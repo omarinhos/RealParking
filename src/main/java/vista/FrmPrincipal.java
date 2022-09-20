@@ -1,3 +1,5 @@
+package vista;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -7,12 +9,12 @@
  *
  * @author eddyo
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public FrmPrincipal() {
         initComponents();
     }
 
@@ -144,7 +146,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(250, 249, 249));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/log-out-solid-24 (1).png"))); // NOI18N
         jLabel5.setText("Cerrar sesión");
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
@@ -162,8 +163,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(250, 249, 249));
         jLabel8.setText("Usuarios");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user-circle-solid-64.png"))); // NOI18N
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 260, 210));
 
         jLabel4.setBackground(new java.awt.Color(102, 102, 255));
@@ -203,7 +202,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jPanel5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 160, 30));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton4.setText("INGRESAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -594,20 +592,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new FrmPrincipal().setVisible(true);
             }
         });
     }
