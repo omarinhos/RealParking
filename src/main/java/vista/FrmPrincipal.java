@@ -10,18 +10,19 @@ import modelo.Rol;
 import modelo.Usuario;
 
 public class FrmPrincipal extends javax.swing.JFrame {
-
+    
     UsuarioDAO udao = new UsuarioDAO();
     RolDAO rdao = new RolDAO();
-
+    
     List<Usuario> usuarios = new ArrayList<>();
     List<Rol> roles = new ArrayList<>();
-
+    
     DefaultTableModel modeloUsuarios = new DefaultTableModel();
     DefaultTableModel modeloRoles = new DefaultTableModel();
     
     int idUsuario;
-
+    int idRol;
+    
     public FrmPrincipal(Usuario user) {
         initComponents();
         
@@ -31,9 +32,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, user.getRol().getDescripcion()
                 + " " + user.getUsuario());
-
+        
     }
-
+    
     private void iniciarTablas() {
         String tituloU[] = {"Id", "DNI", "Nombre", "Cargo", "Estado"};
         String tituloR[] = {"Id", "Rol", "Estado"};
@@ -42,7 +43,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         tblUsuarios.setModel(modeloUsuarios);
         tblRoles.setModel(modeloRoles);
     }
-
     
     private void eliminarTodasLasFilas(DefaultTableModel modelo) {
         int nRow = modelo.getRowCount();
@@ -50,11 +50,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
             modelo.removeRow(i);
         }
     }
-
+    
     private void actualizarTablaUsuarios() {
         usuarios = udao.getList();
         eliminarTodasLasFilas(modeloUsuarios);
-
+        
         usuarios.forEach(usuario -> {
             modeloUsuarios.addRow(new Object[]{
                 usuario.getId(),
@@ -69,7 +69,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void actualizarTablaRoles() {
         roles = rdao.getList();
         eliminarTodasLasFilas(modeloRoles);
-
+        
         roles.forEach(rol -> {
             modeloRoles.addRow(new Object[]{
                 rol.getId(),
@@ -78,7 +78,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             });
         });
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -641,6 +641,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRolesMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblRoles);
 
         jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 247, 640, 370));
@@ -692,10 +697,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void btnUGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUGuardarActionPerformed
-
+        
         String pass = String.valueOf(txtUPass.getPassword());
         String passre = String.valueOf(txtUPassRe.getPassword());
-
+        
         if (pass.equals(passre)) {
             Usuario user = new Usuario();
             Rol rol = new Rol();
@@ -719,7 +724,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
         try {
             int x = tblUsuarios.getSelectedRow();
-
+            
             idUsuario = usuarios.get(x).getId();
             txtUDni.setText("" + usuarios.get(x).getUsuario());
             txtUPass.setText("" + usuarios.get(x).getPass());
@@ -737,7 +742,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnUModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUModificarActionPerformed
         String pass = String.valueOf(txtUPass.getPassword());
         String passre = String.valueOf(txtUPassRe.getPassword());
-
+        
         if (pass.equals(passre)) {
             Usuario user = new Usuario();
             Rol rol = new Rol();
@@ -760,12 +765,53 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUModificarActionPerformed
 
     private void btnRGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRGuardarActionPerformed
-        // TODO add your handling code here:
+        String txtRol = txtRrol.getText();
+        
+        if (!txtRol.isEmpty()) {
+            
+            Rol rol = new Rol();
+            
+            rol.setDescripcion(txtRrol.getText());
+            rol.setEstado((String) cmbUEstado.getSelectedItem());
+            
+            rdao.create(rol);
+            JOptionPane.showMessageDialog(this, "Rol Agregado");
+            actualizarTablaRoles();
+        } else {
+            JOptionPane.showMessageDialog(this, "Llenar todos los campos");
+        }
     }//GEN-LAST:event_btnRGuardarActionPerformed
 
     private void btnRModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRModificarActionPerformed
-        // TODO add your handling code here:
+        
+        Rol rol = new Rol();
+        rol.setDescripcion(txtRrol.getText());
+        rol.setEstado((String) cmbREstado.getSelectedItem());
+        rol.setId(idRol);
+        
+        rdao.update(rol);
+        JOptionPane.showMessageDialog(this, "Rol Modificado");
+        actualizarTablaRoles();
+        btnRGuardar.setEnabled(true);
+        txtRrol.setText("");
+        
+
     }//GEN-LAST:event_btnRModificarActionPerformed
+
+    private void tblRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRolesMouseClicked
+        try {
+            int x = tblRoles.getSelectedRow();
+            
+            idRol = roles.get(x).getId();
+            txtRrol.setText("" + roles.get(x).getDescripcion());
+            cmbREstado.setSelectedItem("" + roles.get(x).getEstado());
+            
+            btnRGuardar.setEnabled(false);
+            btnRModificar.setEnabled(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Dar solo click izquiero.");
+        }
+    }//GEN-LAST:event_tblRolesMouseClicked
 
     /**
      * @param args the command line arguments
