@@ -592,7 +592,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel41.setText("REGISTRO DE ROLES");
+        jLabel41.setText("REGISTRO DE ROLESzzz");
         jPanel3.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 260, 20));
 
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
