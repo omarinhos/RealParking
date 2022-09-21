@@ -214,7 +214,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton5.setText("MOSTRAR");
-        jPanel5.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+        jPanel5.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
@@ -240,7 +240,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 380, 160));
+        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 380, 140));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton6.setText("RETIRAR VEHICULO");
@@ -249,7 +249,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 160, 30));
+        jPanel5.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 160, 30));
 
         jLabel9.setForeground(new java.awt.Color(204, 204, 204));
         jLabel9.setText("___________________________________________________________________");

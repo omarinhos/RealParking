@@ -19,8 +19,8 @@ public class UsuarioDAO implements IDAO<Usuario> {
     private final String SELECT = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol";
     private final String INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol) VALUES (?, ?, ?, ?, ?)";
     private final String UPDATE = "UPDATE usuarios SET usuario = ?, pass = ?, nombre_completo = ?, estado = ?, id_rol = ? WHERE id_usuario = ?";
-    private final String FINDBY = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = ?";
-    
+    private final String FINDBY = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = ";
+    private final String SEARCH = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like";
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
     }
@@ -47,7 +47,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
     public Usuario findBy(String user) {
         Usuario usuario = null;
         try ( Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareCall("SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = " + user);
+                PreparedStatement stmt = conn.prepareCall(FINDBY + user);
                 ResultSet rs = stmt.executeQuery()) {
             
            
@@ -83,7 +83,22 @@ public class UsuarioDAO implements IDAO<Usuario> {
 
     @Override
     public List<Usuario> find(String buscar) {
-        return null;
+       List<Usuario> usuarios = new ArrayList<>();
+
+        try ( Connection conn = getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(SEARCH+" '"+buscar+"%'");) 
+        {
+
+            while (rs.next()) {
+                Usuario usuario = crearUsuario(rs);
+                usuarios.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuarios;
     }
 
     @Override

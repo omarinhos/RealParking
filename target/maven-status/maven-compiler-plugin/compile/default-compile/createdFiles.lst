@@ -6,11 +6,14 @@ vista\VISTA2$1.class
 controlador\RolDAO.class
 vista\FrmPrincipal$4.class
 vista\FrmPrincipal$8.class
+vista\FrmLogin$2.class
 vista\VISTA2.class
 vista\FrmLogin.class
 servicio\Conexion.class
+controlador\Validacion.class
 servicio\IDAO.class
 vista\FrmPrincipal$5.class
+NewClass.class
 vista\FrmLogin$1.class
 vista\FrmPrincipal$7.class
 vista\FrmPrincipal$2.class
