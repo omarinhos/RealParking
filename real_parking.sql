@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `real_parking` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `real_parking`;
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: real_parking
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,9 +26,10 @@ DROP TABLE IF EXISTS `rol`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
   `id_rol` int NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(45) NOT NULL,
+  `estado` varchar(45) NOT NULL,
   PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +38,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'Administrador'),(2,'Digitador'),(3,'Cajero');
+INSERT INTO `rol` VALUES (1,'Administrador','activo'),(2,'Digitador','activo'),(3,'Cajero','activo'),(4,'Prueba','activo'),(5,'abogado','activo');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,15 +51,15 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id_usuario` int NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) DEFAULT NULL,
-  `pass` varchar(45) DEFAULT NULL,
-  `nombre_completo` varchar(60) DEFAULT NULL,
-  `estado` varchar(45) DEFAULT NULL,
-  `id_rol` int DEFAULT NULL,
+  `usuario` varchar(45) NOT NULL,
+  `pass` varchar(45) NOT NULL,
+  `nombre_completo` varchar(60) NOT NULL,
+  `estado` varchar(45) NOT NULL,
+  `id_rol` int NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `usuario_rol_idx` (`id_rol`),
   CONSTRAINT `usuario_rol` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +68,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'71397835','omar123','Omar Mariños Aguilar','activo',1),(2,'71717171','adminadmin','dig','activo',2),(3,'71717171','adminadmin','caj','activo',3),(4,'71717171','adminadmin','caj','inactivo',3);
+INSERT INTO `usuarios` VALUES (1,'71397835','omar123','Omar Mariños Aguilar','activo',1),(2,'71717171','adminadmin','dig','activo',4),(3,'71717171','adminadmin','caj','activo',4),(4,'71717171','adminadmin','caj','activo',4);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-20  5:42:31
+-- Dump completed on 2022-09-20 19:42:14
