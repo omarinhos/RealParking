@@ -24,16 +24,38 @@ public class Validacion {
         return true;
     }
     
-    public boolean exiteUsuario(Usuario usuario) {
+    public boolean existeUsuario(Usuario usuario) {
         UsuarioDAO udao = new UsuarioDAO();
         Usuario user = udao.findBy(usuario.getUsuario());
         
         if (user == null) {
-            this.mostrarError("Usuario no exite");
+            this.mostrarError("Usuario no exite.");
             return false;
         }
         
+        if (!usuario.getPass().equals(user.getPass())) {
+            this.mostrarError("La contraseña es incorrecta.");
+            return false;
+        }
+        
+        if (!user.getEstado().equals("activo")) {
+            this.mostrarError(user.getUsuario() + " no tiene acceso al sistema.");
+            return false;
+        }
+        
+        
         return true;
+    }
+    
+    public Usuario tipoUsuario(Usuario usuario) {
+        UsuarioDAO udao = new UsuarioDAO();
+        Usuario user = udao.findBy(usuario.getUsuario());
+        
+        if (user == null) {
+            return null;
+        }
+                
+        return user;
     }
     
     public void mostrarError(String mensaje) {

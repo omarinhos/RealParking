@@ -13,25 +13,21 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
     }
 
-    private boolean ingresar() {
-        Usuario user = new Usuario();
-        user.setUsuario(txtUser.getText());
-        user.setPass(String.valueOf(txtPass.getPassword()));
-        System.out.println(user.getPass());
+    private boolean validarUsuario(Usuario user) {
 
         if (!v.comprobarCampo(user.getUsuario()) || !v.comprobarCampo(user.getPass())) {
             return false;
         }
-        
-        if (!v.comprobarPass(user.getPass())) {
-            return false;
-        }
-        
-        if (!v.exiteUsuario(user)) {
-            return false;
+
+        return v.existeUsuario(user);
+    }
+
+    public void ingresarSistema(Usuario user) {
+        if (validarUsuario(user)) {
+            Usuario newuser = v.tipoUsuario(user);
+            new FrmPrincipal(newuser).setVisible(true);
         }
 
-        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -111,10 +107,11 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (this.ingresar()) {
-            JOptionPane.showMessageDialog(this, "Ingresó");
+        Usuario user = new Usuario();
+        user.setUsuario(txtUser.getText());
+        user.setPass(String.valueOf(txtPass.getPassword()));
 
-        }
+        ingresarSistema(user);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

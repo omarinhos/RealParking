@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Rol;
 import modelo.Usuario;
 import servicio.Conexion;
@@ -16,11 +16,12 @@ import servicio.IDAO;
 
 public class UsuarioDAO implements IDAO<Usuario> {
 
-    private final String SELECT = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol";
+    private final String SELECT = "SELECT u.*, r.descripcion, r.estado FROM usuarios AS u INNER JOIN rol AS r ON r.id_rol = u.id_rol ORDER BY u.id_usuario";
     private final String INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol) VALUES (?, ?, ?, ?, ?)";
     private final String UPDATE = "UPDATE usuarios SET usuario = ?, pass = ?, nombre_completo = ?, estado = ?, id_rol = ? WHERE id_usuario = ?";
-    private final String FINDBY = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = ";
-    private final String SEARCH = "SELECT u.*, r.descripcion FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like";
+    private final String FINDBY = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = '";
+    private final String SEARCH = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like";
+    
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
     }
@@ -38,6 +39,9 @@ public class UsuarioDAO implements IDAO<Usuario> {
             
             stmt.executeUpdate();
             
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Usuario ya existe");
+            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,7 +51,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
     public Usuario findBy(String user) {
         Usuario usuario = null;
         try ( Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareCall(FINDBY + user);
+                PreparedStatement stmt = conn.prepareCall(FINDBY + user + "'");
                 ResultSet rs = stmt.executeQuery()) {
             
            
@@ -87,7 +91,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
 
         try ( Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SEARCH+" '"+buscar+"%'");) 
+                ResultSet rs = stmt.executeQuery(SEARCH+" '"+buscar+"%' ORDER BY u.id_usuario");) 
         {
 
             while (rs.next()) {
@@ -127,10 +131,11 @@ public class UsuarioDAO implements IDAO<Usuario> {
         usuario.setUsuario(rs.getString("usuario"));
         usuario.setPass(rs.getString("pass"));
         usuario.setNombreCompleto(rs.getString("nombre_completo"));
-        usuario.setEstado(rs.getString("estado"));
+        usuario.setEstado(rs.getString(5));
         Rol rol = new Rol();
         rol.setId(rs.getInt("id_rol"));
         rol.setDescripcion(rs.getString("descripcion"));
+        rol.setEstado(rs.getString(8));
         usuario.setRol(rol);
         return usuario;
     }
