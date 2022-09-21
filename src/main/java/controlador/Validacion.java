@@ -38,7 +38,7 @@ public class Validacion {
             return false;
         }
         
-        if (!user.getEstado().equals("activo")) {
+        if (!user.getEstado().equals("Activo")) {
             this.mostrarError(user.getUsuario() + " no tiene acceso al sistema.");
             return false;
         }
