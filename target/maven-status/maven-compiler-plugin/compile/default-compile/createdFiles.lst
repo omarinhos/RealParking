@@ -5,6 +5,7 @@ vista\FrmPrincipal$17.class
 vista\FrmPrincipal$25.class
 vista\FrmPrincipal.class
 vista\FrmPrincipal$15.class
+vista\FrmLogin$6.class
 vista\FrmPrincipal2$1.class
 controlador\RolDAO.class
 vista\FrmPrincipal$22.class
@@ -19,6 +20,8 @@ vista\FrmPrincipal$23.class
 vista\FrmPrincipal$7.class
 vista\FrmPrincipal$2.class
 vista\FrmPrincipal$18.class
+vista\FrmLogin$4.class
+vista\FrmLogin$5.class
 vista\FrmPrincipal$3.class
 vista\FrmPrincipal2.class
 vista\FrmPrincipal$16.class
@@ -26,11 +29,13 @@ vista\FrmPrincipal$26.class
 modelo\Rol.class
 vista\FrmPrincipal$11.class
 vista\FrmPrincipal$21.class
+vista\FrmLogin$7.class
 vista\FrmPrincipal$8.class
 vista\FrmLogin$2.class
 vista\FrmPrincipal$19.class
 controlador\Validacion.class
 servicio\IDAO.class
+vista\FrmLogin$3.class
 NewClass.class
 vista\FrmPrincipal$1.class
 controlador\UsuarioDAO.class
