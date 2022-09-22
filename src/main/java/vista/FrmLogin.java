@@ -1,6 +1,7 @@
 package vista;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import controlador.TextPrompt;
 import controlador.Validacion;
 import java.awt.Color;
 import java.io.File;
@@ -18,17 +19,9 @@ public class FrmLogin extends javax.swing.JFrame {
 
     public FrmLogin() {
         initComponents();
-        
-//        logo.setIcon(new ImageIcon("src/main/java/images/LogoRealParking.png")); 
-        
-//        File file = new File("src/main/java/images/LogoRealParking.txt");
-//        try {
-//            file.createNewFile();
-//        } catch (IOException ex) {
-//            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        String path = file.getPath();
-//        System.out.println(path);
+
+        TextPrompt txtUserTP = new TextPrompt("Ingrese su Dni", txtUser);
+        TextPrompt txtPassTP = new TextPrompt("Ingrese su Contraseña", txtPass);
     }
 
     private boolean validarUsuario(Usuario user) {
@@ -63,7 +56,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btniniciar = new javax.swing.JButton();
         header = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,7 +105,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logo.setIcon((new ImageIcon("src/main/java/images/LogoRealParking.png")));
-        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 70, 420, 220));
+        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 70, 420, 220));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 35, 360, 413));
 
@@ -120,49 +113,72 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 290, 10));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 290, 10));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 290, 10));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 300, 20));
 
         jLabel2.setBackground(new java.awt.Color(51, 0, 153));
-        jLabel2.setFont(new java.awt.Font("Yu Gothic", 3, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Gestión de parqueo vehicular");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 70, -1, 40));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 260, 40));
 
         jLabel8.setBackground(new java.awt.Color(51, 0, 153));
-        jLabel8.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Yu Gothic", 1, 45)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 0, 153));
         jLabel8.setText("INICIAR SESION");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 6, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
+        txtUser.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
         txtUser.setBorder(null);
-        jPanel2.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 142, 300, 35));
-
-        txtPass.setBorder(null);
-        jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 227, 300, 35));
-
-        jButton1.setBackground(new java.awt.Color(3, 24, 77));
-        jButton1.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("INICIAR");
-        jButton1.setActionCommand("INGRESAR");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 0, 153), 1, true));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+        txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtUserMousePressed(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtUserActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 318, 170, -1));
+        jPanel2.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 300, 35));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 35, 416, 413));
+        txtPass.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        txtPass.setBorder(null);
+        txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtPassMousePressed(evt);
+            }
+        });
+        jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 300, 35));
+
+        btniniciar.setBackground(new java.awt.Color(3, 24, 77));
+        btniniciar.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
+        btniniciar.setForeground(new java.awt.Color(255, 255, 255));
+        btniniciar.setText("INGRESAR");
+        btniniciar.setActionCommand("INGRESAR");
+        btniniciar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 0, 153), 1, true));
+        btniniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btniniciar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btniniciarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btniniciarMouseExited(evt);
+            }
+        });
+        btniniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btniniciarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 170, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 35, 420, 413));
 
         header.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         header.setEnabled(false);
@@ -183,13 +199,13 @@ public class FrmLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btniniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniniciarActionPerformed
         Usuario user = new Usuario();
         user.setUsuario(txtUser.getText());
         user.setPass(String.valueOf(txtPass.getPassword()));
 
         ingresarSistema(user);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btniniciarActionPerformed
 
     private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
         int x = evt.getXOnScreen();
@@ -230,9 +246,33 @@ public class FrmLogin extends javax.swing.JFrame {
         btnCerrar.setForeground(new Color(0, 0, 0));
     }//GEN-LAST:event_btnCerrarMouseExited
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+    private void btniniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btniniciarMouseEntered
+        // 
+        btniniciar.setBackground(new Color(5,42,136));
+        
+
+
+    }//GEN-LAST:event_btniniciarMouseEntered
+
+    private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
+
+    }//GEN-LAST:event_txtUserMouseClicked
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseEntered
+    }//GEN-LAST:event_txtUserActionPerformed
+
+    private void txtUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMousePressed
+
+    }//GEN-LAST:event_txtUserMousePressed
+
+    private void txtPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMousePressed
+
+    }//GEN-LAST:event_txtPassMousePressed
+
+    private void btniniciarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btniniciarMouseExited
+        btniniciar.setBackground(new Color(3,24,77));
+    }//GEN-LAST:event_btniniciarMouseExited
 
     public static void main(String args[]) {
 
@@ -252,8 +292,8 @@ public class FrmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnMin;
+    private javax.swing.JButton btniniciar;
     private javax.swing.JLabel header;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

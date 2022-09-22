@@ -1,4 +1,5 @@
 vista\FrmPrincipal$10.class
+vista\FrmLogin$10.class
 vista\FrmPrincipal$9.class
 vista\FrmPrincipal$20.class
 vista\FrmPrincipal$17.class
@@ -21,6 +22,7 @@ vista\FrmPrincipal$7.class
 vista\FrmPrincipal$2.class
 vista\FrmPrincipal$18.class
 vista\FrmLogin$4.class
+vista\FrmLogin$9.class
 vista\FrmLogin$5.class
 vista\FrmPrincipal$3.class
 vista\FrmPrincipal2.class
@@ -32,6 +34,7 @@ vista\FrmPrincipal$21.class
 vista\FrmLogin$7.class
 vista\FrmPrincipal$8.class
 vista\FrmLogin$2.class
+vista\FrmLogin$8.class
 vista\FrmPrincipal$19.class
 controlador\Validacion.class
 servicio\IDAO.class
