@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -61,6 +62,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         txtRolActual.setText(user.getRol().getDescripcion());
         txtUserActual.setText(user.getNombreCompleto());
+        
+        //userFoto.setIcon(new ImageIcon("src/main/java/images/user.png"));
         
     }
     
@@ -164,6 +167,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnConfiguracion = new javax.swing.JLabel();
         btnReportes = new javax.swing.JLabel();
         btnCaja = new javax.swing.JLabel();
+        userFoto = new javax.swing.JLabel();
         ventanas = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -476,6 +480,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         nav.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 220, 50));
+
+        userFoto.setIcon(new ImageIcon("src/main/java/images/user.png"));
+        nav.add(userFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 160, 160));
 
         jPanel1.add(nav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 670));
 
@@ -1613,6 +1620,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtUPassRe;
     private javax.swing.JTextField txtUnombre;
     private javax.swing.JLabel txtUserActual;
+    private javax.swing.JLabel userFoto;
     private javax.swing.JTabbedPane ventanas;
     // End of variables declaration//GEN-END:variables
 }
