@@ -1,7 +1,6 @@
 package vista;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import controlador.TextPrompt;
 import controlador.Validacion;
 import java.awt.Color;
 import java.io.File;
@@ -37,6 +36,7 @@ public class FrmLogin extends javax.swing.JFrame {
         if (validarUsuario(user)) {
             Usuario newuser = v.tipoUsuario(user);
             new FrmPrincipal(newuser).setVisible(true);
+            this.dispose();
         }
 
     }
