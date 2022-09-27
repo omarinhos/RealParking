@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Rol;
-import modelo.Usuario;
 import servicio.Conexion;
 import servicio.IDAO;
 
@@ -19,7 +18,7 @@ public class RolDAO implements IDAO<Rol> {
     private final String UPDATEROL = "UPDATE rol SET estado = ? WHERE id_rol = ?  ";
     private final String UPDATEUSER = "UPDATE usuarios SET estado = ? WHERE id_rol = ?";
     private final String FINDBY = "SELECT * FROM rol WHERE id_rol = ";
-    private final String SEARCH = "SELECT * FROM rol where descripcion like";
+    private final String FILTER = "SELECT * FROM rol where descripcion like";
 
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -41,7 +40,7 @@ public class RolDAO implements IDAO<Rol> {
         }
 
     }
-//falta hacer este metodo
+
     @Override
     public Rol findBy(String id) {
         Rol rol = null;
@@ -83,13 +82,12 @@ public class RolDAO implements IDAO<Rol> {
     }
 
     @Override
-    public List<Rol> find(String buscar
-    ) {
+    public List<Rol> filter(String buscar) {
         List<Rol> roles = new ArrayList<>();
 
         try (Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SEARCH + " '" + buscar + "%'");) {
+                ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
 
             while (rs.next()) {
                 Rol rol = crearRol(rs);

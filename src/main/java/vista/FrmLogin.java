@@ -1,5 +1,6 @@
 package vista;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import controlador.Validacion;
 import java.awt.Color;
@@ -47,6 +48,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         btnCerrar = new javax.swing.JLabel();
         btnMin = new javax.swing.JLabel();
+        header = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -57,7 +59,6 @@ public class FrmLogin extends javax.swing.JFrame {
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         btniniciar = new javax.swing.JButton();
-        header = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -100,6 +101,21 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 50, 35));
+
+        header.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        header.setEnabled(false);
+        header.setOpaque(true);
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
+        getContentPane().add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 35));
 
         jPanel1.setBackground(new java.awt.Color(3, 24, 77));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -160,7 +176,6 @@ public class FrmLogin extends javax.swing.JFrame {
         btniniciar.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
         btniniciar.setForeground(new java.awt.Color(255, 255, 255));
         btniniciar.setText("INGRESAR");
-        btniniciar.setActionCommand("INGRESAR");
         btniniciar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 0, 153), 1, true));
         btniniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btniniciar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,21 +194,6 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel2.add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 170, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 35, 420, 413));
-
-        header.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
-        header.setEnabled(false);
-        header.setOpaque(true);
-        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                headerMouseDragged(evt);
-            }
-        });
-        header.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                headerMousePressed(evt);
-            }
-        });
-        getContentPane().add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 35));
 
         pack();
         setLocationRelativeTo(null);

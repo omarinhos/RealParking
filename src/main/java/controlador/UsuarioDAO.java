@@ -20,7 +20,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
     private final String INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol) VALUES (?, ?, ?, ?, ?)";
     private final String UPDATE = "UPDATE usuarios SET usuario = ?, pass = ?, nombre_completo = ?, estado = ?, id_rol = ? WHERE id_usuario = ?";
     private final String FINDBY = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = '";
-    private final String SEARCH = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like";
+    private final String FILTER = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like";
     
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -86,12 +86,12 @@ public class UsuarioDAO implements IDAO<Usuario> {
     }
 
     @Override
-    public List<Usuario> find(String buscar) {
+    public List<Usuario> filter(String buscar) {
        List<Usuario> usuarios = new ArrayList<>();
 
         try ( Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SEARCH+" '"+buscar+"%' ORDER BY u.id_usuario");) 
+                ResultSet rs = stmt.executeQuery(FILTER+" '"+buscar+"%' ORDER BY u.id_usuario");) 
         {
 
             while (rs.next()) {
