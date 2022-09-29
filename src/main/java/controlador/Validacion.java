@@ -29,12 +29,12 @@ public class Validacion {
         Usuario user = udao.findBy(usuario.getUsuario());
         
         if (user == null) {
-            this.mostrarError("Usuario no exite.");
+            this.mostrarError("Usuario o contraseña incorrecto.");
             return false;
         }
         
         if (!usuario.getPass().equals(user.getPass())) {
-            this.mostrarError("La contraseña es incorrecta.");
+            this.mostrarError("Usuario o contraseña incorrecta.");
             return false;
         }
         

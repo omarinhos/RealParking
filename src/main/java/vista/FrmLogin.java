@@ -20,26 +20,6 @@ public class FrmLogin extends javax.swing.JFrame {
     public FrmLogin() {
         initComponents();
 
-        TextPrompt txtUserTP = new TextPrompt("Ingrese su Dni", txtUser);
-        TextPrompt txtPassTP = new TextPrompt("Ingrese su Contraseña", txtPass);
-    }
-
-    private boolean validarUsuario(Usuario user) {
-
-        if (!v.comprobarCampo(user.getUsuario()) || !v.comprobarCampo(user.getPass())) {
-            return false;
-        }
-
-        return v.existeUsuario(user);
-    }
-
-    public void ingresarSistema(Usuario user) {
-        if (validarUsuario(user)) {
-            Usuario newuser = v.tipoUsuario(user);
-            new FrmPrincipal(newuser).setVisible(true);
-            this.dispose();
-        }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -186,11 +166,6 @@ public class FrmLogin extends javax.swing.JFrame {
                 btniniciarMouseExited(evt);
             }
         });
-        btniniciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btniniciarActionPerformed(evt);
-            }
-        });
         jPanel2.add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 170, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 35, 420, 413));
@@ -198,14 +173,6 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btniniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniniciarActionPerformed
-        Usuario user = new Usuario();
-        user.setUsuario(txtUser.getText());
-        user.setPass(String.valueOf(txtPass.getPassword()));
-
-        ingresarSistema(user);
-    }//GEN-LAST:event_btniniciarActionPerformed
 
     private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
         int x = evt.getXOnScreen();
@@ -247,11 +214,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btniniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btniniciarMouseEntered
-        // 
         btniniciar.setBackground(new Color(5,42,136));
-        
-
-
     }//GEN-LAST:event_btniniciarMouseEntered
 
     private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
@@ -292,7 +255,7 @@ public class FrmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnMin;
-    private javax.swing.JButton btniniciar;
+    public javax.swing.JButton btniniciar;
     private javax.swing.JLabel header;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
@@ -301,7 +264,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel logo;
-    private javax.swing.JPasswordField txtPass;
-    private javax.swing.JTextField txtUser;
+    public javax.swing.JPasswordField txtPass;
+    public javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,8 +11,8 @@ public class NewClass {
 
     public static void main(String[] args) {
 
-        UsuarioDAO udao = new UsuarioDAO();
-        RolDAO roldao = new RolDAO();
+//        UsuarioDAO udao = new UsuarioDAO();
+//        RolDAO roldao = new RolDAO();
 //        Rol rol = new Rol();
 //        rol.setDescripcion("abogado");
 //        rol.setEstado("activo");
@@ -27,8 +27,8 @@ public class NewClass {
 ////        user.setRol(new Rol(3, ""));
 ////        udao.update(user);
 ////        
-        List<Usuario> usuarios = udao.getList();
-        usuarios.forEach(System.out::println);
+//        List<Usuario> usuarios = udao.getList();
+//        usuarios.forEach(System.out::println);
 //        roldao.create(rol);
 
 //        List<Rol> roles = roldao.find("");
@@ -46,5 +46,7 @@ public class NewClass {
 //        if (v.exiteUsuario(user)) {
 //            System.out.println("SI exite");
 //        }
+
+     
     }
 }
