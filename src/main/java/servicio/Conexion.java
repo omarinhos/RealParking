@@ -6,12 +6,17 @@ import java.sql.SQLException;
 
 public class Conexion {
     
-    private static final String url = "jdbc:mysql://localhost:3306/real_parking";
-    private static final String user = "root";
-    private static final String pass = "root";
+    private static final String URL = "jdbc:mysql://localhost:3306/real_parking";
+    private static final String USER = "root";
+    private static final String PASS = "328350";
+    
+    private static Connection connection;
 
     public static Connection getInstance() throws SQLException {
-        return DriverManager.getConnection(url, user, pass);
+        if (connection == null) {
+            connection = DriverManager.getConnection(URL, USER, PASS);
+        }
+        return connection;
     }
     
 }

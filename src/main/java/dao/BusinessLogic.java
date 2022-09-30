@@ -4,7 +4,6 @@ import java.util.List;
 
 public class BusinessLogic {
 
-    
     DAO<UsuarioDTO> usuarioDAO = DAOFactory.getUsuarioDAO();
     DAO<RolDTO> rolDAO = DAOFactory.getRolDAO();
     DAO<ConfiguracionDTO> configuracionDAO = DAOFactory.getTxtConfiguracionDAO();
@@ -12,12 +11,10 @@ public class BusinessLogic {
     //metodos Usuario
     public void crearUsuario(UsuarioDTO usuarioDTO) {
         usuarioDAO.create(usuarioDTO);
-
     }
 
     public UsuarioDTO buscarPorUsuario(String user) {
         return usuarioDAO.findBy(user);
-
     }
 
     public void actualizarUsuario(UsuarioDTO usuarioDTO) {
@@ -28,20 +25,17 @@ public class BusinessLogic {
         return usuarioDAO.filter(user);
     }
 
-    public List<UsuarioDTO> mostrarListaUsuario() {
-
+    public List<UsuarioDTO> getListaUsuario() {
         return usuarioDAO.getList();
     }
 
     //metodos Rol
     public void crearRol(RolDTO rolDTO) {
         rolDAO.create(rolDTO);
-
     }
 
     public RolDTO buscarPorRol(String id) {
         return rolDAO.findBy(id);
-
     }
 
     public void actualizarRol(RolDTO rolDTO) {
@@ -52,19 +46,16 @@ public class BusinessLogic {
         return rolDAO.filter(buscar);
     }
 
-    public List<RolDTO> mostrarListaRol() {
-
+    public List<RolDTO> getListaRol() {
         return rolDAO.getList();
     }
 
     //metodo Configuracion
     public void guardarConfiguracion(ConfiguracionDTO configuracionDTO) {
-
         configuracionDAO.create(configuracionDTO);
-
     }
 
-    public ConfiguracionDTO LeerConfiguracion(String nombreArchivo) {
+    public ConfiguracionDTO leerConfiguracion(String nombreArchivo) {
         return configuracionDAO.findBy(nombreArchivo);
     }
 

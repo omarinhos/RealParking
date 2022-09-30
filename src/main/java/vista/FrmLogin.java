@@ -1,21 +1,9 @@
 package vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import controlador.Validacion;
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import dao.UsuarioDTO;
 
 public class FrmLogin extends javax.swing.JFrame {
-
-    Validacion v = new Validacion();
 
     public FrmLogin() {
         initComponents();
@@ -128,28 +116,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
         txtUser.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
         txtUser.setBorder(null);
-        txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtUserMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtUserMousePressed(evt);
-            }
-        });
-        txtUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserActionPerformed(evt);
-            }
-        });
         jPanel2.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 300, 35));
 
         txtPass.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
         txtPass.setBorder(null);
-        txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtPassMousePressed(evt);
-            }
-        });
         jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 300, 35));
 
         btniniciar.setBackground(new java.awt.Color(3, 24, 77));
@@ -182,7 +152,6 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_headerMouseDragged
     int xx, xy;
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
-
         xx = evt.getX();
         xy = evt.getY();
     }//GEN-LAST:event_headerMousePressed
@@ -217,44 +186,14 @@ public class FrmLogin extends javax.swing.JFrame {
         btniniciar.setBackground(new Color(5,42,136));
     }//GEN-LAST:event_btniniciarMouseEntered
 
-    private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
-
-    }//GEN-LAST:event_txtUserMouseClicked
-
-    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserActionPerformed
-
-    private void txtUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMousePressed
-
-    }//GEN-LAST:event_txtUserMousePressed
-
-    private void txtPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMousePressed
-
-    }//GEN-LAST:event_txtPassMousePressed
-
     private void btniniciarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btniniciarMouseExited
         btniniciar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btniniciarMouseExited
 
-    public static void main(String args[]) {
-
-        try {
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmLogin().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnCerrar;
-    private javax.swing.JLabel btnMin;
+    public javax.swing.JLabel btnCerrar;
+    public javax.swing.JLabel btnMin;
     public javax.swing.JButton btniniciar;
     private javax.swing.JLabel header;
     private javax.swing.JLabel jLabel2;

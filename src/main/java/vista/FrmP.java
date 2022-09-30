@@ -1407,7 +1407,6 @@ public class FrmP extends javax.swing.JFrame {
             user.setPass(pass);
             user.setNombreCompleto(txtUnombre.getText());
             user.setEstado((String) cmbUEstado.getSelectedItem());
-            System.out.println(cmbUCargo.getSelectedIndex());
             rol.setId(cmbUCargo.getSelectedIndex() + 1);
             user.setRol(rol);
 

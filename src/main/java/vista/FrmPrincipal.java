@@ -1,16 +1,7 @@
 package vista;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import dao.RolDTO;
-import dao.UsuarioDTO;
 
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -20,13 +11,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     public FrmPrincipal() {
         initComponents();
-        
-//        VistaUsuarios vistaUsuarios = new VistaUsuarios();
-//        vistaUsuarios.setSize(740, 640);
-//        contenedor.removeAll();
-//        contenedor.add(vistaUsuarios, BorderLayout.CENTER);
-//        contenedor.revalidate();
-//        contenedor.repaint();
+
     }
     
     
@@ -66,9 +51,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCerrar.setOpaque(true);
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCerrarMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCerrarMouseEntered(evt);
             }
@@ -76,7 +58,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnCerrarMouseExited(evt);
             }
         });
-        fondo.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, 50, 35));
+        fondo.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, 50, 40));
 
         btnMin.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         btnMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -84,9 +66,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMin.setOpaque(true);
         btnMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMinMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMinMouseEntered(evt);
             }
@@ -94,10 +73,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnMinMouseExited(evt);
             }
         });
-        fondo.add(btnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 50, 35));
+        fondo.add(btnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 50, 40));
 
         header.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
-        header.setEnabled(false);
         header.setOpaque(true);
         header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -109,7 +87,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 headerMousePressed(evt);
             }
         });
-        fondo.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 35));
+        fondo.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 40));
 
         nav.setBackground(new java.awt.Color(0, 51, 102));
         nav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,9 +115,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistro.setOpaque(true);
         btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistroMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnRegistroMouseEntered(evt);
             }
@@ -157,9 +132,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCaja.setOpaque(true);
         btnCaja.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCajaMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCajaMouseEntered(evt);
             }
@@ -177,9 +149,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setOpaque(true);
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReportesMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReportesMouseEntered(evt);
             }
@@ -197,9 +166,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnConfiguracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfiguracion.setOpaque(true);
         btnConfiguracion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConfiguracionMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnConfiguracionMouseEntered(evt);
             }
@@ -217,9 +183,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuarios.setOpaque(true);
         btnUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUsuariosMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnUsuariosMouseEntered(evt);
             }
@@ -237,9 +200,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRoles.setOpaque(true);
         btnRoles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRolesMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnRolesMouseEntered(evt);
             }
@@ -257,9 +217,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.setOpaque(true);
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSalirMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSalirMouseEntered(evt);
             }
@@ -272,7 +229,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         fondo.add(nav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 670));
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
-        fondo.add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 740, 640));
+        fondo.add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 740, 630));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 670));
 
@@ -292,10 +249,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         xy = evt.getY();
     }//GEN-LAST:event_headerMousePressed
 
-    private void btnMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseClicked
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_btnMinMouseClicked
-
     private void btnMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseEntered
         btnMin.setBackground(new Color(230, 230, 230));
     }//GEN-LAST:event_btnMinMouseEntered
@@ -303,10 +256,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseExited
         btnMin.setBackground(new Color(242, 242, 242));
     }//GEN-LAST:event_btnMinMouseExited
-
-    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btnCerrarMouseClicked
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
         btnCerrar.setBackground(new Color(139, 0, 0));
@@ -318,10 +267,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCerrar.setForeground(new Color(0, 0, 0));
     }//GEN-LAST:event_btnCerrarMouseExited
 
-    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        
-    }//GEN-LAST:event_btnRegistroMouseClicked
-
     private void btnRegistroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseEntered
         btnRegistro.setBackground(colorEntrar);
     }//GEN-LAST:event_btnRegistroMouseEntered
@@ -329,10 +274,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseExited
         btnRegistro.setBackground(colorSalir);
     }//GEN-LAST:event_btnRegistroMouseExited
-
-    private void btnCajaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCajaMouseClicked
-        
-    }//GEN-LAST:event_btnCajaMouseClicked
 
     private void btnCajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCajaMouseEntered
         btnCaja.setBackground(colorEntrar);
@@ -342,10 +283,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setBackground(colorSalir);
     }//GEN-LAST:event_btnCajaMouseExited
 
-    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
-        
-    }//GEN-LAST:event_btnReportesMouseClicked
-
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
         btnReportes.setBackground(colorEntrar);
     }//GEN-LAST:event_btnReportesMouseEntered
@@ -353,10 +290,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
         btnReportes.setBackground(colorSalir);
     }//GEN-LAST:event_btnReportesMouseExited
-
-    private void btnConfiguracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiguracionMouseClicked
-        
-    }//GEN-LAST:event_btnConfiguracionMouseClicked
 
     private void btnConfiguracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiguracionMouseEntered
         btnConfiguracion.setBackground(colorEntrar);
@@ -366,10 +299,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnConfiguracion.setBackground(colorSalir);
     }//GEN-LAST:event_btnConfiguracionMouseExited
 
-    private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
-        
-    }//GEN-LAST:event_btnUsuariosMouseClicked
-
     private void btnUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseEntered
         btnUsuarios.setBackground(colorEntrar);
     }//GEN-LAST:event_btnUsuariosMouseEntered
@@ -377,10 +306,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseExited
         btnUsuarios.setBackground(colorSalir);
     }//GEN-LAST:event_btnUsuariosMouseExited
-
-    private void btnRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseClicked
-       
-    }//GEN-LAST:event_btnRolesMouseClicked
 
     private void btnRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseEntered
         btnRoles.setBackground(colorEntrar);
@@ -390,10 +315,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnRoles.setBackground(colorSalir);
     }//GEN-LAST:event_btnRolesMouseExited
 
-    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
-        
-    }//GEN-LAST:event_btnSalirMouseClicked
-
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
         btnSalir.setBackground(colorEntrar);
     }//GEN-LAST:event_btnSalirMouseEntered
@@ -402,29 +323,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnSalir.setBackground(colorSalir);
     }//GEN-LAST:event_btnSalirMouseExited
 
-    public static void main(String args[]) {
-        
-//        try {
-//            UIManager.setLookAndFeel(new FlatIntelliJLaf());
-//        } catch (UnsupportedLookAndFeelException ex) {
-//            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                UsuarioDTO user = new UsuarioDTO();
-//                user.setUsuario("alo");
-//                user.setRol(new RolDTO(1, "Administrador", "Activo"));
-//                new FrmPrincipal(user).setVisible(true);
-//            }
-//        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel btnCaja;
-    private javax.swing.JLabel btnCerrar;
+    public javax.swing.JLabel btnCerrar;
     public javax.swing.JLabel btnConfiguracion;
-    private javax.swing.JLabel btnMin;
+    public javax.swing.JLabel btnMin;
     public javax.swing.JLabel btnRegistro;
     public javax.swing.JLabel btnReportes;
     public javax.swing.JLabel btnRoles;

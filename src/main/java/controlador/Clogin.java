@@ -6,26 +6,39 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import dao.UsuarioDTO;
+import static java.awt.Frame.ICONIFIED;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import vista.FrmLogin;
 import recursos.TextPrompt;
 
 public class Clogin {
     
-    private UsuarioDTO usuario;
-    public FrmLogin FrmLogin;
-    private Validacion v;
+    private final UsuarioDTO usuario = new UsuarioDTO();
+    public FrmLogin FrmLogin = new FrmLogin();
+    private final Validacion v = new Validacion();
     
     public Clogin() {
-        usuario = new UsuarioDTO();
-        FrmLogin = new FrmLogin();
-        v = new Validacion();
+        TextPrompt txtUserTP = new TextPrompt("Ingrese su Dni", FrmLogin.txtUser);
+        TextPrompt txtPassTP = new TextPrompt("Ingrese su Contraseña", FrmLogin.txtPass);
         
         FrmLogin.btniniciar.addActionListener(e -> {
             ingresar();
         });
+         
+        FrmLogin.btnCerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
         
-        TextPrompt txtUserTP = new TextPrompt("Ingrese su Dni", FrmLogin.txtUser);
-        TextPrompt txtPassTP = new TextPrompt("Ingrese su Contraseña", FrmLogin.txtPass);
+        FrmLogin.btnMin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                FrmLogin.setExtendedState(ICONIFIED);
+            }
+        });
     }
     
     private boolean ingresar() {

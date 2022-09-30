@@ -25,8 +25,7 @@ public class RolDAO extends DAO<RolDTO> {
     @Override
     public void create(RolDTO rolDTO) {
 
-        try (Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement(INSERT)) {
+        try ( PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
 
             stmt.setString(1, rolDTO.getDescripcion());
             stmt.setString(2, rolDTO.getEstado());
@@ -42,16 +41,14 @@ public class RolDAO extends DAO<RolDTO> {
     @Override
     public RolDTO findBy(String id) {
         RolDTO rolDTO = null;
-        try ( Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareCall(FINDBY + id);
+        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  
                 ResultSet rs = stmt.executeQuery()) {
-            
-           
+
             if (rs.next()) {
                 rolDTO = new RolDTO();
                 rolDTO = crearRol(rs);
             }
-            
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -60,9 +57,8 @@ public class RolDAO extends DAO<RolDTO> {
 
     @Override
     public void update(RolDTO rolDTO) {
-        try (Connection conn = getConnection();
-                PreparedStatement stmtrol = conn.prepareStatement(UPDATEROL);
-                PreparedStatement stmtuser = conn.prepareStatement(UPDATEUSER)) {
+        try ( PreparedStatement stmtrol = getConnection().prepareStatement(UPDATEROL);  
+                PreparedStatement stmtuser = getConnection().prepareStatement(UPDATEUSER)) {
 
             stmtrol.setString(1, rolDTO.getEstado());
             stmtrol.setInt(2, rolDTO.getId());
@@ -83,8 +79,7 @@ public class RolDAO extends DAO<RolDTO> {
     public List<RolDTO> filter(String buscar) {
         List<RolDTO> rolesDTO = new ArrayList<>();
 
-        try (Connection conn = getConnection();
-                Statement stmt = conn.createStatement();
+        try ( Statement stmt = getConnection().createStatement();  
                 ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
 
             while (rs.next()) {
@@ -102,9 +97,8 @@ public class RolDAO extends DAO<RolDTO> {
     public List<RolDTO> getList() {
         List<RolDTO> rolesDTO = new ArrayList<>();
 
-        try (Connection conn = getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SELECT);) {
+        try ( Statement stmt = getConnection().createStatement();  
+                ResultSet rs = stmt.executeQuery(SELECT)) {
 
             while (rs.next()) {
                 RolDTO rolDTO = crearRol(rs);

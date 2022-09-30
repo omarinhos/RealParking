@@ -1,11 +1,9 @@
 package controlador;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import dao.BusinessLogic;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,29 +13,24 @@ import javax.swing.UnsupportedLookAndFeelException;
 import dao.RolDTO;
 import vista.FrmPrincipal;
 import dao.UsuarioDTO;
-import vista.FrmLogin;
+import static java.awt.Frame.ICONIFIED;
 import vista.VistaCaja;
 import vista.VistaConfiguracion;
 import vista.VistaRegistro;
 import vista.VistaReportes;
-import vista.VistaRoles;
-import vista.VistaUsuarios;
 
 public class CPrincipal {
 
-    public FrmPrincipal frmPrincipal;
+    public FrmPrincipal frmPrincipal = new FrmPrincipal();
 
-    boolean permisoRegistro;
-    boolean permisoCaja;
-    boolean permisoReportes;
-    boolean permisoConfiguracion;
-    boolean permisoUsuarios;
-    boolean permisoRoles;
-    BusinessLogic bsl = new BusinessLogic();
+    private boolean permisoRegistro;
+    private boolean permisoCaja;
+    private boolean permisoReportes;
+    private boolean permisoConfiguracion;
+    private boolean permisoUsuarios;
+    private boolean permisoRoles;
 
     public CPrincipal(UsuarioDTO usuario) {
-        frmPrincipal = new FrmPrincipal();
-
         tipoRolPanel(usuario.getRol());
 
         frmPrincipal.btnRegistro.setEnabled(permisoRegistro);
@@ -79,7 +72,7 @@ public class CPrincipal {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (permisoConfiguracion) {
-                    cargarPanel(new VistaConfiguracion());
+                    new CConfiguracion(frmPrincipal).vistaConfig.setVisible(true);
                 }
             }
         });
@@ -105,17 +98,32 @@ public class CPrincipal {
         frmPrincipal.btnSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int op = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?", "Salir", 0);
+                int op = JOptionPane.showConfirmDialog(frmPrincipal, "¿Desea cerrar sesión?",
+                        "Salir", 0, 3);
                 if (op == 0) {
                     new Clogin().FrmLogin.setVisible(true);
                     frmPrincipal.dispose();
                 }
             }
         });
+
+        frmPrincipal.btnCerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+
+        frmPrincipal.btnMin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frmPrincipal.setExtendedState(ICONIFIED);
+            }
+        });
     }
 
     private void cargarPanel(JPanel panel) {
-        panel.setSize(740, 640);
+        panel.setSize(740, 630);
         frmPrincipal.contenedor.removeAll();
         frmPrincipal.contenedor.add(panel, BorderLayout.CENTER);
         frmPrincipal.contenedor.revalidate();

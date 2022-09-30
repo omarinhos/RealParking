@@ -2,8 +2,8 @@ package dao;
 
 public class ConfiguracionDTO {
 
-public static final String NOMBRE_CONFIGURACION  = "configuracion.txt";
- private String razonSocial;
+    public static final String ARCHIVO_CONFIGURACION = "configuracion.txt";
+    private String razonSocial;
     private String RUC;
     private String nombreComercial;
     private int espacios;
@@ -59,5 +59,5 @@ public static final String NOMBRE_CONFIGURACION  = "configuracion.txt";
     public void setTarifa(double tarifa) {
         this.tarifa = tarifa;
     }
-    
+
 }

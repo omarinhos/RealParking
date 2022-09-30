@@ -26,8 +26,7 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
 
     @Override
     public void create(UsuarioDTO usuarioDTO) {
-        try (Connection conn = getConnection();
-            PreparedStatement stmt = conn.prepareStatement(INSERT)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
             
             stmt.setString(1, usuarioDTO.getUsuario());
             stmt.setString(2, usuarioDTO.getPass());
@@ -48,8 +47,7 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
     @Override
     public UsuarioDTO findBy(String user) {
         UsuarioDTO usuarioDTO = null;
-        try ( Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareCall(FINDBY + user + "'");
+        try (PreparedStatement stmt = getConnection().prepareCall(FINDBY + user + "'");
                 ResultSet rs = stmt.executeQuery()) {
             
            
@@ -66,8 +64,7 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
 
     @Override
     public void update(UsuarioDTO usuarioDTO) {
-        try (Connection conn = getConnection();
-            PreparedStatement stmt = conn.prepareStatement(UPDATE)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(UPDATE)) {
             
             stmt.setString(1, usuarioDTO.getUsuario());
             stmt.setString(2, usuarioDTO.getPass());
@@ -87,8 +84,7 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
     public List<UsuarioDTO> filter(String buscar) {
        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
 
-        try ( Connection conn = getConnection();
-                Statement stmt = conn.createStatement();
+        try (Statement stmt = getConnection().createStatement();
                 ResultSet rs = stmt.executeQuery(FILTER+" '"+buscar+"%' ORDER BY u.id_usuario");) 
         {
 
@@ -107,8 +103,7 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
     public List<UsuarioDTO> getList() {
         List<UsuarioDTO> usuariosDTO = new ArrayList<>();
 
-        try ( Connection conn = getConnection();
-                Statement stmt = conn.createStatement();
+        try ( Statement stmt = getConnection().createStatement();
                 ResultSet rs = stmt.executeQuery(SELECT);) 
         {
 

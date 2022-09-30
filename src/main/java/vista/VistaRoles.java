@@ -32,12 +32,13 @@ public class VistaRoles extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         txtRrol = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
-        cmbREstado = new javax.swing.JComboBox<>();
+        cmbEstado = new javax.swing.JComboBox<>();
         jLabel43 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblRoles = new javax.swing.JTable();
+        btnNuevo = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,8 +60,8 @@ public class VistaRoles extends javax.swing.JPanel {
         jLabel42.setText("Rol:");
         add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 96, -1, 30));
 
-        cmbREstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        add(cmbREstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 146, 160, 30));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 146, 160, 30));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(102, 102, 102));
@@ -85,7 +86,7 @@ public class VistaRoles extends javax.swing.JPanel {
                 btnGuardarActionPerformed(evt);
             }
         });
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 96, 110, 30));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 120, 30));
 
         btnModificar.setBackground(new java.awt.Color(0, 51, 102));
         btnModificar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -127,6 +128,26 @@ public class VistaRoles extends javax.swing.JPanel {
         jScrollPane6.setViewportView(tblRoles);
 
         add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 700, 330));
+
+        btnNuevo.setBackground(new java.awt.Color(0, 51, 102));
+        btnNuevo.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevo.setText("NUEVO");
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseExited(evt);
+            }
+        });
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 120, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
@@ -149,11 +170,24 @@ public class VistaRoles extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tblRolesMouseClicked
 
+    private void btnNuevoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoMouseEntered
+
+    private void btnNuevoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoMouseExited
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnModificar;
-    public javax.swing.JComboBox<String> cmbREstado;
+    public javax.swing.JButton btnNuevo;
+    public javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;

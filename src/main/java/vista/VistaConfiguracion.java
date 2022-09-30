@@ -30,18 +30,18 @@ public class VistaConfiguracion extends javax.swing.JPanel {
 
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtRazonSocial = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        txtRUC = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        txtNombreComercial = new javax.swing.JTextField();
+        txtTarifa = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        txtEspacios = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,13 +56,17 @@ public class VistaConfiguracion extends javax.swing.JPanel {
         jLabel30.setForeground(new java.awt.Color(102, 102, 102));
         jLabel30.setText("Razón Social :");
         add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 160, 30));
+
+        txtRazonSocial.setEnabled(false);
+        add(txtRazonSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 160, 30));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(102, 102, 102));
         jLabel31.setText("r.u..c. :");
         add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
-        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 160, 30));
+
+        txtRUC.setEnabled(false);
+        add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 160, 30));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(102, 102, 102));
@@ -73,36 +77,41 @@ public class VistaConfiguracion extends javax.swing.JPanel {
         jLabel33.setForeground(new java.awt.Color(102, 102, 102));
         jLabel33.setText("Tarfica unica:");
         add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, -1, 20));
-        add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
-        add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 160, 30));
 
-        jButton13.setBackground(new java.awt.Color(0, 51, 102));
-        jButton13.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("REGISTRAR");
-        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtNombreComercial.setEnabled(false);
+        add(txtNombreComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
+
+        txtTarifa.setEnabled(false);
+        add(txtTarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 160, 30));
+
+        btnGuardar.setBackground(new java.awt.Color(0, 51, 102));
+        btnGuardar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.setEnabled(false);
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton13MouseEntered(evt);
+                btnGuardarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton13MouseExited(evt);
+                btnGuardarMouseExited(evt);
             }
         });
-        add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, -1, -1));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 120, -1));
 
-        jButton14.setBackground(new java.awt.Color(0, 51, 102));
-        jButton14.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("MODIFICAR");
-        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnModificar.setBackground(new java.awt.Color(0, 51, 102));
+        btnModificar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton14MouseEntered(evt);
+                btnModificarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton14MouseExited(evt);
+                btnModificarMouseExited(evt);
             }
         });
-        add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
+        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 120, -1));
 
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,29 +122,31 @@ public class VistaConfiguracion extends javax.swing.JPanel {
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
         jLabel40.setText("Espacios disponibles:");
         add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, 20));
-        add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 160, 30));
+
+        txtEspacios.setEnabled(false);
+        add(txtEspacios, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 160, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseEntered
-        jButton13.setBackground(new Color(5,42,136));
-    }//GEN-LAST:event_jButton13MouseEntered
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        btnGuardar.setBackground(new Color(5,42,136));
+    }//GEN-LAST:event_btnGuardarMouseEntered
 
-    private void jButton13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseExited
-        jButton13.setBackground(new Color(3,24,77));
-    }//GEN-LAST:event_jButton13MouseExited
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        btnGuardar.setBackground(new Color(3,24,77));
+    }//GEN-LAST:event_btnGuardarMouseExited
 
-    private void jButton14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseEntered
-        jButton14.setBackground(new Color(5,42,136));
-    }//GEN-LAST:event_jButton14MouseEntered
+    private void btnModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseEntered
+        btnModificar.setBackground(new Color(5,42,136));
+    }//GEN-LAST:event_btnModificarMouseEntered
 
-    private void jButton14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseExited
-        jButton14.setBackground(new Color(3,24,77));
-    }//GEN-LAST:event_jButton14MouseExited
+    private void btnModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseExited
+        btnModificar.setBackground(new Color(3,24,77));
+    }//GEN-LAST:event_btnModificarMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
+    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -143,10 +154,10 @@ public class VistaConfiguracion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
+    public javax.swing.JTextField txtEspacios;
+    public javax.swing.JTextField txtNombreComercial;
+    public javax.swing.JTextField txtRUC;
+    public javax.swing.JTextField txtRazonSocial;
+    public javax.swing.JTextField txtTarifa;
     // End of variables declaration//GEN-END:variables
 }

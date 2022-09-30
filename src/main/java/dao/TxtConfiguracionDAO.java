@@ -3,6 +3,7 @@ package dao;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -22,17 +23,15 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
             pw.append("Espacios: " + configuracion.getEspacios() + "\n");
             pw.append("Tarifa: " + configuracion.getTarifa());
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace(System.out);
         } finally {
             try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
                 if (null != fichero) {
                     fichero.close();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace(System.out);
             }
         }
     }
@@ -54,7 +53,7 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
 
             br.close();
 
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException e) {
             e.printStackTrace(System.out);
         }
         return configuracionDTO;

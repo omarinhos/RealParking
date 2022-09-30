@@ -62,7 +62,7 @@ public class Validacion {
     }
     
     public void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje);
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", 2);
     }
     
 }
