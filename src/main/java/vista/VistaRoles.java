@@ -34,8 +34,8 @@ public class VistaRoles extends javax.swing.JPanel {
         jLabel42 = new javax.swing.JLabel();
         cmbREstado = new javax.swing.JComboBox<>();
         jLabel43 = new javax.swing.JLabel();
-        btnRGuardar = new javax.swing.JButton();
-        btnRModificar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblRoles = new javax.swing.JTable();
 
@@ -67,42 +67,50 @@ public class VistaRoles extends javax.swing.JPanel {
         jLabel43.setText("Estado:");
         add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 156, 60, -1));
 
-        btnRGuardar.setBackground(new java.awt.Color(0, 51, 102));
-        btnRGuardar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        btnRGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRGuardar.setText("GUARDAR");
-        btnRGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGuardar.setBackground(new java.awt.Color(0, 51, 102));
+        btnGuardar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRGuardarMouseEntered(evt);
+                btnGuardarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRGuardarMouseExited(evt);
+                btnGuardarMouseExited(evt);
             }
         });
-        btnRGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRGuardarActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        add(btnRGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 96, 110, 30));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 96, 110, 30));
 
-        btnRModificar.setBackground(new java.awt.Color(0, 51, 102));
-        btnRModificar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        btnRModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRModificar.setText("MODIFICAR");
-        btnRModificar.setEnabled(false);
-        btnRModificar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setBackground(new java.awt.Color(0, 51, 102));
+        btnModificar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("MODIFICAR");
+        btnModificar.setEnabled(false);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRModificarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
-        add(btnRModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 146, 120, 30));
+        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 146, 120, 30));
 
         jScrollPane6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
         tblRoles.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         tblRoles.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblRoles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         tblRoles.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblRoles.setFocusable(false);
         tblRoles.setGridColor(new java.awt.Color(0, 51, 102));
@@ -121,21 +129,21 @@ public class VistaRoles extends javax.swing.JPanel {
         add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 700, 330));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRGuardarMouseEntered
-        btnRGuardar.setBackground(new Color(5,42,136));
-    }//GEN-LAST:event_btnRGuardarMouseEntered
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        btnGuardar.setBackground(new Color(5,42,136));
+    }//GEN-LAST:event_btnGuardarMouseEntered
 
-    private void btnRGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRGuardarMouseExited
-        btnRGuardar.setBackground(new Color(3,24,77));
-    }//GEN-LAST:event_btnRGuardarMouseExited
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        btnGuardar.setBackground(new Color(3,24,77));
+    }//GEN-LAST:event_btnGuardarMouseExited
 
-    private void btnRGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRGuardarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
-    }//GEN-LAST:event_btnRGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnRModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRModificarActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-    }//GEN-LAST:event_btnRModificarActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tblRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRolesMouseClicked
         
@@ -143,15 +151,15 @@ public class VistaRoles extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRGuardar;
-    private javax.swing.JButton btnRModificar;
-    private javax.swing.JComboBox<String> cmbREstado;
+    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnModificar;
+    public javax.swing.JComboBox<String> cmbREstado;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable tblRoles;
-    private javax.swing.JTextField txtRrol;
+    public javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JTable tblRoles;
+    public javax.swing.JTextField txtRrol;
     // End of variables declaration//GEN-END:variables
 }

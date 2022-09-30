@@ -82,11 +82,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnUGuardarMouseExited(evt);
             }
         });
-        btnUGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUGuardarActionPerformed(evt);
-            }
-        });
         add(btnUGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 120, 30));
 
         jLabel11.setForeground(new java.awt.Color(204, 204, 204));
@@ -125,11 +120,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnUModificarMouseExited(evt);
             }
         });
-        btnUModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUModificarActionPerformed(evt);
-            }
-        });
         add(btnUModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 120, 30));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
@@ -144,11 +134,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
         tblUsuarios.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tblUsuarios.getTableHeader().setResizingAllowed(false);
         tblUsuarios.getTableHeader().setReorderingAllowed(false);
-        tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblUsuariosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblUsuarios);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 700, 330));
@@ -170,11 +155,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
         btnUGuardar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnUGuardarMouseExited
 
-    private void btnUGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUGuardarActionPerformed
-
-        
-    }//GEN-LAST:event_btnUGuardarActionPerformed
-
     private void btnUModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUModificarMouseEntered
         btnUModificar.setBackground(new Color(5,42,136));
     }//GEN-LAST:event_btnUModificarMouseEntered
@@ -183,20 +163,12 @@ public class VistaUsuarios extends javax.swing.JPanel {
         btnUModificar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnUModificarMouseExited
 
-    private void btnUModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUModificarActionPerformed
-        
-    }//GEN-LAST:event_btnUModificarActionPerformed
-
-    private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
-        
-    }//GEN-LAST:event_tblUsuariosMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnUGuardar;
-    private javax.swing.JButton btnUModificar;
-    private javax.swing.JComboBox<String> cmbUCargo;
-    private javax.swing.JComboBox<String> cmbUEstado;
+    public javax.swing.JButton btnUGuardar;
+    public javax.swing.JButton btnUModificar;
+    public javax.swing.JComboBox<String> cmbUCargo;
+    public javax.swing.JComboBox<String> cmbUEstado;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel21;
@@ -205,11 +177,11 @@ public class VistaUsuarios extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblUsuarios;
-    private javax.swing.JTextField txtUDni;
-    private javax.swing.JPasswordField txtUPass;
-    private javax.swing.JPasswordField txtUPassRe;
-    private javax.swing.JTextField txtUnombre;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable tblUsuarios;
+    public javax.swing.JTextField txtUDni;
+    public javax.swing.JPasswordField txtUPass;
+    public javax.swing.JPasswordField txtUPassRe;
+    public javax.swing.JTextField txtUnombre;
     // End of variables declaration//GEN-END:variables
 }

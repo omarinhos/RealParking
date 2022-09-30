@@ -18,15 +18,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     Color colorSalir = new Color(0, 51, 102);
     
     
-    public FrmPrincipal(Usuario user) {
+    public FrmPrincipal() {
         initComponents();
         
-        VistaUsuarios vistaUsuarios = new VistaUsuarios();
-        vistaUsuarios.setSize(740, 640);
-        contenedor.removeAll();
-        contenedor.add(vistaUsuarios, BorderLayout.CENTER);
-        contenedor.revalidate();
-        contenedor.repaint();
+//        VistaUsuarios vistaUsuarios = new VistaUsuarios();
+//        vistaUsuarios.setSize(740, 640);
+//        contenedor.removeAll();
+//        contenedor.add(vistaUsuarios, BorderLayout.CENTER);
+//        contenedor.revalidate();
+//        contenedor.repaint();
     }
     
     
@@ -404,20 +404,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         
-        try {
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Usuario user = new Usuario();
-                user.setUsuario("alo");
-                user.setRol(new Rol(1, "Administrador", "Activo"));
-                new FrmPrincipal(user).setVisible(true);
-            }
-        });
+//        try {
+//            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+//        } catch (UnsupportedLookAndFeelException ex) {
+//            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                Usuario user = new Usuario();
+//                user.setUsuario("alo");
+//                user.setRol(new Rol(1, "Administrador", "Activo"));
+//                new FrmPrincipal(user).setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

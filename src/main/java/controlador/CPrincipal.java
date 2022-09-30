@@ -34,7 +34,7 @@ public class CPrincipal {
     boolean permisoRoles;
 
     public CPrincipal(Usuario usuario) {
-        frmPrincipal = new FrmPrincipal(usuario);
+        frmPrincipal = new FrmPrincipal();
 
         tipoRolPanel(usuario.getRol());
 
@@ -77,14 +77,14 @@ public class CPrincipal {
         frmPrincipal.btnUsuarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoUsuarios) cargarPanel(new VistaUsuarios());
+                if (permisoUsuarios) new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
             }
         });
 
         frmPrincipal.btnRoles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoRoles) cargarPanel(new VistaRoles());
+                if (permisoRoles) new CRoles(frmPrincipal).vistaRoles.setVisible(true);
             }
         });
 
@@ -111,7 +111,8 @@ public class CPrincipal {
     private void tipoRolPanel(Rol rol) {
         switch (rol.getDescripcion()) {
             case "Administrador":
-                cargarPanel(new VistaUsuarios());
+                //cargarPanel(new VistaUsuarios());
+                new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
                 permisoRegistro = false;
                 permisoCaja = false;
                 permisoReportes = true;
