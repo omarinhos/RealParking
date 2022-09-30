@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import modelo.Usuario;
+import dao.UsuarioDTO;
 
 public class FrmLogin extends javax.swing.JFrame {
 

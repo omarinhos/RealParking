@@ -1,4 +1,4 @@
-package controlador;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Rol;
 import servicio.Conexion;
-import servicio.IDAO;
 
-public class RolDAO implements IDAO<Rol> {
+public class RolDAO extends DAO<RolDTO> {
 
     private final String SELECT = "SELECT * FROM rol";
     private final String INSERT = "INSERT INTO rol (descripcion, estado) VALUES (?, ?)";
@@ -25,13 +23,13 @@ public class RolDAO implements IDAO<Rol> {
     }
 
     @Override
-    public void create(Rol rol) {
+    public void create(RolDTO rolDTO) {
 
         try (Connection conn = getConnection();
                 PreparedStatement stmt = conn.prepareStatement(INSERT)) {
 
-            stmt.setString(1, rol.getDescripcion());
-            stmt.setString(2, rol.getEstado());
+            stmt.setString(1, rolDTO.getDescripcion());
+            stmt.setString(2, rolDTO.getEstado());
 
             stmt.executeUpdate();
 
@@ -42,37 +40,37 @@ public class RolDAO implements IDAO<Rol> {
     }
 
     @Override
-    public Rol findBy(String id) {
-        Rol rol = null;
+    public RolDTO findBy(String id) {
+        RolDTO rolDTO = null;
         try ( Connection conn = getConnection();
                 PreparedStatement stmt = conn.prepareCall(FINDBY + id);
                 ResultSet rs = stmt.executeQuery()) {
             
            
             if (rs.next()) {
-                rol = new Rol();
-                rol = crearRol(rs);
+                rolDTO = new RolDTO();
+                rolDTO = crearRol(rs);
             }
             
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return rol;
+        return rolDTO;
     }
 
     @Override
-    public void update(Rol rol) {
+    public void update(RolDTO rolDTO) {
         try (Connection conn = getConnection();
                 PreparedStatement stmtrol = conn.prepareStatement(UPDATEROL);
                 PreparedStatement stmtuser = conn.prepareStatement(UPDATEUSER)) {
 
-            stmtrol.setString(1, rol.getEstado());
-            stmtrol.setInt(2, rol.getId());
+            stmtrol.setString(1, rolDTO.getEstado());
+            stmtrol.setInt(2, rolDTO.getId());
 
             stmtrol.executeUpdate();
 
-            stmtuser.setString(1, rol.getEstado());
-            stmtuser.setInt(2, rol.getId());
+            stmtuser.setString(1, rolDTO.getEstado());
+            stmtuser.setInt(2, rolDTO.getId());
 
             stmtuser.executeUpdate();
 
@@ -82,50 +80,50 @@ public class RolDAO implements IDAO<Rol> {
     }
 
     @Override
-    public List<Rol> filter(String buscar) {
-        List<Rol> roles = new ArrayList<>();
+    public List<RolDTO> filter(String buscar) {
+        List<RolDTO> rolesDTO = new ArrayList<>();
 
         try (Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
 
             while (rs.next()) {
-                Rol rol = crearRol(rs);
-                roles.add(rol);
+                RolDTO rolDTO = crearRol(rs);
+                rolesDTO.add(rolDTO);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return roles;
+        return rolesDTO;
     }
 
     @Override
-    public List<Rol> getList() {
-        List<Rol> roles = new ArrayList<>();
+    public List<RolDTO> getList() {
+        List<RolDTO> rolesDTO = new ArrayList<>();
 
         try (Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(SELECT);) {
 
             while (rs.next()) {
-                Rol rol = crearRol(rs);
-                roles.add(rol);
+                RolDTO rolDTO = crearRol(rs);
+                rolesDTO.add(rolDTO);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return roles;
+        return rolesDTO;
     }
 
-    private Rol crearRol(ResultSet rs) throws SQLException {
-        Rol rol = new Rol();
-        rol.setId(rs.getInt("id_rol"));
-        rol.setDescripcion(rs.getString("descripcion"));
-        rol.setEstado(rs.getString("estado"));
+    private RolDTO crearRol(ResultSet rs) throws SQLException {
+        RolDTO rolDTO = new RolDTO();
+        rolDTO.setId(rs.getInt("id_rol"));
+        rolDTO.setDescripcion(rs.getString("descripcion"));
+        rolDTO.setEstado(rs.getString("estado"));
 
-        return rol;
+        return rolDTO;
     }
 
 }

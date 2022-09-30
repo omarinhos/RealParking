@@ -5,18 +5,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import modelo.Usuario;
+import dao.UsuarioDTO;
 import vista.FrmLogin;
 import recursos.TextPrompt;
 
 public class Clogin {
     
-    private Usuario usuario;
+    private UsuarioDTO usuario;
     public FrmLogin FrmLogin;
     private Validacion v;
     
     public Clogin() {
-        usuario = new Usuario();
+        usuario = new UsuarioDTO();
         FrmLogin = new FrmLogin();
         v = new Validacion();
         
@@ -44,7 +44,7 @@ public class Clogin {
             return false;
         }
         
-        Usuario newUser = v.tipoUsuario(usuario);
+        UsuarioDTO newUser = v.tipoUsuario(usuario);
         new CPrincipal(newUser).frmPrincipal.setVisible(true);
         FrmLogin.dispose();
         

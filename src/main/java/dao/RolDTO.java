@@ -1,15 +1,17 @@
-package modelo;
 
-public class Rol {
+package dao;
+
+
+public class RolDTO {
 
     private int id;
     private String descripcion;
     private String estado;
 
-    public Rol() {
+    public RolDTO() {
     }
 
-    public Rol(int id, String descripcion, String estado) {
+    public RolDTO(int id, String descripcion, String estado) {
         this.id = id;
         this.descripcion = descripcion;
         this.estado = estado;
@@ -39,5 +41,11 @@ public class Rol {
         this.descripcion = descripcion;
     }
 
+    @Override
+    public String toString() {
+        return id + ", "
+                + descripcion + ", "
+                + estado;
+    }
 
 }

@@ -1,7 +1,9 @@
 package controlador;
 
+import dao.BusinessLogic;
+import dao.UsuarioDAO;
 import javax.swing.JOptionPane;
-import modelo.Usuario;
+import dao.UsuarioDTO;
 
 public class Validacion {
     
@@ -24,9 +26,10 @@ public class Validacion {
         return true;
     }
     
-    public boolean existeUsuario(Usuario usuario) {
+    public boolean existeUsuario(UsuarioDTO usuario) {
+        BusinessLogic bsl = new BusinessLogic();
         UsuarioDAO udao = new UsuarioDAO();
-        Usuario user = udao.findBy(usuario.getUsuario());
+        UsuarioDTO user = bsl.buscarPorUsuario(usuario.getUsuario());
         
         if (user == null) {
             this.mostrarError("Usuario o contraseña incorrecto.");
@@ -47,9 +50,9 @@ public class Validacion {
         return true;
     }
     
-    public Usuario tipoUsuario(Usuario usuario) {
+    public UsuarioDTO tipoUsuario(UsuarioDTO usuario) {
         UsuarioDAO udao = new UsuarioDAO();
-        Usuario user = udao.findBy(usuario.getUsuario());
+        UsuarioDTO user = udao.findBy(usuario.getUsuario());
         
         if (user == null) {
             return null;

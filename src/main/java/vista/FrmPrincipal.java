@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import modelo.Rol;
-import modelo.Usuario;
+import dao.RolDTO;
+import dao.UsuarioDTO;
 
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -412,9 +412,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //        
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                Usuario user = new Usuario();
+//                UsuarioDTO user = new UsuarioDTO();
 //                user.setUsuario("alo");
-//                user.setRol(new Rol(1, "Administrador", "Activo"));
+//                user.setRol(new RolDTO(1, "Administrador", "Activo"));
 //                new FrmPrincipal(user).setVisible(true);
 //            }
 //        });

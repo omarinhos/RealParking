@@ -1,6 +1,7 @@
 package controlador;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import dao.BusinessLogic;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,9 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import modelo.Rol;
+import dao.RolDTO;
 import vista.FrmPrincipal;
-import modelo.Usuario;
+import dao.UsuarioDTO;
 import vista.FrmLogin;
 import vista.VistaCaja;
 import vista.VistaConfiguracion;
@@ -32,8 +33,9 @@ public class CPrincipal {
     boolean permisoConfiguracion;
     boolean permisoUsuarios;
     boolean permisoRoles;
+    BusinessLogic bsl = new BusinessLogic();
 
-    public CPrincipal(Usuario usuario) {
+    public CPrincipal(UsuarioDTO usuario) {
         frmPrincipal = new FrmPrincipal();
 
         tipoRolPanel(usuario.getRol());
@@ -48,43 +50,55 @@ public class CPrincipal {
         frmPrincipal.btnRegistro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoRegistro) cargarPanel(new VistaRegistro());
-                
+                if (permisoRegistro) {
+                    cargarPanel(new VistaRegistro());
+                }
+
             }
         });
 
         frmPrincipal.btnCaja.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoCaja) cargarPanel(new VistaCaja());
+                if (permisoCaja) {
+                    cargarPanel(new VistaCaja());
+                }
             }
         });
 
         frmPrincipal.btnReportes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoReportes) cargarPanel(new VistaReportes());
+                if (permisoReportes) {
+                    cargarPanel(new VistaReportes());
+                }
             }
         });
 
         frmPrincipal.btnConfiguracion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoConfiguracion) cargarPanel(new VistaConfiguracion());
+                if (permisoConfiguracion) {
+                    cargarPanel(new VistaConfiguracion());
+                }
             }
         });
 
         frmPrincipal.btnUsuarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoUsuarios) new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
+                if (permisoUsuarios) {
+                    new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
+                }
             }
         });
 
         frmPrincipal.btnRoles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (permisoRoles) new CRoles(frmPrincipal).vistaRoles.setVisible(true);
+                if (permisoRoles) {
+                    new CRoles(frmPrincipal).vistaRoles.setVisible(true);
+                }
             }
         });
 
@@ -108,7 +122,7 @@ public class CPrincipal {
         frmPrincipal.contenedor.repaint();
     }
 
-    private void tipoRolPanel(Rol rol) {
+    private void tipoRolPanel(RolDTO rol) {
         switch (rol.getDescripcion()) {
             case "Administrador":
                 //cargarPanel(new VistaUsuarios());
@@ -151,17 +165,17 @@ public class CPrincipal {
     }
 
     public static void main(String args[]) {
-        
+
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         java.awt.EventQueue.invokeLater(() -> {
-            Usuario user = new Usuario();
+            UsuarioDTO user = new UsuarioDTO();
             user.setUsuario("alo");
-            user.setRol(new Rol(1, "Administrador", "Activo"));
+            user.setRol(new RolDTO(1, "Administrador", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });
     }

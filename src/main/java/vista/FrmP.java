@@ -1,8 +1,8 @@
 package vista;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import controlador.RolDAO;
-import controlador.UsuarioDAO;
+import dao.RolDAO;
+import dao.UsuarioDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import modelo.Rol;
-import modelo.Usuario;
+import dao.RolDTO;
+import dao.UsuarioDTO;
 
 public class FrmP extends javax.swing.JFrame {
 
     UsuarioDAO udao = new UsuarioDAO();
     RolDAO rdao = new RolDAO();
     
-    List<Usuario> usuarios = new ArrayList<>();
-    List<Rol> roles = new ArrayList<>();
+    List<UsuarioDTO> usuarios = new ArrayList<>();
+    List<RolDTO> roles = new ArrayList<>();
     
     DefaultTableModel modeloUsuarios = new DefaultTableModel();
     DefaultTableModel modeloRoles = new DefaultTableModel();
@@ -42,7 +42,7 @@ public class FrmP extends javax.swing.JFrame {
     Color colorEntrar = new Color(0, 35, 71);
     Color colorSalir = new Color(0, 51, 102);
     
-    public FrmP(Usuario user) {
+    public FrmP(UsuarioDTO user) {
         initComponents();
         
         formatoCabeceraTabla(tblUsuarios);
@@ -75,7 +75,7 @@ public class FrmP extends javax.swing.JFrame {
        
     }
     
-    private void validarPermisos(Usuario user) {
+    private void validarPermisos(UsuarioDTO user) {
         switch (user.getRol().getDescripcion()) {
             case "Administrador" :
                 ventanas.setSelectedIndex(3);
@@ -1369,8 +1369,8 @@ public class FrmP extends javax.swing.JFrame {
         String passre = String.valueOf(txtUPassRe.getPassword());
 
         if (pass.equals(passre)) {
-            Usuario user = new Usuario();
-            Rol rol = new Rol();
+            UsuarioDTO user = new UsuarioDTO();
+            RolDTO rol = new RolDTO();
             user.setUsuario(txtUDni.getText());
             user.setPass(pass);
             user.setNombreCompleto(txtUnombre.getText());
@@ -1400,8 +1400,8 @@ public class FrmP extends javax.swing.JFrame {
         String passre = String.valueOf(txtUPassRe.getPassword());
 
         if (pass.equals(passre)) {
-            Usuario user = new Usuario();
-            Rol rol = new Rol();
+            UsuarioDTO user = new UsuarioDTO();
+            RolDTO rol = new RolDTO();
             user.setId(idUsuario);
             user.setUsuario(txtUDni.getText());
             user.setPass(pass);
@@ -1451,7 +1451,7 @@ public class FrmP extends javax.swing.JFrame {
 
         if (!txtRol.isEmpty()) {
 
-            Rol rol = new Rol();
+            RolDTO rol = new RolDTO();
 
             rol.setDescripcion(txtRrol.getText());
             rol.setEstado((String) cmbUEstado.getSelectedItem());
@@ -1467,7 +1467,7 @@ public class FrmP extends javax.swing.JFrame {
 
     private void btnRModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRModificarActionPerformed
 
-        Rol rol = new Rol();
+        RolDTO rol = new RolDTO();
         rol.setDescripcion(txtRrol.getText());
         rol.setEstado((String) cmbREstado.getSelectedItem());
         rol.setId(idRol);
@@ -1515,9 +1515,9 @@ public class FrmP extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Usuario user = new Usuario();
+                UsuarioDTO user = new UsuarioDTO();
                 user.setUsuario("alo");
-                user.setRol(new Rol(1, "Administrador", "Activo"));
+                user.setRol(new RolDTO(1, "Administrador", "Activo"));
                 new FrmP(user).setVisible(true);
             }
         });

@@ -1,18 +1,23 @@
-package modelo;
 
-public class Usuario {
-    
+package dao;
+
+
+
+
+public class UsuarioDTO {
+
+ 
     private int id;
     private String usuario;
     private String pass;
     private String nombreCompleto;
     private String estado;
-    private Rol rol;
+    private RolDTO rol;
 
-    public Usuario() {
+    public UsuarioDTO() {
     }
 
-    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol) {
+    public UsuarioDTO(int id, String usuario, String pass, String nombreCompleto, String estado, RolDTO rol) {
         this.id = id;
         this.usuario = usuario;
         this.pass = pass;
@@ -61,13 +66,22 @@ public class Usuario {
         this.estado = estado;
     }
     
-    public Rol getRol() {
+    public RolDTO getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(RolDTO rol) {
         this.rol = rol;
     }
 
+    @Override
+    public String toString() {
+        return  id + ", " +
+                usuario + ", " +
+                pass + ", " +
+                nombreCompleto + ", " +
+                estado + ", " +
+                rol;
+    }
     
 }
