@@ -42,6 +42,7 @@ public class VistaConfiguracion extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         txtEspacios = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,6 +126,10 @@ public class VistaConfiguracion extends javax.swing.JPanel {
 
         txtEspacios.setEnabled(false);
         add(txtEspacios, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 160, 30));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("jLabel1");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 620, -1, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
@@ -147,6 +152,7 @@ public class VistaConfiguracion extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;

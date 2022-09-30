@@ -21,12 +21,7 @@ public class CConfiguracion {
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
 
-        configuracionDTO = bl.leerConfiguracion(ConfiguracionDTO.ARCHIVO_CONFIGURACION);
-        vistaConfig.txtRazonSocial.setText(configuracionDTO.getRazonSocial());
-        vistaConfig.txtRUC.setText(configuracionDTO.getRUC());
-        vistaConfig.txtNombreComercial.setText(configuracionDTO.getNombreComercial());
-        vistaConfig.txtEspacios.setText("" + configuracionDTO.getEspacios());
-        vistaConfig.txtTarifa.setText("" + configuracionDTO.getTarifa());
+        actualizarParametrosConfiguracion();
 
         vistaConfig.btnGuardar.addActionListener(e -> {
             btnGuardarAction(e);
@@ -35,6 +30,15 @@ public class CConfiguracion {
         vistaConfig.btnModificar.addActionListener(e -> {
             btnModificarAction(e);
         });
+    }
+    
+    private void actualizarParametrosConfiguracion() {
+        configuracionDTO = bl.leerConfiguracion(ConfiguracionDTO.ARCHIVO_CONFIGURACION);
+        vistaConfig.txtRazonSocial.setText(configuracionDTO.getRazonSocial());
+        vistaConfig.txtRUC.setText(configuracionDTO.getRUC());
+        vistaConfig.txtNombreComercial.setText(configuracionDTO.getNombreComercial());
+        vistaConfig.txtEspacios.setText("" + configuracionDTO.getEspacios());
+        vistaConfig.txtTarifa.setText("" + configuracionDTO.getTarifa());
     }
 
     private boolean btnGuardarAction(ActionEvent e) {
@@ -61,6 +65,8 @@ public class CConfiguracion {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(vistaConfig, "NumberFormatException en Espacios y/o Tarifa" + ex,
                     "Configuración", 0);
+            actualizarParametrosConfiguracion();
+            
         }
 
         vistaConfig.txtRazonSocial.setEnabled(false);
