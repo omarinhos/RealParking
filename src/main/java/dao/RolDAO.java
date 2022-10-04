@@ -4,16 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import servicio.Conexion;
 
 public class RolDAO extends DAO<RolDTO> {
 
     private final String SELECT = "SELECT * FROM rol";
-    private final String INSERT = "INSERT INTO rol (descripcion, estado) VALUES (?, ?)";
-    private final String UPDATEROL = "UPDATE rol SET estado = ? WHERE id_rol = ?  ";
+    private final String INSERT = "INSERT INTO rol (id_rol, descripcion, estado) VALUES (?, ?, ?)";
+    private final String UPDATEROL = "UPDATE rol SET descripcion = ?, estado = ? WHERE id_rol = ? ";
     private final String UPDATEUSER = "UPDATE usuarios SET estado = ? WHERE id_rol = ?";
     private final String FINDBY = "SELECT * FROM rol WHERE id_rol = ";
     private final String FILTER = "SELECT * FROM rol where descripcion like";
@@ -27,11 +29,15 @@ public class RolDAO extends DAO<RolDTO> {
 
         try ( PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
 
-            stmt.setString(1, rolDTO.getDescripcion());
-            stmt.setString(2, rolDTO.getEstado());
+            stmt.setInt(1, rolDTO.getId());
+            stmt.setString(2, rolDTO.getDescripcion());
+            stmt.setString(3, rolDTO.getEstado());
 
             stmt.executeUpdate();
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Rol ya existe");
+            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -41,8 +47,7 @@ public class RolDAO extends DAO<RolDTO> {
     @Override
     public RolDTO findBy(String id) {
         RolDTO rolDTO = null;
-        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  
-                ResultSet rs = stmt.executeQuery()) {
+        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  ResultSet rs = stmt.executeQuery()) {
 
             if (rs.next()) {
                 rolDTO = new RolDTO();
@@ -60,8 +65,9 @@ public class RolDAO extends DAO<RolDTO> {
         try ( PreparedStatement stmtrol = getConnection().prepareStatement(UPDATEROL);  
                 PreparedStatement stmtuser = getConnection().prepareStatement(UPDATEUSER)) {
 
-            stmtrol.setString(1, rolDTO.getEstado());
-            stmtrol.setInt(2, rolDTO.getId());
+            stmtrol.setString(1, rolDTO.getDescripcion());
+            stmtrol.setString(2, rolDTO.getEstado());
+            stmtrol.setInt(3, rolDTO.getId());
 
             stmtrol.executeUpdate();
 
@@ -70,6 +76,9 @@ public class RolDAO extends DAO<RolDTO> {
 
             stmtuser.executeUpdate();
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Rol ya existe");
+            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -79,8 +88,7 @@ public class RolDAO extends DAO<RolDTO> {
     public List<RolDTO> filter(String buscar) {
         List<RolDTO> rolesDTO = new ArrayList<>();
 
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
+        try ( Statement stmt = getConnection().createStatement();  ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
 
             while (rs.next()) {
                 RolDTO rolDTO = crearRol(rs);
@@ -97,8 +105,7 @@ public class RolDAO extends DAO<RolDTO> {
     public List<RolDTO> getList() {
         List<RolDTO> rolesDTO = new ArrayList<>();
 
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(SELECT)) {
+        try ( Statement stmt = getConnection().createStatement();  ResultSet rs = stmt.executeQuery(SELECT)) {
 
             while (rs.next()) {
                 RolDTO rolDTO = crearRol(rs);

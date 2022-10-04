@@ -31,8 +31,8 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
 
     @Override
     public void create(UsuarioDTO usuarioDTO) {
-        if (usuarioDTO.getImagen() != null) {
-            INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol,foto) VALUES (?, ?, ?, ?, ?, ?)";
+        if (usuarioDTO.getRutaFoto()!= null) {
+            INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol, foto) VALUES (?, ?, ?, ?, ?, ?)";
         }
 
         try (PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
@@ -43,10 +43,10 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
             stmt.setString(4, usuarioDTO.getEstado());
             stmt.setInt(5, usuarioDTO.getRol().getId());
 
-            if (usuarioDTO.getImagen() != null) {
+            if (usuarioDTO.getRutaFoto()!= null) {
                 File imageFile = new File(usuarioDTO.getRutaFoto());
                 FileInputStream fis = new FileInputStream(imageFile);
-                stmt.setBlob(6, fis, imageFile.length());
+                stmt.setBinaryStream(6, fis, imageFile.length());
             }
 
             stmt.executeUpdate();
@@ -93,6 +93,9 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
 
             stmt.executeUpdate();
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Usuario ya existe");
+            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

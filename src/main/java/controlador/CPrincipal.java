@@ -216,6 +216,7 @@ public class CPrincipal {
         java.awt.EventQueue.invokeLater(() -> {
             UsuarioDTO user = new UsuarioDTO();
             user.setUsuario("alo");
+            user.setNombreCompleto("Nombre");
             user.setRol(new RolDTO(1, "Administrador", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });

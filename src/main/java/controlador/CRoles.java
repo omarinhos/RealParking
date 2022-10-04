@@ -74,6 +74,7 @@ public class CRoles {
 
             RolDTO rol = new RolDTO();
 
+            rol.setId(roles.size() + 1);
             rol.setDescripcion(campoRol);
             rol.setEstado((String) vistaRoles.cmbEstado.getSelectedItem());
 
