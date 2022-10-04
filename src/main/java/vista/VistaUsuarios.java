@@ -16,6 +16,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel18 = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
@@ -35,6 +36,8 @@ public class VistaUsuarios extends javax.swing.JPanel {
         cmbCargo = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
+        jlbfotoUsuario = new javax.swing.JLabel();
+        btnGuardarFotos = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -42,22 +45,22 @@ public class VistaUsuarios extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
         jLabel18.setText("Nombre Completo:");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
-        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 74, 160, 30));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 160, 30));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setText("Estado:");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 30));
-        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 114, 160, 30));
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, 30));
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 160, 30));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
         jLabel23.setText("Dni:");
-        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, 30));
+        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, 30));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 204, 160, 30));
+        add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 160, 30));
 
         btnGuardar.setBackground(new java.awt.Color(0, 51, 102));
         btnGuardar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -71,7 +74,12 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnGuardarMouseExited(evt);
             }
         });
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 120, 30));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 130, 30));
 
         jLabel11.setForeground(new java.awt.Color(204, 204, 204));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,14 +95,14 @@ public class VistaUsuarios extends javax.swing.JPanel {
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(102, 102, 102));
         jLabel26.setText("Contraseña:");
-        add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
-        add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 160, 30));
+        add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 30));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 102, 102));
         jLabel27.setText("Repetir contraseña:");
-        add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, -1, -1));
-        add(txtPassRe, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 160, 30));
+        add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        add(txtPassRe, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 160, 30));
 
         btnModificar.setBackground(new java.awt.Color(0, 51, 102));
         btnModificar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -109,7 +117,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnModificarMouseExited(evt);
             }
         });
-        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 120, 30));
+        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 120, 30));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
@@ -125,15 +133,15 @@ public class VistaUsuarios extends javax.swing.JPanel {
         tblUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblUsuarios);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 700, 330));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 700, 290));
 
         cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Digitador", "Cajero", "Prueba", "Abogado" }));
-        add(cmbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 164, 160, 30));
+        add(cmbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 160, 30));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("Cargo: ");
-        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
         btnNuevo.setBackground(new java.awt.Color(0, 51, 102));
         btnNuevo.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -147,7 +155,29 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnNuevoMouseExited(evt);
             }
         });
-        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 120, 30));
+        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 120, 30));
+
+        jlbfotoUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jlbfotoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbfotoUsuarioMouseClicked(evt);
+            }
+        });
+        add(jlbfotoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 160, 160));
+
+        btnGuardarFotos.setBackground(new java.awt.Color(0, 51, 102));
+        btnGuardarFotos.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnGuardarFotos.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarFotos.setText("ELEGIR FOTO");
+        btnGuardarFotos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarFotosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarFotosMouseExited(evt);
+            }
+        });
+        add(btnGuardarFotos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
@@ -174,9 +204,26 @@ public class VistaUsuarios extends javax.swing.JPanel {
         btnModificar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnNuevoMouseExited
 
+    private void jlbfotoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbfotoUsuarioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlbfotoUsuarioMouseClicked
+
+    private void btnGuardarFotosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarFotosMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarFotosMouseExited
+
+    private void btnGuardarFotosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarFotosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarFotosMouseEntered
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnGuardarFotos;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnNuevo;
     public javax.swing.JComboBox<String> cmbCargo;
@@ -189,7 +236,9 @@ public class VistaUsuarios extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLayeredPane jLayeredPane1;
     public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel jlbfotoUsuario;
     public javax.swing.JTable tblUsuarios;
     public javax.swing.JTextField txtDni;
     public javax.swing.JTextField txtNombre;

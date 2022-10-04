@@ -14,42 +14,56 @@ import dao.RolDTO;
 import vista.FrmPrincipal;
 import dao.UsuarioDTO;
 import static java.awt.Frame.ICONIFIED;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import vista.VistaCaja;
 import vista.VistaConfiguracion;
 import vista.VistaRegistro;
 import vista.VistaReportes;
 
 public class CPrincipal {
-
+    
     public FrmPrincipal frmPrincipal = new FrmPrincipal();
-
+    
     private boolean permisoRegistro;
     private boolean permisoCaja;
     private boolean permisoReportes;
     private boolean permisoConfiguracion;
     private boolean permisoUsuarios;
     private boolean permisoRoles;
-
+    
     public CPrincipal(UsuarioDTO usuario) {
         tipoRolPanel(usuario.getRol());
-
+        frmPrincipal.txtUserActual.setText(usuario.getNombreCompleto());
+        frmPrincipal.txtRolActual.setText(usuario.getRol().getDescripcion());
         frmPrincipal.btnRegistro.setEnabled(permisoRegistro);
         frmPrincipal.btnCaja.setEnabled(permisoCaja);
         frmPrincipal.btnReportes.setEnabled(permisoReportes);
         frmPrincipal.btnConfiguracion.setEnabled(permisoConfiguracion);
         frmPrincipal.btnUsuarios.setEnabled(permisoUsuarios);
         frmPrincipal.btnRoles.setEnabled(permisoRoles);
-
+        
+        if (usuario.getImagen() != null) {
+            cargarImagen(usuario.getImagen());
+        }
+        
         frmPrincipal.btnRegistro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (permisoRegistro) {
                     cargarPanel(new VistaRegistro());
                 }
-
+                
             }
         });
-
+        
         frmPrincipal.btnCaja.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -58,7 +72,7 @@ public class CPrincipal {
                 }
             }
         });
-
+        
         frmPrincipal.btnReportes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -67,7 +81,7 @@ public class CPrincipal {
                 }
             }
         });
-
+        
         frmPrincipal.btnConfiguracion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -76,7 +90,7 @@ public class CPrincipal {
                 }
             }
         });
-
+        
         frmPrincipal.btnUsuarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -85,7 +99,7 @@ public class CPrincipal {
                 }
             }
         });
-
+        
         frmPrincipal.btnRoles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -94,7 +108,7 @@ public class CPrincipal {
                 }
             }
         });
-
+        
         frmPrincipal.btnSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -106,14 +120,14 @@ public class CPrincipal {
                 }
             }
         });
-
+        
         frmPrincipal.btnCerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.exit(0);
             }
         });
-
+        
         frmPrincipal.btnMin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -121,7 +135,7 @@ public class CPrincipal {
             }
         });
     }
-
+    
     private void cargarPanel(JPanel panel) {
         panel.setSize(740, 630);
         frmPrincipal.contenedor.removeAll();
@@ -129,7 +143,7 @@ public class CPrincipal {
         frmPrincipal.contenedor.revalidate();
         frmPrincipal.contenedor.repaint();
     }
-
+    
     private void tipoRolPanel(RolDTO rol) {
         switch (rol.getDescripcion()) {
             case "Administrador":
@@ -168,18 +182,37 @@ public class CPrincipal {
                 permisoConfiguracion = false;
                 permisoUsuarios = false;
                 permisoRoles = false;
-
+            
         }
     }
-
+    
+    private void cargarImagen(Blob blob) {
+        
+        BufferedImage img = null;
+        try {
+            //pasar el binario a imagen
+            byte[] data = blob.getBytes(1, (int) blob.length());
+            //lee la imagen
+            img = ImageIO.read(new ByteArrayInputStream(data));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ImageIcon icono = new ImageIcon(img);
+        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(frmPrincipal.userFoto.getWidth(), frmPrincipal.userFoto.getHeight(), Image.SCALE_DEFAULT));
+        frmPrincipal.userFoto.setIcon(imagen);
+    }
+    
     public static void main(String args[]) {
-
+        
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         java.awt.EventQueue.invokeLater(() -> {
             UsuarioDTO user = new UsuarioDTO();
             user.setUsuario("alo");
@@ -187,4 +220,5 @@ public class CPrincipal {
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });
     }
+    
 }

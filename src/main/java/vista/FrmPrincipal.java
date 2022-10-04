@@ -339,6 +339,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel nav;
     public javax.swing.JLabel txtRolActual;
     public javax.swing.JLabel txtUserActual;
-    private javax.swing.JLabel userFoto;
+    public javax.swing.JLabel userFoto;
     // End of variables declaration//GEN-END:variables
 }

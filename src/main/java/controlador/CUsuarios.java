@@ -4,12 +4,36 @@ import dao.BusinessLogic;
 import dao.RolDTO;
 import dao.UsuarioDTO;
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 import vista.FrmPrincipal;
 import vista.VistaUsuarios;
@@ -22,6 +46,10 @@ public class CUsuarios {
     private List<UsuarioDTO> usuarios = new ArrayList<>();
     private List<RolDTO> roles = new ArrayList<>();
     private int idUsuario;
+    //esto es para la imagen
+    private FileInputStream fis;
+    private int longitudBytes;
+    private String rutaImagen;
     
     public CUsuarios(FrmPrincipal FrmP) {
         
@@ -45,7 +73,6 @@ public class CUsuarios {
         vistaUsuarios.btnModificar.addActionListener(e -> {
             btnModificarAction(e);
         });
-        
         vistaUsuarios.tblUsuarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -56,9 +83,14 @@ public class CUsuarios {
         vistaUsuarios.btnNuevo.addActionListener(e -> {
             btnNuevoAction(e);
         });
+        
+        vistaUsuarios.btnGuardarFotos.addActionListener(e -> {
+            btnGuardarFotosAction(e);
+        });
+        
     }
     
-    private void actualizarComboRoles(){
+    private void actualizarComboRoles() {
         vistaUsuarios.cmbCargo.removeAllItems();
         roles = bl.getListaRol();
         roles.forEach(rol -> vistaUsuarios.cmbCargo.addItem(rol.getDescripcion()));
@@ -84,7 +116,7 @@ public class CUsuarios {
         String nombre = vistaUsuarios.txtNombre.getText();
         String pass = String.valueOf(vistaUsuarios.txtPass.getPassword());
         String passre = String.valueOf(vistaUsuarios.txtPassRe.getPassword());
-
+        
         if (DNI.isEmpty() || nombre.isEmpty() || pass.isEmpty() || passre.isEmpty()) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Llenar todos los campos.", "Usuario", 2);
             return false;
@@ -100,23 +132,23 @@ public class CUsuarios {
         user.setPass(pass);
         user.setNombreCompleto(nombre);
         user.setEstado((String) vistaUsuarios.cmbEstado.getSelectedItem());
+        user.setRutaFoto(rutaImagen);
         RolDTO rol = new RolDTO();
         rol.setId(vistaUsuarios.cmbCargo.getSelectedIndex() + 1);
         user.setRol(rol);
-        
         bl.crearUsuario(user);
         JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Agregado.", "Usuario", 1);
-        actualizarTablaUsuarios(); 
+        actualizarTablaUsuarios();
         
         return true;
     }
-
+    
     private boolean btnModificarAction(ActionEvent e) {
         String DNI = vistaUsuarios.txtDni.getText();
         String nombre = vistaUsuarios.txtNombre.getText();
         String pass = String.valueOf(vistaUsuarios.txtPass.getPassword());
         String passre = String.valueOf(vistaUsuarios.txtPassRe.getPassword());
-
+        
         if (DNI.isEmpty() || nombre.isEmpty() || pass.isEmpty() || passre.isEmpty()) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Llenar todos los campos.", "Usuario", 2);
             return false;
@@ -139,15 +171,15 @@ public class CUsuarios {
         
         bl.actualizarUsuario(user);
         JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Mdificado", "Usuario", 1);
-        actualizarTablaUsuarios(); 
+        actualizarTablaUsuarios();
         
         return true;
     }
-
+    
     private void tblUsuariosMouseClicked(MouseEvent evt) {
         try {
             int x = vistaUsuarios.tblUsuarios.getSelectedRow();
-
+            
             idUsuario = usuarios.get(x).getId();
             vistaUsuarios.txtDni.setText(usuarios.get(x).getUsuario());
             vistaUsuarios.txtPass.setText(usuarios.get(x).getPass());
@@ -157,11 +189,17 @@ public class CUsuarios {
             vistaUsuarios.cmbEstado.setSelectedItem(usuarios.get(x).getEstado());
             vistaUsuarios.btnGuardar.setEnabled(false);
             vistaUsuarios.btnModificar.setEnabled(true);
+            if (usuarios.get(x).getImagen() != null) {
+                cargarImagen(usuarios.get(x).getImagen());
+            } else {
+                vistaUsuarios.jlbfotoUsuario.setIcon(new ImageIcon("src/main/java/images/user.png"));
+            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Dar solo click izquiero.", "Advertencia", 2);
         }
     }
-
+    
     private void btnNuevoAction(ActionEvent e) {
         vistaUsuarios.btnGuardar.setEnabled(true);
         vistaUsuarios.btnModificar.setEnabled(false);
@@ -170,6 +208,48 @@ public class CUsuarios {
         vistaUsuarios.txtNombre.setText("");
         vistaUsuarios.txtPass.setText("");
         vistaUsuarios.txtPassRe.setText("");
+        vistaUsuarios.jlbfotoUsuario.setIcon(null);
+    }
+    
+    private void btnGuardarFotosAction(ActionEvent e) {
+        JFileChooser se = new JFileChooser();
+        se.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int estado = se.showOpenDialog(null);
+        
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
+                fis = new FileInputStream(se.getSelectedFile());
+                rutaImagen = se.getSelectedFile().getAbsolutePath();
+                this.longitudBytes = (int) se.getSelectedFile().length();
+                Image icono = ImageIO.read(se.getSelectedFile()).getScaledInstance(vistaUsuarios.jlbfotoUsuario.getWidth(), vistaUsuarios.jlbfotoUsuario.getHeight(), Image.SCALE_DEFAULT);
+                vistaUsuarios.jlbfotoUsuario.setIcon(new ImageIcon(icono));
+                vistaUsuarios.jlbfotoUsuario.updateUI();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }
+    
+    private void cargarImagen(Blob blob) {
+        
+        BufferedImage img = null;
+        try {
+            //pasar el binario a imagen
+            byte[] data = blob.getBytes(1, (int) blob.length());
+            //lee la imagen
+            img = ImageIO.read(new ByteArrayInputStream(data));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ImageIcon icono = new ImageIcon(img);
+        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(vistaUsuarios.jlbfotoUsuario.getWidth(), vistaUsuarios.jlbfotoUsuario.getHeight(), Image.SCALE_DEFAULT));
+        vistaUsuarios.jlbfotoUsuario.setIcon(imagen);
     }
     
 }
