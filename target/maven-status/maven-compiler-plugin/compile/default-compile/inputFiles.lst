@@ -2,6 +2,7 @@ D:\RealParking\src\main\java\controlador\CUsuarios.java
 D:\RealParking\src\main\java\controlador\CPrincipal.java
 D:\RealParking\src\main\java\dao\BusinessLogic.java
 D:\RealParking\src\main\java\dao\RolDTO.java
+D:\RealParking\src\main\java\dao\Conexion.java
 D:\RealParking\src\main\java\recursos\TextPrompt.java
 D:\RealParking\src\main\java\vista\FrmLogin.java
 D:\RealParking\src\main\java\vista\VistaConfiguracion.java
@@ -24,7 +25,6 @@ D:\RealParking\src\main\java\controlador\CRoles.java
 D:\RealParking\src\main\java\dao\RolDAO.java
 D:\RealParking\src\main\java\vista\VistaUsuarios.java
 D:\RealParking\src\main\java\modelo\Rol.java
-D:\RealParking\src\main\java\servicio\Conexion.java
 D:\RealParking\src\main\java\controlador\Validacion.java
 D:\RealParking\src\main\java\controlador\CConfiguracion.java
 D:\RealParking\src\main\java\controlador\Clogin.java

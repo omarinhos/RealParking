@@ -11,12 +11,10 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
 
     @Override
     public void create(ConfiguracionDTO configuracion) {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter("configuracion.txt");
-            pw = new PrintWriter(fichero);
-
+        
+        try (FileWriter fichero = new FileWriter("configuracion.txt");
+            PrintWriter pw = new PrintWriter(fichero)){
+          
             pw.append("Razon Social: " + configuracion.getRazonSocial() + "\n");
             pw.append("RUC: " + configuracion.getRUC() + "\n");
             pw.append("Nombre Comercial: " + configuracion.getNombreComercial() + "\n");
@@ -25,14 +23,6 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
 
         } catch (IOException e) {
             e.printStackTrace(System.out);
-        } finally {
-            try {
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace(System.out);
-            }
         }
     }
 
@@ -40,18 +30,14 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
     public ConfiguracionDTO findBy(String nombrefichero) {
 
         ConfiguracionDTO configuracionDTO = new ConfiguracionDTO();
-        BufferedReader br = null;
 
-        try {
-
-            br = new BufferedReader(new FileReader(nombrefichero));
+        try (BufferedReader br = new BufferedReader(new FileReader(nombrefichero))){
+ 
             configuracionDTO.setRazonSocial(br.readLine().substring(14));
             configuracionDTO.setRUC(br.readLine().substring(5));
             configuracionDTO.setNombreComercial(br.readLine().substring(18));
             configuracionDTO.setEspacios(Integer.parseInt(br.readLine().substring(10)));
             configuracionDTO.setTarifa(Double.parseDouble(br.readLine().substring(8)));
-
-            br.close();
 
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace(System.out);

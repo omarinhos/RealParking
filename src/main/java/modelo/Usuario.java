@@ -1,6 +1,7 @@
 package modelo;
 
 import java.awt.Image;
+import java.sql.Blob;
 
 
 public class Usuario {
@@ -11,21 +12,21 @@ public class Usuario {
     private String nombreCompleto;
     private String estado;
     private Rol rol;
-    private String nombreFoto;
-    private Image foto;
+    private String rutaFoto;
+    private Blob imagen;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol, String nombreFoto, Image foto) {
+    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol, String rutaFoto, Blob imagen) {
         this.id = id;
         this.usuario = usuario;
         this.pass = pass;
         this.nombreCompleto = nombreCompleto;
         this.estado = estado;
         this.rol = rol;
-        this.nombreFoto = nombreFoto;
-        this.foto = foto;
+        this.rutaFoto = rutaFoto;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -76,22 +77,22 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getNombreFoto() {
-        return nombreFoto;
+    public String getRutaFoto() {
+        return rutaFoto;
     }
 
-    public void setNombreFoto(String nombreFoto) {
-        this.nombreFoto = nombreFoto;
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
     }
 
-    public Image getFoto() {
-        return foto;
+    public Blob getImagen() {
+        return imagen;
     }
 
-    public void setFoto(Image foto) {
-        this.foto = foto;
+    public void setImagen(Blob imagen) {
+        this.imagen = imagen;
     }
-
-
-
+    
+    
+    
 }

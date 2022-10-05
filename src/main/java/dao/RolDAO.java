@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import servicio.Conexion;
 
 public class RolDAO extends DAO<RolDTO> {
 

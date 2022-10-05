@@ -73,7 +73,6 @@ controlador\CPrincipal$6.class
 controlador\CRoles$1.class
 vista\FrmPrincipal$4.class
 vista\VistaRoles$5.class
-servicio\Conexion.class
 vista\FrmPrincipal$7.class
 vista\VistaConfiguracion$2.class
 vista\VistaUsuarios.class
@@ -95,6 +94,7 @@ vista\FrmLogin$2.class
 vista\FrmP$5.class
 vista\VistaUsuarios$1.class
 vista\FrmP$39.class
+dao\Conexion.class
 vista\VistaRoles$2.class
 NewClass.class
 vista\FrmP$19.class

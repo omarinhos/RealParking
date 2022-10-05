@@ -4,19 +4,15 @@ import dao.BusinessLogic;
 import dao.RolDTO;
 import dao.UsuarioDTO;
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,16 +20,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import vista.FrmPrincipal;
@@ -46,10 +36,8 @@ public class CUsuarios {
     private final DefaultTableModel modeloUsuarios = new DefaultTableModel();
     private List<UsuarioDTO> usuarios = new ArrayList<>();
     private List<RolDTO> roles = new ArrayList<>();
+    
     private int idUsuario;
-    //esto es para la imagen
-    private FileInputStream fis;
-    private int longitudBytes;
     private String rutaImagen = null;
 
     public CUsuarios(FrmPrincipal FrmP) {
@@ -225,9 +213,7 @@ public class CUsuarios {
         if (estado == JFileChooser.APPROVE_OPTION) {
             try {
 
-                fis = new FileInputStream(se.getSelectedFile());
                 rutaImagen = se.getSelectedFile().getAbsolutePath();
-                this.longitudBytes = (int) se.getSelectedFile().length();
                 Image icono = ImageIO.read(se.getSelectedFile()).getScaledInstance(vistaUsuarios.jlbfotoUsuario.getWidth(), vistaUsuarios.jlbfotoUsuario.getHeight(), Image.SCALE_DEFAULT);
                 vistaUsuarios.jlbfotoUsuario.setIcon(new ImageIcon(icono));
                 vistaUsuarios.jlbfotoUsuario.updateUI();

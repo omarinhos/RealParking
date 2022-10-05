@@ -24,7 +24,6 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import vista.VistaCaja;
-import vista.VistaConfiguracion;
 import vista.VistaRegistro;
 import vista.VistaReportes;
 
@@ -57,6 +56,7 @@ public class CPrincipal {
         frmPrincipal.btnRegistro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //falta implementar
                 if (permisoRegistro) {
                     cargarPanel(new VistaRegistro());
                 }
@@ -67,6 +67,7 @@ public class CPrincipal {
         frmPrincipal.btnCaja.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //falta implementar
                 if (permisoCaja) {
                     cargarPanel(new VistaCaja());
                 }
@@ -76,6 +77,7 @@ public class CPrincipal {
         frmPrincipal.btnReportes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //falta implementar
                 if (permisoReportes) {
                     cargarPanel(new VistaReportes());
                 }
@@ -147,7 +149,6 @@ public class CPrincipal {
     private void tipoRolPanel(RolDTO rol) {
         switch (rol.getDescripcion()) {
             case "Administrador":
-                //cargarPanel(new VistaUsuarios());
                 new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
                 permisoRegistro = false;
                 permisoCaja = false;
