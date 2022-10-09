@@ -53,6 +53,7 @@ public class CUsuarios {
         vistaUsuarios.tblUsuarios.setModel(modeloUsuarios);
 
         actualizarComboRoles();
+        usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
 
         vistaUsuarios.btnGuardar.addActionListener(e -> {
@@ -76,6 +77,10 @@ public class CUsuarios {
         vistaUsuarios.btnGuardarFotos.addActionListener(e -> {
             btnGuardarFotosAction(e);
         });
+        
+        vistaUsuarios.btnFiltrar.addActionListener(e -> {
+            btnFiltrarAction(e);
+        });
 
     }
 
@@ -86,7 +91,6 @@ public class CUsuarios {
     }
 
     private void actualizarTablaUsuarios() {
-        usuarios = bl.getListaUsuario();
         modeloUsuarios.setRowCount(0);
 
         usuarios.forEach(usuario -> {
@@ -127,6 +131,7 @@ public class CUsuarios {
         user.setRol(rol);
         bl.crearUsuario(user);
         JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Agregado.", "Usuario", 1);
+        usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
         rutaImagen = null;
 
@@ -161,6 +166,7 @@ public class CUsuarios {
 
         bl.actualizarUsuario(user);
         JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Mdificado", "Usuario", 1);
+        usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
 
         return true;
@@ -199,6 +205,13 @@ public class CUsuarios {
         vistaUsuarios.txtPass.setText("");
         vistaUsuarios.txtPassRe.setText("");
         vistaUsuarios.jlbfotoUsuario.setIcon(null);
+        vistaUsuarios.txtFiltro.setText("");
+    }
+    
+    private void btnFiltrarAction(ActionEvent e) {
+        String filtro = vistaUsuarios.txtFiltro.getText();
+        usuarios = bl.filtrarPorUsuario(filtro);
+        actualizarTablaUsuarios();
     }
 
     private void btnGuardarFotosAction(ActionEvent e) {

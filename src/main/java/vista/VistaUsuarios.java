@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vista;
 
 import java.awt.Color;
@@ -38,6 +34,9 @@ public class VistaUsuarios extends javax.swing.JPanel {
         btnNuevo = new javax.swing.JButton();
         jlbfotoUsuario = new javax.swing.JLabel();
         btnGuardarFotos = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        txtFiltro = new javax.swing.JTextField();
+        btnFiltrar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,8 +55,8 @@ public class VistaUsuarios extends javax.swing.JPanel {
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel23.setText("Dni:");
-        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, 30));
+        jLabel23.setText("Ingresar DNI");
+        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, 30));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 160, 30));
@@ -74,12 +73,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnGuardarMouseExited(evt);
             }
         });
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 130, 30));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 130, 30));
 
         jLabel11.setForeground(new java.awt.Color(204, 204, 204));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,7 +111,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnModificarMouseExited(evt);
             }
         });
-        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 120, 30));
+        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 130, 30));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
@@ -133,7 +127,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
         tblUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblUsuarios);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 700, 290));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 700, 230));
 
         cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Digitador", "Cajero", "Prueba", "Abogado" }));
         add(cmbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 160, 30));
@@ -155,7 +149,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnNuevoMouseExited(evt);
             }
         });
-        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 120, 30));
+        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 130, 30));
 
         jlbfotoUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jlbfotoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,7 +157,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 jlbfotoUsuarioMouseClicked(evt);
             }
         });
-        add(jlbfotoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 160, 160));
+        add(jlbfotoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 160, 160));
 
         btnGuardarFotos.setBackground(new java.awt.Color(0, 51, 102));
         btnGuardarFotos.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -177,7 +171,27 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnGuardarFotosMouseExited(evt);
             }
         });
-        add(btnGuardarFotos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 140, 30));
+        add(btnGuardarFotos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 140, 30));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel25.setText("Dni:");
+        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, 30));
+        add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 160, 30));
+
+        btnFiltrar.setBackground(new java.awt.Color(0, 51, 102));
+        btnFiltrar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnFiltrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnFiltrar.setText("FILTRAR");
+        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseExited(evt);
+            }
+        });
+        add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, 130, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
@@ -209,19 +223,24 @@ public class VistaUsuarios extends javax.swing.JPanel {
     }//GEN-LAST:event_jlbfotoUsuarioMouseClicked
 
     private void btnGuardarFotosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarFotosMouseExited
-        // TODO add your handling code here:
+        btnModificar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnGuardarFotosMouseExited
 
     private void btnGuardarFotosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarFotosMouseEntered
-        // TODO add your handling code here:
+        btnModificar.setBackground(new Color(5,42,136));
     }//GEN-LAST:event_btnGuardarFotosMouseEntered
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    private void btnFiltrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseEntered
+        btnModificar.setBackground(new Color(5,42,136));
+    }//GEN-LAST:event_btnFiltrarMouseEntered
+
+    private void btnFiltrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseExited
+        btnModificar.setBackground(new Color(3,24,77));
+    }//GEN-LAST:event_btnFiltrarMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnFiltrar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnGuardarFotos;
     public javax.swing.JButton btnModificar;
@@ -234,6 +253,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -241,6 +261,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
     public javax.swing.JLabel jlbfotoUsuario;
     public javax.swing.JTable tblUsuarios;
     public javax.swing.JTextField txtDni;
+    public javax.swing.JTextField txtFiltro;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JPasswordField txtPass;
     public javax.swing.JPasswordField txtPassRe;

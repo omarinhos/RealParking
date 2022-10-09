@@ -46,7 +46,8 @@ public class RolDAO extends DAO<RolDTO> {
     @Override
     public RolDTO findBy(String id) {
         RolDTO rolDTO = null;
-        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  ResultSet rs = stmt.executeQuery()) {
+        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  
+                ResultSet rs = stmt.executeQuery()) {
 
             if (rs.next()) {
                 rolDTO = new RolDTO();
@@ -87,7 +88,8 @@ public class RolDAO extends DAO<RolDTO> {
     public List<RolDTO> filter(String buscar) {
         List<RolDTO> rolesDTO = new ArrayList<>();
 
-        try ( Statement stmt = getConnection().createStatement();  ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
+        try ( Statement stmt = getConnection().createStatement();  
+                ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
 
             while (rs.next()) {
                 RolDTO rolDTO = crearRol(rs);
@@ -104,7 +106,8 @@ public class RolDAO extends DAO<RolDTO> {
     public List<RolDTO> getList() {
         List<RolDTO> rolesDTO = new ArrayList<>();
 
-        try ( Statement stmt = getConnection().createStatement();  ResultSet rs = stmt.executeQuery(SELECT)) {
+        try ( Statement stmt = getConnection().createStatement();  
+                ResultSet rs = stmt.executeQuery(SELECT)) {
 
             while (rs.next()) {
                 RolDTO rolDTO = crearRol(rs);

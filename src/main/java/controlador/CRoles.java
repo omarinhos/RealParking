@@ -32,6 +32,7 @@ public class CRoles {
         modeloRoles.setColumnIdentifiers(cabecera);
         vistaRoles.tblRoles.setModel(modeloRoles);
         
+        roles = bl.getListaRol();
         actualizarTablaRoles();
 
         vistaRoles.btnGuardar.addActionListener(e -> {
@@ -52,10 +53,13 @@ public class CRoles {
         vistaRoles.btnNuevo.addActionListener(e -> {
             btnNuevoAction(e);
         });
+        
+        vistaRoles.btnFiltrar.addActionListener(e -> {
+            btnFiltrarAction(e);
+        });
     }
 
     private void actualizarTablaRoles() {
-        roles = bl.getListaRol();
         modeloRoles.setRowCount(0);
 
         roles.forEach(rol -> {
@@ -68,7 +72,7 @@ public class CRoles {
     }
 
     private void btnGuardarAction(ActionEvent e) {
-        String campoRol = vistaRoles.txtRrol.getText();
+        String campoRol = vistaRoles.txtRol.getText();
 
         if (!campoRol.isEmpty()) {
 
@@ -80,6 +84,7 @@ public class CRoles {
 
             bl.crearRol(rol);
             JOptionPane.showMessageDialog(vistaRoles, "Rol Agregado.", "Roles", 1);
+            roles = bl.getListaRol();
             actualizarTablaRoles();
         } else {
             JOptionPane.showMessageDialog(vistaRoles, "Llenar todos los campos.", "Roles", 2);
@@ -87,7 +92,7 @@ public class CRoles {
     }
 
     private void btnModificarAction(ActionEvent e) {
-        String campoRol = vistaRoles.txtRrol.getText();
+        String campoRol = vistaRoles.txtRol.getText();
 
         if (!campoRol.isEmpty()) {
 
@@ -99,6 +104,7 @@ public class CRoles {
 
             bl.actualizarRol(rol);
             JOptionPane.showMessageDialog(vistaRoles, "Rol Modificado.", "Roles", 1);
+            roles = bl.getListaRol();
             actualizarTablaRoles();
         } else {
             JOptionPane.showMessageDialog(vistaRoles, "Llenar todos los campos.", "Roles", 2);
@@ -110,7 +116,7 @@ public class CRoles {
             int x = vistaRoles.tblRoles.getSelectedRow();
 
             idRol = roles.get(x).getId();
-            vistaRoles.txtRrol.setText(roles.get(x).getDescripcion());
+            vistaRoles.txtRol.setText(roles.get(x).getDescripcion());
             vistaRoles.cmbEstado.setSelectedItem(roles.get(x).getEstado());
 
             vistaRoles.btnGuardar.setEnabled(false);
@@ -129,8 +135,15 @@ public class CRoles {
     private void btnNuevoAction(ActionEvent e) {
         vistaRoles.btnGuardar.setEnabled(true);
         vistaRoles.btnModificar.setEnabled(false);
-        vistaRoles.txtRrol.setText("");
+        vistaRoles.txtRol.setText("");
         vistaRoles.tblRoles.setSelectionMode(0);
+        vistaRoles.txtFiltro.setText("");
+    }
+    
+    private void btnFiltrarAction(ActionEvent e) {
+        String filtro = vistaRoles.txtFiltro.getText();
+        roles = bl.filtrarPorRol(filtro);
+        actualizarTablaRoles();
     }
 
 }

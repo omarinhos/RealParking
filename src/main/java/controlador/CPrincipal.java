@@ -30,6 +30,9 @@ import vista.VistaReportes;
 public class CPrincipal {
     
     public FrmPrincipal frmPrincipal = new FrmPrincipal();
+    private CConfiguracion cConfiguracion;
+    private CUsuarios cUsuarios;
+    private CRoles cRoles;
     
     private boolean permisoRegistro;
     private boolean permisoCaja;
@@ -88,7 +91,8 @@ public class CPrincipal {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (permisoConfiguracion) {
-                    new CConfiguracion(frmPrincipal).vistaConfig.setVisible(true);
+                    cConfiguracion = new CConfiguracion(frmPrincipal);
+                    cConfiguracion.vistaConfig.setVisible(true);
                 }
             }
         });
@@ -97,7 +101,8 @@ public class CPrincipal {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (permisoUsuarios) {
-                    new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
+                    cUsuarios = new CUsuarios(frmPrincipal);
+                    cUsuarios.vistaUsuarios.setVisible(true);
                 }
             }
         });
@@ -106,7 +111,8 @@ public class CPrincipal {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (permisoRoles) {
-                    new CRoles(frmPrincipal).vistaRoles.setVisible(true);
+                    cRoles = new CRoles(frmPrincipal);
+                    cRoles.vistaRoles.setVisible(true);
                 }
             }
         });
