@@ -2,12 +2,14 @@ package vista;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import recursos.TextPrompt;
 
 public class FrmLogin extends javax.swing.JFrame {
 
     public FrmLogin() {
         initComponents();
-
+        TextPrompt txtUserTP = new TextPrompt("Ingrese su Dni", txtUser);
+        TextPrompt txtPassTP = new TextPrompt("Ingrese su Contraseña", txtPass);
     }
 
     @SuppressWarnings("unchecked")

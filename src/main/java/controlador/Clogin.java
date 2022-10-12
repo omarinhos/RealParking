@@ -10,17 +10,15 @@ import static java.awt.Frame.ICONIFIED;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import vista.FrmLogin;
-import recursos.TextPrompt;
 
 public class Clogin {
     
     private final UsuarioDTO usuario = new UsuarioDTO();
     public FrmLogin FrmLogin = new FrmLogin();
     private final Validacion v = new Validacion();
+    private CPrincipal cPrincipal;
     
     public Clogin() {
-        TextPrompt txtUserTP = new TextPrompt("Ingrese su Dni", FrmLogin.txtUser);
-        TextPrompt txtPassTP = new TextPrompt("Ingrese su Contraseña", FrmLogin.txtPass);
         
         FrmLogin.btniniciar.addActionListener(e -> {
             ingresar();
@@ -58,7 +56,8 @@ public class Clogin {
         }
         
         UsuarioDTO newUser = v.tipoUsuario(usuario);
-        new CPrincipal(newUser).frmPrincipal.setVisible(true);
+        cPrincipal = new CPrincipal(newUser);
+        cPrincipal.frmPrincipal.setVisible(true);
         FrmLogin.dispose();
         
         return true;
