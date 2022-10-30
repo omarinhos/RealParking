@@ -151,4 +151,8 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
         return usuarioDTO;
     }
 
+    @Override
+    public void delete(int id) {
+    }
+
 }

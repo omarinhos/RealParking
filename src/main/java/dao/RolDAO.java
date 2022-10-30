@@ -129,4 +129,8 @@ public class RolDAO extends DAO<RolDTO> {
         return rolDTO;
     }
 
+    @Override
+    public void delete(int id) {
+    }
+
 }

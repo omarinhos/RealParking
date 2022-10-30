@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Blob;
@@ -56,13 +55,10 @@ public class CUsuarios {
         usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
 
-        vistaUsuarios.btnGuardar.addActionListener(e -> {
-            btnGuardarAction(e);
-        });
+        vistaUsuarios.btnGuardar.addActionListener(this::btnGuardarAction);
 
-        vistaUsuarios.btnModificar.addActionListener(e -> {
-            btnModificarAction(e);
-        });
+        vistaUsuarios.btnModificar.addActionListener(this::btnModificarAction);
+        
         vistaUsuarios.tblUsuarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -70,17 +66,11 @@ public class CUsuarios {
             }
         });
 
-        vistaUsuarios.btnNuevo.addActionListener(e -> {
-            btnNuevoAction(e);
-        });
+        vistaUsuarios.btnNuevo.addActionListener(this::btnNuevoAction);
 
-        vistaUsuarios.btnGuardarFotos.addActionListener(e -> {
-            btnGuardarFotosAction(e);
-        });
+        vistaUsuarios.btnGuardarFotos.addActionListener(this::btnGuardarFotosAction);
         
-        vistaUsuarios.btnFiltrar.addActionListener(e -> {
-            btnFiltrarAction(e);
-        });
+        vistaUsuarios.btnFiltrar.addActionListener(this::btnFiltrarAction);
 
     }
 

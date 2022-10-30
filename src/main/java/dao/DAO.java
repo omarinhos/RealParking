@@ -7,6 +7,7 @@ public abstract class DAO<T> {
     public abstract void create(T t);
     public abstract T findBy(String id);
     public abstract void update(T t);
+    public abstract void delete(int id);
     public abstract List<T> filter(String filtro);
     public abstract List<T> getList();
 }

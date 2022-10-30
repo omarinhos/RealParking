@@ -60,4 +60,8 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
         return null;
     }
 
+    @Override
+    public void delete(int id) {
+    }
+
 }

@@ -33,6 +33,8 @@ public class CPrincipal {
     private CConfiguracion cConfiguracion;
     private CUsuarios cUsuarios;
     private CRoles cRoles;
+    private CRegistro cRegistro;
+    private CCaja cCaja;
     
     private boolean permisoRegistro;
     private boolean permisoCaja;
@@ -61,7 +63,8 @@ public class CPrincipal {
             public void mouseClicked(MouseEvent e) {
                 //falta implementar
                 if (permisoRegistro) {
-                    cargarPanel(new VistaRegistro());
+                    cRegistro = new CRegistro(frmPrincipal);
+                    cRegistro.vistaRegistro.setVisible(true);
                 }
                 
             }
@@ -72,7 +75,8 @@ public class CPrincipal {
             public void mouseClicked(MouseEvent e) {
                 //falta implementar
                 if (permisoCaja) {
-                    cargarPanel(new VistaCaja());
+                    cCaja = new CCaja(frmPrincipal);
+                    cCaja.vistaCaja.setVisible(true);
                 }
             }
         });
@@ -182,7 +186,7 @@ public class CPrincipal {
                 permisoRoles = false;
                 break;
             default:
-                cargarPanel(new VistaRegistro());
+                new CRegistro(frmPrincipal).vistaRegistro.setVisible(true);
                 permisoRegistro = true;
                 permisoCaja = true;
                 permisoReportes = false;
@@ -202,7 +206,6 @@ public class CPrincipal {
             //lee la imagen
             img = ImageIO.read(new ByteArrayInputStream(data));
         } catch (IOException e) {
-            e.printStackTrace();
         } catch (SQLException ex) {
             Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -224,7 +227,7 @@ public class CPrincipal {
             UsuarioDTO user = new UsuarioDTO();
             user.setUsuario("alo");
             user.setNombreCompleto("Nombre");
-            user.setRol(new RolDTO(1, "Administrador", "Activo"));
+            user.setRol(new RolDTO(1, "Prueba", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });
     }

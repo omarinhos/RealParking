@@ -1,12 +1,14 @@
 package dao;
 
 import java.util.List;
+import modelo.Ticket;
 
 public class BusinessLogic {
 
     DAO<UsuarioDTO> usuarioDAO = DAOFactory.getUsuarioDAO();
     DAO<RolDTO> rolDAO = DAOFactory.getRolDAO();
     DAO<ConfiguracionDTO> configuracionDAO = DAOFactory.getTxtConfiguracionDAO();
+    DAO<Ticket> ticketDAO = DAOFactory.getTicketDAO();
 
     //metodos Usuario
     public void crearUsuario(UsuarioDTO usuarioDTO) {
@@ -57,6 +59,26 @@ public class BusinessLogic {
 
     public ConfiguracionDTO leerConfiguracion(String nombreArchivo) {
         return configuracionDAO.findBy(nombreArchivo);
+    }
+    
+    public List<Ticket> getListaTickets() {
+        return ticketDAO.getList();
+    }
+    
+    public void crearTicket(Ticket ticket) {
+        ticketDAO.create(ticket);
+    }
+    
+    public void eliminarTicket(int id) {
+        ticketDAO.delete(id);
+    }
+    
+    public List<Ticket> filtrarPorPlaca(String placa) {
+        return ticketDAO.filter(placa);
+    }
+    
+    public void actualizarEstadoVehiculo(Ticket ticket) {
+        ticketDAO.update(ticket);
     }
 
 }
