@@ -7,6 +7,7 @@ public class VistaCaja extends javax.swing.JPanel {
     public VistaCaja() {
         initComponents();
         dlgVentas.setLocationRelativeTo(null);
+        dlgIncidente.setLocationRelativeTo(null);
         btnGenerarPago.setEnabled(false);
         btnRegistrarIncidente.setEnabled(false);
     }
@@ -24,7 +25,15 @@ public class VistaCaja extends javax.swing.JPanel {
         jScrollPane7 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        dlgIncidente = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        btnGenerarComprobanteDlg = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        txtNombreCompleto = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        txtDNI = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        lblTarifa = new javax.swing.JLabel();
         txtPlaca = new javax.swing.JTextField();
         btnMostrar = new javax.swing.JButton();
         btnRegistrarIncidente = new javax.swing.JButton();
@@ -35,6 +44,8 @@ public class VistaCaja extends javax.swing.JPanel {
         jScrollPane6 = new javax.swing.JScrollPane();
         tblTicket = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
 
         dlgVentas.setTitle("Ventas del Día");
         dlgVentas.setModal(true);
@@ -95,13 +106,56 @@ public class VistaCaja extends javax.swing.JPanel {
 
         dlgVentas.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
+        dlgIncidente.setTitle("Registrar Incidente");
+        dlgIncidente.setModal(true);
+        dlgIncidente.setResizable(false);
+        dlgIncidente.setSize(new java.awt.Dimension(500, 300));
+        dlgIncidente.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnGenerarComprobanteDlg.setBackground(new java.awt.Color(0, 51, 102));
+        btnGenerarComprobanteDlg.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnGenerarComprobanteDlg.setForeground(new java.awt.Color(255, 255, 255));
+        btnGenerarComprobanteDlg.setText("GENERAR COMPROBANTE");
+        btnGenerarComprobanteDlg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGenerarComprobanteDlgMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGenerarComprobanteDlgMouseExited(evt);
+            }
+        });
+        jPanel2.add(btnGenerarComprobanteDlg, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("Pérdida de Ticket");
+        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 90));
+        jPanel2.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 290, 30));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel24.setText("DNI:");
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 40, -1));
+        jPanel2.add(txtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 290, 30));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel25.setText("Nombre Completo:");
+        jPanel2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 140, -1));
+
+        dlgIncidente.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 300));
+
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel17.setText("Buscar:");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
+        lblTarifa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTarifa.setForeground(new java.awt.Color(102, 102, 102));
+        lblTarifa.setText("-");
+        add(lblTarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 30, -1));
         add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 230, 30));
 
         btnMostrar.setBackground(new java.awt.Color(0, 51, 102));
@@ -116,11 +170,6 @@ public class VistaCaja extends javax.swing.JPanel {
                 btnMostrarMouseExited(evt);
             }
         });
-        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarActionPerformed(evt);
-            }
-        });
         add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, -1, -1));
 
         btnRegistrarIncidente.setBackground(new java.awt.Color(0, 51, 102));
@@ -133,11 +182,6 @@ public class VistaCaja extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnRegistrarIncidenteMouseExited(evt);
-            }
-        });
-        btnRegistrarIncidente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarIncidenteActionPerformed(evt);
             }
         });
         add(btnRegistrarIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 590, 220, 30));
@@ -160,11 +204,6 @@ public class VistaCaja extends javax.swing.JPanel {
                 btnGenerarPagoMouseExited(evt);
             }
         });
-        btnGenerarPago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarPagoActionPerformed(evt);
-            }
-        });
         add(btnGenerarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 590, 160, 30));
 
         btnVentasDia.setBackground(new java.awt.Color(0, 51, 102));
@@ -177,11 +216,6 @@ public class VistaCaja extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVentasDiaMouseExited(evt);
-            }
-        });
-        btnVentasDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVentasDiaActionPerformed(evt);
             }
         });
         add(btnVentasDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 160, 30));
@@ -218,6 +252,16 @@ public class VistaCaja extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("jLabel1");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 620, -1, 20));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("Buscar:");
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel22.setText("Tarifa : ");
+        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMostrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarMouseEntered
@@ -228,10 +272,6 @@ public class VistaCaja extends javax.swing.JPanel {
         btnMostrar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnMostrarMouseExited
 
-    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMostrarActionPerformed
-
     private void btnRegistrarIncidenteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarIncidenteMouseEntered
         btnRegistrarIncidente.setBackground(new Color(5,42,136));
     }//GEN-LAST:event_btnRegistrarIncidenteMouseEntered
@@ -239,10 +279,6 @@ public class VistaCaja extends javax.swing.JPanel {
     private void btnRegistrarIncidenteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarIncidenteMouseExited
         btnRegistrarIncidente.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnRegistrarIncidenteMouseExited
-
-    private void btnRegistrarIncidenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarIncidenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarIncidenteActionPerformed
 
     private void btnGenerarPagoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarPagoMouseEntered
         btnGenerarPago.setBackground(new Color(5,42,136));
@@ -252,10 +288,6 @@ public class VistaCaja extends javax.swing.JPanel {
         btnGenerarPago.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnGenerarPagoMouseExited
 
-    private void btnGenerarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPagoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGenerarPagoActionPerformed
-
     private void btnVentasDiaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasDiaMouseEntered
         btnVentasDia.setBackground(new Color(5,42,136));
     }//GEN-LAST:event_btnVentasDiaMouseEntered
@@ -264,31 +296,45 @@ public class VistaCaja extends javax.swing.JPanel {
         btnVentasDia.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnVentasDiaMouseExited
 
-    private void btnVentasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVentasDiaActionPerformed
+    private void btnGenerarComprobanteDlgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarComprobanteDlgMouseEntered
+        btnVentasDia.setBackground(new Color(5,42,136));
+    }//GEN-LAST:event_btnGenerarComprobanteDlgMouseEntered
+
+    private void btnGenerarComprobanteDlgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarComprobanteDlgMouseExited
+        btnVentasDia.setBackground(new Color(3,24,77));
+    }//GEN-LAST:event_btnGenerarComprobanteDlgMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnGenerarComprobanteDlg;
     public javax.swing.JButton btnGenerarPago;
     public javax.swing.JButton btnMostrar;
     public javax.swing.JButton btnRegistrarIncidente;
     public javax.swing.JButton btnVentasDia;
+    public javax.swing.JDialog dlgIncidente;
     public javax.swing.JDialog dlgVentas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     public javax.swing.JScrollPane jScrollPane6;
     public javax.swing.JScrollPane jScrollPane7;
     public javax.swing.JLabel lblIngresos;
+    public javax.swing.JLabel lblTarifa;
     public javax.swing.JLabel lblVehículos;
     public javax.swing.JTable tblTicket;
     public javax.swing.JTable tblVentas;
+    public javax.swing.JTextField txtDNI;
+    public javax.swing.JTextField txtNombreCompleto;
     public javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }

@@ -102,6 +102,7 @@ public class CRegistro {
             tickets = bl.getListaTickets();
             actualizarTablaTickets();
             actualizarEspaciosDisponibles();
+            vistaRegistro.txtPlaca.setText("");
         } else {
             JOptionPane.showMessageDialog(vistaRegistro, "Llenar todos los campos.", "Resgistro", 2);
         }

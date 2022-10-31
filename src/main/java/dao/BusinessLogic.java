@@ -10,6 +10,7 @@ public class BusinessLogic {
     DAO<Configuracion> configuracionDAO = DAOFactory.getTxtConfiguracionDAO();
     DAO<Ticket> ticketDAO = DAOFactory.getTicketDAO();
     DAO<Comprobante> comprobanteDAO = DAOFactory.getComprobanteDAO();
+    DAO<Incidente> incidenteDAO = DAOFactory.getIncidenteDAO();
 
     //Métodos Usuario
     public void crearUsuario(Usuario usuario) {
@@ -62,7 +63,7 @@ public class BusinessLogic {
         return configuracionDAO.findBy(nombreArchivo);
     }
     
-    //métodos tickets
+    //métodos registro y caja
     public List<Ticket> getListaTickets() {
         return ticketDAO.getList();
     }
@@ -82,9 +83,17 @@ public class BusinessLogic {
     public void actualizarEstadoVehiculo(Ticket ticket) {
         ticketDAO.update(ticket);
     }
+   
+    public void crearComprobante(Comprobante comprobante) {
+        comprobanteDAO.create(comprobante);
+    }
     
     public List<Comprobante> getListaComprobantes() {
         return comprobanteDAO.getList();
+    }
+    
+    public void crearIncidente(Incidente incidente) {
+        incidenteDAO.create(incidente);
     }
 
 }

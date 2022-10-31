@@ -73,9 +73,8 @@ public class CPrincipal {
         frmPrincipal.btnCaja.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //falta implementar
                 if (permisoCaja) {
-                    cCaja = new CCaja(frmPrincipal);
+                    cCaja = new CCaja(frmPrincipal, usuario);
                     cCaja.vistaCaja.setVisible(true);
                 }
             }
@@ -225,6 +224,7 @@ public class CPrincipal {
         
         java.awt.EventQueue.invokeLater(() -> {
             Usuario user = new Usuario();
+            user.setId(2);
             user.setUsuario("alo");
             user.setNombreCompleto("Nombre");
             user.setRol(new Rol(1, "Prueba", "Activo"));

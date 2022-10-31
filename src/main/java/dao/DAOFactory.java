@@ -23,4 +23,8 @@ public class DAOFactory {
     public static DAO<Comprobante> getComprobanteDAO() {
         return new ComprobanteDAO();
     }
+    
+    public static DAO<Incidente> getIncidenteDAO() {
+        return new IncidenteDAO();
+    }
 }

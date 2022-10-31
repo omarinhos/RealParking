@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Comprobante;
 import modelo.Configuracion;
+import modelo.Incidente;
 import modelo.Ticket;
+import modelo.Usuario;
 import vista.FrmPrincipal;
 import vista.VistaCaja;
 
@@ -28,7 +30,7 @@ public class CCaja {
     
     private int idTicket, x;
 
-    public CCaja(FrmPrincipal FrmP) {
+    public CCaja(FrmPrincipal FrmP, Usuario usuario) {
         vistaCaja.setSize(740, 630);
         FrmP.contenedor.removeAll();
         FrmP.contenedor.add(vistaCaja, BorderLayout.CENTER);
@@ -46,8 +48,9 @@ public class CCaja {
         tickets = bl.getListaTickets();
         actualizarTablaTickets();
         configuracion = bl.leerConfiguracion(Configuracion.ARCHIVO_CONFIGURACION);
+        vistaCaja.lblTarifa.setText(String.valueOf(configuracion.getTarifa()));
 
-        vistaCaja.btnGenerarPago.addActionListener(this::btnGenerarPago);
+        vistaCaja.btnGenerarPago.addActionListener(e -> btnGenerarPago(e, usuario));
 
         vistaCaja.btnRegistrarIncidente.addActionListener(this::btnRegistrarIncidente);
 
@@ -61,6 +64,8 @@ public class CCaja {
                 tblRegistroMouseClicked(e);
             }
         });
+        
+        vistaCaja.btnGenerarComprobanteDlg.addActionListener(e -> btnGenerarPagoDlg(e, usuario));
     }
 
     private void actualizarTablaTickets() {
@@ -97,6 +102,8 @@ public class CCaja {
         String placa = vistaCaja.txtPlaca.getText();
         tickets = bl.filtrarPorPlaca(placa);
         actualizarTablaTickets();
+        vistaCaja.btnRegistrarIncidente.setEnabled(false);
+        vistaCaja.btnGenerarPago.setEnabled(false);
     }
 
     private void btnVentasDiaAction(ActionEvent e) {
@@ -105,14 +112,22 @@ public class CCaja {
     }
 
     private void btnRegistrarIncidente(ActionEvent e) {
+        vistaCaja.dlgIncidente.setVisible(true);
+        
     }
 
-    private void btnGenerarPago(ActionEvent e) {
+    private void btnGenerarPago(ActionEvent e, Usuario usuario) {
         Ticket ticket = new Ticket();
         ticket.setId(idTicket);
         ticket.setEstado(tickets.get(x).getEstado());
         bl.actualizarEstadoVehiculo(ticket);
         JOptionPane.showMessageDialog(vistaCaja, "Pago registrado.", "Pago", 1);
+        
+        Comprobante comprobante = new Comprobante();
+        comprobante.setTicket(ticket);
+        comprobante.setUsuario(usuario);
+        comprobante.setImporte(configuracion.getTarifa());
+        bl.crearComprobante(comprobante);
         
         //Pendiente generar comprobante
         JOptionPane.showMessageDialog(vistaCaja, "Comprobante en pantalla", "", 1);
@@ -120,6 +135,7 @@ public class CCaja {
         tickets = bl.getListaTickets();
         actualizarTablaTickets();
         vistaCaja.btnGenerarPago.setEnabled(false);
+        vistaCaja.btnRegistrarIncidente.setEnabled(false);
     }
 
     private void tblRegistroMouseClicked(MouseEvent e) {
@@ -128,5 +144,26 @@ public class CCaja {
         idTicket = tickets.get(x).getId();
         vistaCaja.btnGenerarPago.setEnabled(true);
         vistaCaja.btnRegistrarIncidente.setEnabled(true);
+    }
+    
+    private void btnGenerarPagoDlg(ActionEvent e, Usuario usuario) {
+        String nombreCompleto = vistaCaja.txtNombreCompleto.getText();
+        String dni = vistaCaja.txtDNI.getText();
+        if (!nombreCompleto.isEmpty() && !dni.isEmpty()) {
+            Incidente incidente = new Incidente();
+            Ticket ticket = new Ticket();
+            ticket.setId(idTicket);
+            incidente.setTicket(ticket);
+            incidente.setUsuario(usuario);
+            incidente.setDNI(dni);
+            incidente.setNombreCompleto(nombreCompleto);
+            bl.crearIncidente(incidente);
+            btnGenerarPago(e, usuario);
+            vistaCaja.dlgIncidente.setVisible(false);
+            vistaCaja.txtDNI.setText("");
+            vistaCaja.txtNombreCompleto.setText("");
+        } else {
+            JOptionPane.showMessageDialog(vistaCaja.dlgIncidente, "Llenar todos los campos.", "Campos Vacíos", 2);
+        }
     }
 }
