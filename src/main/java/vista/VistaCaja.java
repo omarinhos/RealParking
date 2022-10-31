@@ -6,6 +6,7 @@ public class VistaCaja extends javax.swing.JPanel {
 
     public VistaCaja() {
         initComponents();
+        dlgVentas.setLocationRelativeTo(null);
         btnGenerarPago.setEnabled(false);
         btnRegistrarIncidente.setEnabled(false);
     }
@@ -14,6 +15,15 @@ public class VistaCaja extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlgVentas = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        lblIngresos = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        lblVehículos = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblVentas = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txtPlaca = new javax.swing.JTextField();
         btnMostrar = new javax.swing.JButton();
@@ -25,6 +35,65 @@ public class VistaCaja extends javax.swing.JPanel {
         jScrollPane6 = new javax.swing.JScrollPane();
         tblTicket = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+
+        dlgVentas.setTitle("Ventas del Día");
+        dlgVentas.setModal(true);
+        dlgVentas.setResizable(false);
+        dlgVentas.setSize(new java.awt.Dimension(900, 600));
+        dlgVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblIngresos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblIngresos.setForeground(new java.awt.Color(51, 0, 153));
+        lblIngresos.setText("--");
+        jPanel1.add(lblIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 230, 20));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel20.setText("Total de Vehículos  :");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 250, 20));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel21.setText("Total de Ingresos   :");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 240, 30));
+
+        lblVehículos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblVehículos.setForeground(new java.awt.Color(51, 0, 153));
+        lblVehículos.setText("--");
+        jPanel1.add(lblVehículos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 230, 20));
+
+        jScrollPane7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
+
+        tblVentas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        tblVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblVentas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblVentas.setFocusable(false);
+        tblVentas.setGridColor(new java.awt.Color(0, 51, 102));
+        tblVentas.setRowHeight(25);
+        tblVentas.setSelectionBackground(new java.awt.Color(0, 51, 102));
+        tblVentas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tblVentas.getTableHeader().setResizingAllowed(false);
+        tblVentas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane7.setViewportView(tblVentas);
+
+        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 840, 430));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 580, -1, -1));
+
+        dlgVentas.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,12 +274,21 @@ public class VistaCaja extends javax.swing.JPanel {
     public javax.swing.JButton btnMostrar;
     public javax.swing.JButton btnRegistrarIncidente;
     public javax.swing.JButton btnVentasDia;
+    public javax.swing.JDialog dlgVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JPanel jPanel1;
     public javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JScrollPane jScrollPane7;
+    public javax.swing.JLabel lblIngresos;
+    public javax.swing.JLabel lblVehículos;
     public javax.swing.JTable tblTicket;
+    public javax.swing.JTable tblVentas;
     public javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }

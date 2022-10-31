@@ -1,66 +1,68 @@
 package dao;
 
 import java.util.List;
-import modelo.Ticket;
+import modelo.*;
 
 public class BusinessLogic {
 
-    DAO<UsuarioDTO> usuarioDAO = DAOFactory.getUsuarioDAO();
-    DAO<RolDTO> rolDAO = DAOFactory.getRolDAO();
-    DAO<ConfiguracionDTO> configuracionDAO = DAOFactory.getTxtConfiguracionDAO();
+    DAO<Usuario> usuarioDAO = DAOFactory.getUsuarioDAO();
+    DAO<Rol> rolDAO = DAOFactory.getRolDAO();
+    DAO<Configuracion> configuracionDAO = DAOFactory.getTxtConfiguracionDAO();
     DAO<Ticket> ticketDAO = DAOFactory.getTicketDAO();
+    DAO<Comprobante> comprobanteDAO = DAOFactory.getComprobanteDAO();
 
-    //metodos Usuario
-    public void crearUsuario(UsuarioDTO usuarioDTO) {
-        usuarioDAO.create(usuarioDTO);
+    //Métodos Usuario
+    public void crearUsuario(Usuario usuario) {
+        usuarioDAO.create(usuario);
     }
 
-    public UsuarioDTO buscarPorUsuario(String user) {
+    public Usuario buscarPorUsuario(String user) {
         return usuarioDAO.findBy(user);
     }
 
-    public void actualizarUsuario(UsuarioDTO usuarioDTO) {
-        usuarioDAO.update(usuarioDTO);
+    public void actualizarUsuario(Usuario usuario) {
+        usuarioDAO.update(usuario);
     }
 
-    public List<UsuarioDTO> filtrarPorUsuario(String user) {
+    public List<Usuario> filtrarPorUsuario(String user) {
         return usuarioDAO.filter(user);
     }
 
-    public List<UsuarioDTO> getListaUsuario() {
+    public List<Usuario> getListaUsuario() {
         return usuarioDAO.getList();
     }
 
-    //metodos Rol
-    public void crearRol(RolDTO rolDTO) {
-        rolDAO.create(rolDTO);
+    //Métodos Rol
+    public void crearRol(Rol rol) {
+        rolDAO.create(rol);
     }
 
-    public RolDTO buscarPorRol(String id) {
+    public Rol buscarPorRol(String id) {
         return rolDAO.findBy(id);
     }
 
-    public void actualizarRol(RolDTO rolDTO) {
-        rolDAO.update(rolDTO);
+    public void actualizarRol(Rol rol) {
+        rolDAO.update(rol);
     }
 
-    public List<RolDTO> filtrarPorRol(String buscar) {
+    public List<Rol> filtrarPorRol(String buscar) {
         return rolDAO.filter(buscar);
     }
 
-    public List<RolDTO> getListaRol() {
+    public List<Rol> getListaRol() {
         return rolDAO.getList();
     }
 
-    //metodo Configuracion
-    public void guardarConfiguracion(ConfiguracionDTO configuracionDTO) {
-        configuracionDAO.create(configuracionDTO);
+    //Métodos Configuracion
+    public void guardarConfiguracion(Configuracion configuracion) {
+        configuracionDAO.create(configuracion);
     }
 
-    public ConfiguracionDTO leerConfiguracion(String nombreArchivo) {
+    public Configuracion leerConfiguracion(String nombreArchivo) {
         return configuracionDAO.findBy(nombreArchivo);
     }
     
+    //métodos tickets
     public List<Ticket> getListaTickets() {
         return ticketDAO.getList();
     }
@@ -79,6 +81,10 @@ public class BusinessLogic {
     
     public void actualizarEstadoVehiculo(Ticket ticket) {
         ticketDAO.update(ticket);
+    }
+    
+    public List<Comprobante> getListaComprobantes() {
+        return comprobanteDAO.getList();
     }
 
 }

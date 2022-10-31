@@ -10,9 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import dao.RolDTO;
 import vista.FrmPrincipal;
-import dao.UsuarioDTO;
 import static java.awt.Frame.ICONIFIED;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -26,6 +24,8 @@ import javax.swing.ImageIcon;
 import vista.VistaCaja;
 import vista.VistaRegistro;
 import vista.VistaReportes;
+import modelo.Usuario;
+import modelo.Rol;
 
 public class CPrincipal {
     
@@ -43,7 +43,7 @@ public class CPrincipal {
     private boolean permisoUsuarios;
     private boolean permisoRoles;
     
-    public CPrincipal(UsuarioDTO usuario) {
+    public CPrincipal(Usuario usuario) {
         tipoRolPanel(usuario.getRol());
         frmPrincipal.txtUserActual.setText(usuario.getNombreCompleto());
         frmPrincipal.txtRolActual.setText(usuario.getRol().getDescripcion());
@@ -156,7 +156,7 @@ public class CPrincipal {
         frmPrincipal.contenedor.repaint();
     }
     
-    private void tipoRolPanel(RolDTO rol) {
+    private void tipoRolPanel(Rol rol) {
         switch (rol.getDescripcion()) {
             case "Administrador":
                 new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
@@ -224,10 +224,10 @@ public class CPrincipal {
         }
         
         java.awt.EventQueue.invokeLater(() -> {
-            UsuarioDTO user = new UsuarioDTO();
+            Usuario user = new Usuario();
             user.setUsuario("alo");
             user.setNombreCompleto("Nombre");
-            user.setRol(new RolDTO(1, "Prueba", "Activo"));
+            user.setRol(new Rol(1, "Prueba", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });
     }

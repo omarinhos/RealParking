@@ -1,8 +1,6 @@
 package modelo;
 
-import java.awt.Image;
 import java.sql.Blob;
-
 
 public class Usuario {
 
@@ -92,7 +90,5 @@ public class Usuario {
     public void setImagen(Blob imagen) {
         this.imagen = imagen;
     }
-    
-    
     
 }

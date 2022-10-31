@@ -1,7 +1,6 @@
 package controlador;
 
 import dao.BusinessLogic;
-import dao.RolDTO;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Rol;
 import vista.FrmPrincipal;
 import vista.VistaRoles;
 
@@ -18,7 +18,7 @@ public class CRoles {
     public final VistaRoles vistaRoles = new VistaRoles();
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloRoles = new DefaultTableModel();
-    private List<RolDTO> roles = new ArrayList<>();
+    private List<Rol> roles = new ArrayList<>();
     private int idRol;
 
     public CRoles(FrmPrincipal FrmP) {
@@ -76,7 +76,7 @@ public class CRoles {
 
         if (!campoRol.isEmpty()) {
 
-            RolDTO rol = new RolDTO();
+            Rol rol = new Rol();
 
             rol.setId(roles.size() + 1);
             rol.setDescripcion(campoRol);
@@ -96,7 +96,7 @@ public class CRoles {
 
         if (!campoRol.isEmpty()) {
 
-            RolDTO rol = new RolDTO();
+            Rol rol = new Rol();
 
             rol.setDescripcion(campoRol);
             rol.setEstado((String) vistaRoles.cmbEstado.getSelectedItem());

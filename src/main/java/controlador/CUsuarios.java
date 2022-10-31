@@ -1,8 +1,8 @@
 package controlador;
 
 import dao.BusinessLogic;
-import dao.RolDTO;
-import dao.UsuarioDTO;
+import modelo.Usuario;
+import modelo.Rol;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -33,8 +33,8 @@ public class CUsuarios {
     public final VistaUsuarios vistaUsuarios = new VistaUsuarios();
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloUsuarios = new DefaultTableModel();
-    private List<UsuarioDTO> usuarios = new ArrayList<>();
-    private List<RolDTO> roles = new ArrayList<>();
+    private List<Usuario> usuarios = new ArrayList<>();
+    private List<Rol> roles = new ArrayList<>();
     
     private int idUsuario;
     private String rutaImagen = null;
@@ -110,13 +110,13 @@ public class CUsuarios {
             return false;
         }
 
-        UsuarioDTO user = new UsuarioDTO();
+        Usuario user = new Usuario();
         user.setUsuario(DNI);
         user.setPass(pass);
         user.setNombreCompleto(nombre);
         user.setEstado((String) vistaUsuarios.cmbEstado.getSelectedItem());
         user.setRutaFoto(rutaImagen);
-        RolDTO rol = new RolDTO();
+        Rol rol = new Rol();
         rol.setId(vistaUsuarios.cmbCargo.getSelectedIndex() + 1);
         user.setRol(rol);
         bl.crearUsuario(user);
@@ -144,13 +144,13 @@ public class CUsuarios {
             return false;
         }
 
-        UsuarioDTO user = new UsuarioDTO();
+        Usuario user = new Usuario();
         user.setId(idUsuario);
         user.setUsuario(DNI);
         user.setPass(pass);
         user.setNombreCompleto(nombre);
         user.setEstado((String) vistaUsuarios.cmbEstado.getSelectedItem());
-        RolDTO rol = new RolDTO();
+        Rol rol = new Rol();
         rol.setId(vistaUsuarios.cmbCargo.getSelectedIndex() + 1);
         user.setRol(rol);
 

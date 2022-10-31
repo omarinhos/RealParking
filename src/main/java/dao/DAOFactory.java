@@ -1,18 +1,18 @@
 package dao;
 
-import modelo.Ticket;
+import modelo.*;
 
 public class DAOFactory {
 
-    public static DAO<UsuarioDTO> getUsuarioDAO() {
+    public static DAO<Usuario> getUsuarioDAO() {
         return new UsuarioDAO();
     }
 
-    public static DAO<RolDTO> getRolDAO() {
+    public static DAO<Rol> getRolDAO() {
         return new RolDAO();
     }
 
-    public static DAO<ConfiguracionDTO> getTxtConfiguracionDAO() {
+    public static DAO<Configuracion> getTxtConfiguracionDAO() {
         return new TxtConfiguracionDAO();
     }
     
@@ -20,7 +20,7 @@ public class DAOFactory {
         return new TicketDAO();
     }
     
-//    public static DAO<Comprobante> getComprobanteDAO() {
-//        return new ComprobanteDAO();
-//    }
+    public static DAO<Comprobante> getComprobanteDAO() {
+        return new ComprobanteDAO();
+    }
 }

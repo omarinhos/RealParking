@@ -114,7 +114,6 @@ public class TicketDAO extends DAO<Ticket> {
     }
 
     private Ticket crearTicket(ResultSet rs) throws SQLException {
-
         Ticket ticket = new Ticket();
         ticket.setId(rs.getInt("id_ticket"));
         ticket.setPlaca(rs.getString("placa"));

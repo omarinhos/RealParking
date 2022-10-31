@@ -1,7 +1,6 @@
 package controlador;
 
 import dao.BusinessLogic;
-import dao.ConfiguracionDTO;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -21,7 +20,7 @@ public class CRegistro {
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloTicket = new DefaultTableModel();
     private List<Ticket> tickets = new ArrayList<>();
-    private final ConfiguracionDTO configuracion;
+    private final Configuracion configuracion;
     
     private int idTicket, x;
 
@@ -40,7 +39,7 @@ public class CRegistro {
         tickets = bl.getListaTickets();
         actualizarTablaTickets();
         
-        configuracion = bl.leerConfiguracion(ConfiguracionDTO.ARCHIVO_CONFIGURACION);
+        configuracion = bl.leerConfiguracion(Configuracion.ARCHIVO_CONFIGURACION);
         actualizarEspaciosDisponibles();
 
         vistaRegistro.btnIngresar.addActionListener(this::btnIngresarAction);
@@ -96,6 +95,10 @@ public class CRegistro {
 
             bl.crearTicket(ticket);
             JOptionPane.showMessageDialog(vistaRegistro, "Vehiculo Agregado.", "Registro", 1);
+            
+            //Pendiente Generar el ticket 
+            JOptionPane.showMessageDialog(vistaRegistro, "Ticket en pantalla");
+            
             tickets = bl.getListaTickets();
             actualizarTablaTickets();
             actualizarEspaciosDisponibles();

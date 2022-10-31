@@ -9,8 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import modelo.Rol;
 
-public class RolDAO extends DAO<RolDTO> {
+public class RolDAO extends DAO<Rol> {
 
     private final String SELECT = "SELECT * FROM rol";
     private final String INSERT = "INSERT INTO rol (id_rol, descripcion, estado) VALUES (?, ?, ?)";
@@ -24,13 +25,13 @@ public class RolDAO extends DAO<RolDTO> {
     }
 
     @Override
-    public void create(RolDTO rolDTO) {
+    public void create(Rol rol) {
 
         try ( PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
 
-            stmt.setInt(1, rolDTO.getId());
-            stmt.setString(2, rolDTO.getDescripcion());
-            stmt.setString(3, rolDTO.getEstado());
+            stmt.setInt(1, rol.getId());
+            stmt.setString(2, rol.getDescripcion());
+            stmt.setString(3, rol.getEstado());
 
             stmt.executeUpdate();
 
@@ -44,13 +45,13 @@ public class RolDAO extends DAO<RolDTO> {
     }
 
     @Override
-    public RolDTO findBy(String id) {
-        RolDTO rolDTO = null;
+    public Rol findBy(String id) {
+        Rol rolDTO = null;
         try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  
                 ResultSet rs = stmt.executeQuery()) {
 
             if (rs.next()) {
-                rolDTO = new RolDTO();
+                rolDTO = new Rol();
                 rolDTO = crearRol(rs);
             }
 
@@ -61,18 +62,18 @@ public class RolDAO extends DAO<RolDTO> {
     }
 
     @Override
-    public void update(RolDTO rolDTO) {
+    public void update(Rol rol) {
         try ( PreparedStatement stmtrol = getConnection().prepareStatement(UPDATEROL);  
                 PreparedStatement stmtuser = getConnection().prepareStatement(UPDATEUSER)) {
 
-            stmtrol.setString(1, rolDTO.getDescripcion());
-            stmtrol.setString(2, rolDTO.getEstado());
-            stmtrol.setInt(3, rolDTO.getId());
+            stmtrol.setString(1, rol.getDescripcion());
+            stmtrol.setString(2, rol.getEstado());
+            stmtrol.setInt(3, rol.getId());
 
             stmtrol.executeUpdate();
 
-            stmtuser.setString(1, rolDTO.getEstado());
-            stmtuser.setInt(2, rolDTO.getId());
+            stmtuser.setString(1, rol.getEstado());
+            stmtuser.setInt(2, rol.getId());
 
             stmtuser.executeUpdate();
 
@@ -85,15 +86,15 @@ public class RolDAO extends DAO<RolDTO> {
     }
 
     @Override
-    public List<RolDTO> filter(String buscar) {
-        List<RolDTO> rolesDTO = new ArrayList<>();
+    public List<Rol> filter(String buscar) {
+        List<Rol> rolesDTO = new ArrayList<>();
 
         try ( Statement stmt = getConnection().createStatement();  
                 ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
 
             while (rs.next()) {
-                RolDTO rolDTO = crearRol(rs);
-                rolesDTO.add(rolDTO);
+                Rol rol = crearRol(rs);
+                rolesDTO.add(rol);
             }
 
         } catch (SQLException e) {
@@ -103,30 +104,30 @@ public class RolDAO extends DAO<RolDTO> {
     }
 
     @Override
-    public List<RolDTO> getList() {
-        List<RolDTO> rolesDTO = new ArrayList<>();
+    public List<Rol> getList() {
+        List<Rol> roles = new ArrayList<>();
 
         try ( Statement stmt = getConnection().createStatement();  
                 ResultSet rs = stmt.executeQuery(SELECT)) {
 
             while (rs.next()) {
-                RolDTO rolDTO = crearRol(rs);
-                rolesDTO.add(rolDTO);
+                Rol rol = crearRol(rs);
+                roles.add(rol);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return rolesDTO;
+        return roles;
     }
 
-    private RolDTO crearRol(ResultSet rs) throws SQLException {
-        RolDTO rolDTO = new RolDTO();
-        rolDTO.setId(rs.getInt("id_rol"));
-        rolDTO.setDescripcion(rs.getString("descripcion"));
-        rolDTO.setEstado(rs.getString("estado"));
+    private Rol crearRol(ResultSet rs) throws SQLException {
+        Rol rol = new Rol();
+        rol.setId(rs.getInt("id_rol"));
+        rol.setDescripcion(rs.getString("descripcion"));
+        rol.setEstado(rs.getString("estado"));
 
-        return rolDTO;
+        return rol;
     }
 
     @Override

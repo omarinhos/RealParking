@@ -1,5 +1,6 @@
 package dao;
 
+import modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +15,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Rol;
 
-public class UsuarioDAO extends DAO<UsuarioDTO> {
+public class UsuarioDAO extends DAO<Usuario> {
 
     private final String SELECT = "SELECT u.*, r.descripcion, r.estado FROM usuarios AS u INNER JOIN rol AS r ON r.id_rol = u.id_rol ORDER BY u.id_usuario";
     private String INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol) VALUES (?, ?, ?, ?, ?)";
@@ -28,21 +30,21 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
     }
 
     @Override
-    public void create(UsuarioDTO usuarioDTO) {
-        if (usuarioDTO.getRutaFoto()!= null) {
+    public void create(Usuario usuario) {
+        if (usuario.getRutaFoto()!= null) {
             INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol, foto) VALUES (?, ?, ?, ?, ?, ?)";
         }
 
         try (PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
 
-            stmt.setString(1, usuarioDTO.getUsuario());
-            stmt.setString(2, usuarioDTO.getPass());
-            stmt.setString(3, usuarioDTO.getNombreCompleto());
-            stmt.setString(4, usuarioDTO.getEstado());
-            stmt.setInt(5, usuarioDTO.getRol().getId());
+            stmt.setString(1, usuario.getUsuario());
+            stmt.setString(2, usuario.getPass());
+            stmt.setString(3, usuario.getNombreCompleto());
+            stmt.setString(4, usuario.getEstado());
+            stmt.setInt(5, usuario.getRol().getId());
 
-            if (usuarioDTO.getRutaFoto()!= null) {
-                File imageFile = new File(usuarioDTO.getRutaFoto());
+            if (usuario.getRutaFoto()!= null) {
+                File imageFile = new File(usuario.getRutaFoto());
                 FileInputStream fis = new FileInputStream(imageFile);
                 stmt.setBinaryStream(6, fis, imageFile.length());
             }
@@ -60,34 +62,30 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
     }
 
     @Override
-    public UsuarioDTO findBy(String user) {
-        UsuarioDTO usuarioDTO = null;
-
+    public Usuario findBy(String user) {
+        Usuario usuario = null;
         try (PreparedStatement stmt = getConnection().prepareCall(FINDBY + user + "'");
                 ResultSet rs = stmt.executeQuery()) {
-
             if (rs.next()) {
-                usuarioDTO = new UsuarioDTO();
-                usuarioDTO = crearUsuario(rs);
-
+                usuario = new Usuario();
+                usuario = crearUsuario(rs);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return usuarioDTO;
+        return usuario;
     }
 
     @Override
-    public void update(UsuarioDTO usuarioDTO) {
+    public void update(Usuario usuario) {
         try (PreparedStatement stmt = getConnection().prepareStatement(UPDATE)) {
 
-            stmt.setString(1, usuarioDTO.getUsuario());
-            stmt.setString(2, usuarioDTO.getPass());
-            stmt.setString(3, usuarioDTO.getNombreCompleto());
-            stmt.setString(4, usuarioDTO.getEstado());
-            stmt.setInt(5, usuarioDTO.getRol().getId());
-            stmt.setInt(6, usuarioDTO.getId());
+            stmt.setString(1, usuario.getUsuario());
+            stmt.setString(2, usuario.getPass());
+            stmt.setString(3, usuario.getNombreCompleto());
+            stmt.setString(4, usuario.getEstado());
+            stmt.setInt(5, usuario.getRol().getId());
+            stmt.setInt(6, usuario.getId());
 
             stmt.executeUpdate();
 
@@ -100,55 +98,55 @@ public class UsuarioDAO extends DAO<UsuarioDTO> {
     }
 
     @Override
-    public List<UsuarioDTO> filter(String buscar) {
-        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+    public List<Usuario> filter(String buscar) {
+        List<Usuario> usuarios = new ArrayList<>();
 
         try (Statement stmt = getConnection().createStatement();
                 ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%' ORDER BY u.id_usuario");) {
 
             while (rs.next()) {
-                UsuarioDTO usuarioDTO = crearUsuario(rs);
-                usuariosDTO.add(usuarioDTO);
+                Usuario usuario = crearUsuario(rs);
+                usuarios.add(usuario);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return usuariosDTO;
+        return usuarios;
     }
 
     @Override
-    public List<UsuarioDTO> getList() {
-        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+    public List<Usuario> getList() {
+        List<Usuario> usuarios = new ArrayList<>();
 
         try (Statement stmt = getConnection().createStatement();
                 ResultSet rs = stmt.executeQuery(SELECT);) {
 
             while (rs.next()) {
-                UsuarioDTO usuarioDTO = crearUsuario(rs);
-                usuariosDTO.add(usuarioDTO);
+                Usuario usuario = crearUsuario(rs);
+                usuarios.add(usuario);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return usuariosDTO;
+        return usuarios;
     }
 
-    private UsuarioDTO crearUsuario(ResultSet rs) throws SQLException {
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(rs.getInt("id_usuario"));
-        usuarioDTO.setUsuario(rs.getString("usuario"));
-        usuarioDTO.setPass(rs.getString("pass"));
-        usuarioDTO.setNombreCompleto(rs.getString("nombre_completo"));
-        usuarioDTO.setEstado(rs.getString(5));
-        RolDTO rol = new RolDTO();
+    private Usuario crearUsuario(ResultSet rs) throws SQLException {
+        Usuario usuario = new Usuario();
+        usuario.setId(rs.getInt("id_usuario"));
+        usuario.setUsuario(rs.getString("usuario"));
+        usuario.setPass(rs.getString("pass"));
+        usuario.setNombreCompleto(rs.getString("nombre_completo"));
+        usuario.setEstado(rs.getString(5));
+        Rol rol = new Rol();
         rol.setId(rs.getInt("id_rol"));
         rol.setDescripcion(rs.getString("descripcion"));
         rol.setEstado(rs.getString(8));
-        usuarioDTO.setRol(rol);
-        usuarioDTO.setImagen(rs.getBlob("foto"));
-        return usuarioDTO;
+        usuario.setRol(rol);
+        usuario.setImagen(rs.getBlob("foto"));
+        return usuario;
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import dao.UsuarioDTO;
+import modelo.Usuario;
 import static java.awt.Frame.ICONIFIED;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,7 +13,7 @@ import vista.FrmLogin;
 
 public class Clogin {
     
-    private final UsuarioDTO usuario = new UsuarioDTO();
+    private final Usuario usuario = new Usuario();
     public FrmLogin FrmLogin = new FrmLogin();
     private final Validacion v = new Validacion();
     private CPrincipal cPrincipal;
@@ -55,7 +55,7 @@ public class Clogin {
             return false;
         }
         
-        UsuarioDTO newUser = v.tipoUsuario(usuario);
+        Usuario newUser = v.tipoUsuario(usuario);
         cPrincipal = new CPrincipal(newUser);
         cPrincipal.frmPrincipal.setVisible(true);
         FrmLogin.dispose();

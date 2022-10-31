@@ -2,12 +2,9 @@
 import dao.RolDAO;
 import dao.UsuarioDAO;
 import controlador.Validacion;
-import dao.ConfiguracionDTO;
 import java.util.ArrayList;
 import java.util.List;
-import dao.RolDTO;
 import dao.TxtConfiguracionDAO;
-import dao.UsuarioDTO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;

@@ -7,7 +7,7 @@ public class Comprobante {
     private int id;
     private Ticket ticket;
     private Usuario usuario;
-    private Date fecha;
+    private String fecha;
     private double importe;
 
     public Comprobante() {
@@ -37,14 +37,14 @@ public class Comprobante {
         this.usuario = usuario;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+    
     public double getImporte() {
         return importe;
     }

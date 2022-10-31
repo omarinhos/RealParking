@@ -7,6 +7,8 @@ public class Configuracion {
     private String nombreComercial;
     private int espacios;
     private double tarifa;
+    
+    public final static String ARCHIVO_CONFIGURACION = "configuracion.txt";
 
     public Configuracion() {
     }

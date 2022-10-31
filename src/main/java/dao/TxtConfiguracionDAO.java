@@ -6,11 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import modelo.Configuracion;
 
-public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
+public class TxtConfiguracionDAO extends DAO<Configuracion> {
 
     @Override
-    public void create(ConfiguracionDTO configuracion) {
+    public void create(Configuracion configuracion) {
         
         try (FileWriter fichero = new FileWriter("configuracion.txt");
             PrintWriter pw = new PrintWriter(fichero)){
@@ -27,36 +28,36 @@ public class TxtConfiguracionDAO extends DAO<ConfiguracionDTO> {
     }
 
     @Override
-    public ConfiguracionDTO findBy(String nombrefichero) {
+    public Configuracion findBy(String nombrefichero) {
 
-        ConfiguracionDTO configuracionDTO = new ConfiguracionDTO();
+        Configuracion configuracion = new Configuracion();
 
         try (BufferedReader br = new BufferedReader(new FileReader(nombrefichero))){
  
-            configuracionDTO.setRazonSocial(br.readLine().substring(14));
-            configuracionDTO.setRUC(br.readLine().substring(5));
-            configuracionDTO.setNombreComercial(br.readLine().substring(18));
-            configuracionDTO.setEspacios(Integer.parseInt(br.readLine().substring(10)));
-            configuracionDTO.setTarifa(Double.parseDouble(br.readLine().substring(8)));
+            configuracion.setRazonSocial(br.readLine().substring(14));
+            configuracion.setRUC(br.readLine().substring(5));
+            configuracion.setNombreComercial(br.readLine().substring(18));
+            configuracion.setEspacios(Integer.parseInt(br.readLine().substring(10)));
+            configuracion.setTarifa(Double.parseDouble(br.readLine().substring(8)));
 
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace(System.out);
         }
-        return configuracionDTO;
+        return configuracion;
     }
 
     @Override
-    public void update(ConfiguracionDTO configuracion) {
+    public void update(Configuracion configuracion) {
 
     }
 
     @Override
-    public List<ConfiguracionDTO> filter(String filtro) {
+    public List<Configuracion> filter(String filtro) {
         return null;
     }
 
     @Override
-    public List<ConfiguracionDTO> getList() {
+    public List<Configuracion> getList() {
         return null;
     }
 
