@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -38,16 +40,15 @@ public class CReportes {
         String cabecera[] = {"Id", "Usuario", "Placa", "Hora Ingreso", "Hora Salida", "Importe"};
         modeloVenta.setColumnIdentifiers(cabecera);
         vistaReportes.tblVentas.setModel(modeloVenta);
-        
-        actualizarTablaVentas();
+
         actualizarComboUsuarios();
-        resizeColumnWidth(vistaReportes.tblVentas);
 
         vistaReportes.btnMostrar.addActionListener(this::btnMostrarAction);
+        
+        vistaReportes.btnExportar.addActionListener(this::btnExportarAction);
     }
 
     private void actualizarTablaVentas() {
-        ventas = bl.getListaComprobantes();
         modeloVenta.setRowCount(0);
         ventas.forEach(venta -> {
             modeloVenta.addRow(new Object[]{
@@ -59,8 +60,10 @@ public class CReportes {
                 venta.getImporte()
             });
         });
+        resizeColumnWidth(vistaReportes.tblVentas);
+
     }
-    
+
     private void actualizarComboUsuarios() {
         vistaReportes.cmbUsuarios.removeAllItems();
         vistaReportes.cmbUsuarios.addItem("Todos los usuarios");
@@ -68,25 +71,34 @@ public class CReportes {
                 .stream()
                 .map(Usuario::getUsuario)
                 .collect(Collectors.toList());
-                
-        
+
         usuarios.forEach(u -> vistaReportes.cmbUsuarios.addItem(u));
     }
 
     private void btnMostrarAction(ActionEvent e) {
-        
+
         try {
             String desde = sdf.format(vistaReportes.jDateDesde.getCalendar().getTime());
             String hasta = sdf.format(vistaReportes.jDateHasta.getCalendar().getTime());
             String user = "" + vistaReportes.cmbUsuarios.getSelectedItem();
-            
+
+            ventas = bl.filtrarComprobantes(desde + "/" + hasta + "/" + user);
+            actualizarTablaVentas();
+
+            vistaReportes.lblVehiculos.setText("" + ventas.size());
+            vistaReportes.lblIngresos.setText("" + ventas.stream()
+                    .mapToDouble(v -> v.getImporte())
+                    .sum());
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(vistaReportes, "Seleccionar las fechas", "Campos vacíos", 2);
         }
-        
 
     }
 
+    private void btnExportarAction(ActionEvent e) {
+        JOptionPane.showMessageDialog(vistaReportes, "Falta implementar");
+    }
+    
     private void resizeColumnWidth(JTable table) {
         //Se obtiene el modelo de la columna
         TableColumnModel columnModel = table.getColumnModel();
@@ -112,6 +124,13 @@ public class CReportes {
             //Se establece el ancho de la columna
             columnModel.getColumn(column).setPreferredWidth(width);
         }
+
+        DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+        dtcr.setHorizontalAlignment(SwingConstants.CENTER);
+        columnModel.getColumn(0).setCellRenderer(dtcr);
+        columnModel.getColumn(1).setCellRenderer(dtcr);
+        columnModel.getColumn(5).setCellRenderer(dtcr);
+
     }
 
 }

@@ -96,4 +96,7 @@ public class BusinessLogic {
         incidenteDAO.create(incidente);
     }
 
+    public List<Comprobante> filtrarComprobantes(String filtro) {
+        return comprobanteDAO.filter(filtro);
+    } 
 }

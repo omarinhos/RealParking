@@ -28,6 +28,7 @@ public class VistaReportes extends javax.swing.JPanel {
         lblVehiculos = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,24 +93,24 @@ public class VistaReportes extends javax.swing.JPanel {
         lblIngresos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblIngresos.setForeground(new java.awt.Color(102, 102, 102));
         lblIngresos.setText("--");
-        add(lblIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 610, 40, 20));
+        add(lblIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 600, 40, 20));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(102, 102, 102));
         jLabel39.setText("Total de ingresos   : S/");
-        add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 290, 20));
+        add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 290, 20));
         add(jDateDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 150, 30));
         add(jDateHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 150, 30));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
         jLabel40.setText("Total de vehiculos :  ");
-        add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 190, 20));
+        add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 190, 20));
 
         lblVehiculos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblVehiculos.setForeground(new java.awt.Color(102, 102, 102));
         lblVehiculos.setText("--");
-        add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, 40, 20));
+        add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 570, 40, 20));
 
         jScrollPane6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
@@ -132,7 +133,11 @@ public class VistaReportes extends javax.swing.JPanel {
         tblVentas.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(tblVentas);
 
-        add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 700, 340));
+        add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 700, 330));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("jLabel1");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 620, -1, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExportarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseEntered
@@ -158,6 +163,7 @@ public class VistaReportes extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> cmbUsuarios;
     public com.toedter.calendar.JDateChooser jDateDesde;
     public com.toedter.calendar.JDateChooser jDateHasta;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel35;

@@ -57,14 +57,17 @@ public class ComprobanteDAO extends DAO<Comprobante> {
     @Override
     public List<Comprobante> filter(String filtro) {
         List<Comprobante> comprobantes = new ArrayList<>();
-        String desde = "";
-        String hasta = "";
-        String user = "";
         
-        FILTER += "WHERE c.fecha >= cast('" + desde + "' AS DATE) and c.fecha <= cast('" + hasta + "' AS DATE) and u.usuario like '%" + user + "'";
-
+        String desde = filtro.split("/")[0];
+        String hasta = filtro.split("/")[1];
+        String user = filtro.split("/")[2];
+        
+        if (user.equals("Todos los usuarios")) {
+            user = "";
+        }
+        
         try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(FILTER)) {
+                ResultSet rs = stmt.executeQuery(FILTER + "WHERE c.fecha >= cast('" + desde + " 00:00:00' AS DATETIME) and c.fecha <= cast('" + hasta + " 23:59:59' AS DATETIME) and u.usuario like '%" + user + "'")) {
             while (rs.next()) {
                 Comprobante comprobante = crearComprobante(rs);
                 comprobantes.add(comprobante);
