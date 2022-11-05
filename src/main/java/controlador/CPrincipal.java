@@ -23,7 +23,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import vista.VistaCaja;
 import vista.VistaRegistro;
-import vista.VistaReportes;
 import modelo.Usuario;
 import modelo.Rol;
 
@@ -35,6 +34,7 @@ public class CPrincipal {
     private CRoles cRoles;
     private CRegistro cRegistro;
     private CCaja cCaja;
+    private CReportes cReportes;
     
     private boolean permisoRegistro;
     private boolean permisoCaja;
@@ -85,7 +85,8 @@ public class CPrincipal {
             public void mouseClicked(MouseEvent e) {
                 //falta implementar
                 if (permisoReportes) {
-                    cargarPanel(new VistaReportes());
+                    cReportes = new CReportes(frmPrincipal);
+                    cReportes.vistaReportes.setVisible(true);
                 }
             }
         });
@@ -159,8 +160,8 @@ public class CPrincipal {
         switch (rol.getDescripcion()) {
             case "Administrador":
                 new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
-                permisoRegistro = false;
-                permisoCaja = false;
+                permisoRegistro = true;
+                permisoCaja = true;
                 permisoReportes = true;
                 permisoConfiguracion = true;
                 permisoUsuarios = true;
@@ -227,7 +228,7 @@ public class CPrincipal {
             user.setId(2);
             user.setUsuario("alo");
             user.setNombreCompleto("Nombre");
-            user.setRol(new Rol(1, "Prueba", "Activo"));
+            user.setRol(new Rol(1, "Administrador", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });
     }

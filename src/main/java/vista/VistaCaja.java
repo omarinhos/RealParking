@@ -59,7 +59,7 @@ public class VistaCaja extends javax.swing.JPanel {
         lblIngresos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblIngresos.setForeground(new java.awt.Color(51, 0, 153));
         lblIngresos.setText("--");
-        jPanel1.add(lblIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 230, 20));
+        jPanel1.add(lblIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 230, 30));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(51, 0, 153));
@@ -68,13 +68,13 @@ public class VistaCaja extends javax.swing.JPanel {
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(51, 0, 153));
-        jLabel21.setText("Total de Ingresos   :");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 240, 30));
+        jLabel21.setText("Total de Ingresos   : S/ ");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 310, 30));
 
         lblVehículos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblVehículos.setForeground(new java.awt.Color(51, 0, 153));
         lblVehículos.setText("--");
-        jPanel1.add(lblVehículos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 230, 20));
+        jPanel1.add(lblVehículos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 230, 20));
 
         jScrollPane7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 

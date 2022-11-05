@@ -19,7 +19,9 @@ public class ComprobanteDAO extends DAO<Comprobante> {
     private final String SELECT = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n"
             + "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario\n"
             + "WHERE c.fecha LIKE '";
-
+    private String FILTER = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n" +
+"            FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario ";
+    
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
     }
@@ -54,7 +56,24 @@ public class ComprobanteDAO extends DAO<Comprobante> {
 
     @Override
     public List<Comprobante> filter(String filtro) {
-        return null;
+        List<Comprobante> comprobantes = new ArrayList<>();
+        String desde = "";
+        String hasta = "";
+        String user = "";
+        
+        FILTER += "WHERE c.fecha >= cast('" + desde + "' AS DATE) and c.fecha <= cast('" + hasta + "' AS DATE) and u.usuario like '%" + user + "'";
+
+        try ( Statement stmt = getConnection().createStatement();  
+                ResultSet rs = stmt.executeQuery(FILTER)) {
+            while (rs.next()) {
+                Comprobante comprobante = crearComprobante(rs);
+                comprobantes.add(comprobante);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return comprobantes;
     }
 
     @Override
