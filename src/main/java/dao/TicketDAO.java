@@ -16,7 +16,7 @@ public class TicketDAO extends DAO<Ticket> {
     private final String SELECT = "SELECT * FROM ticket WHERE estado != 'retirado' AND hora_ingreso LIKE ";
     private final String INSERT = "INSERT INTO ticket (placa, estado, hora_ingreso) VALUES (?, ?, now())";
     private final String UPDATE = "UPDATE ticket SET estado = ?, hora_salida = now() WHERE id_ticket = ? ";
-    private final String FILTER = "SELECT * FROM ticket WHERE estado != 'retirado' AND placa like '";
+    private final String FILTER = "SELECT * FROM ticket WHERE estado != 'retirado' AND placa like '%";
 
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -94,7 +94,7 @@ public class TicketDAO extends DAO<Ticket> {
         String fechaHoy = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         List<Ticket> tickets = new ArrayList<>();
         try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(SELECT + "'" + fechaHoy + "%' ORDER BY estado")) {
+                ResultSet rs = stmt.executeQuery(SELECT + "'%" + fechaHoy + "%' ORDER BY estado")) {
 
             while (rs.next()) {
                 Ticket ticket = crearTicket(rs);

@@ -12,25 +12,25 @@ import java.awt.event.MouseEvent;
 import vista.FrmLogin;
 
 public class Clogin {
-    
+
     private final Usuario usuario = new Usuario();
     public FrmLogin FrmLogin = new FrmLogin();
     private final Validacion v = new Validacion();
     private CPrincipal cPrincipal;
-    
+
     public Clogin() {
-        
+
         FrmLogin.btniniciar.addActionListener(e -> {
             ingresar();
         });
-         
+
         FrmLogin.btnCerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.exit(0);
             }
         });
-        
+
         FrmLogin.btnMin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -38,31 +38,31 @@ public class Clogin {
             }
         });
     }
-    
+
     private boolean ingresar() {
         if (!v.comprobarCampo(FrmLogin.txtUser.getText())) {
             return false;
         }
-        
+
         if (!v.comprobarCampo(String.valueOf(FrmLogin.txtPass.getPassword()))) {
             return false;
         }
-        
+
         usuario.setUsuario(FrmLogin.txtUser.getText());
         usuario.setPass(String.valueOf(FrmLogin.txtPass.getPassword()));
 
         if (!v.existeUsuario(usuario)) {
             return false;
         }
-        
+
         Usuario newUser = v.tipoUsuario(usuario);
         cPrincipal = new CPrincipal(newUser);
         cPrincipal.frmPrincipal.setVisible(true);
         FrmLogin.dispose();
-        
+
         return true;
     }
-    
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
@@ -74,6 +74,5 @@ public class Clogin {
             new Clogin().FrmLogin.setVisible(true);
         });
     }
-    
-    
+
 }

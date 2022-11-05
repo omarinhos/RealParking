@@ -44,7 +44,7 @@ public class CReportes {
         actualizarComboUsuarios();
 
         vistaReportes.btnMostrar.addActionListener(this::btnMostrarAction);
-        
+
         vistaReportes.btnExportar.addActionListener(this::btnExportarAction);
     }
 
@@ -98,7 +98,7 @@ public class CReportes {
     private void btnExportarAction(ActionEvent e) {
         JOptionPane.showMessageDialog(vistaReportes, "Falta implementar");
     }
-    
+
     private void resizeColumnWidth(JTable table) {
         //Se obtiene el modelo de la columna
         TableColumnModel columnModel = table.getColumnModel();

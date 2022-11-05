@@ -8,7 +8,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import modelo.Configuracion;
 import modelo.Ticket;
 import vista.FrmPrincipal;
@@ -21,7 +24,10 @@ public class CRegistro {
     private final DefaultTableModel modeloTicket = new DefaultTableModel();
     private List<Ticket> tickets = new ArrayList<>();
     private final Configuracion configuracion;
-    
+
+    TableColumnModel columnModel = vistaRegistro.tblTicket.getColumnModel();
+    DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+
     private int idTicket, x;
 
     public CRegistro(FrmPrincipal FrmP) {
@@ -38,7 +44,7 @@ public class CRegistro {
 
         tickets = bl.getListaTickets();
         actualizarTablaTickets();
-        
+
         configuracion = bl.leerConfiguracion(Configuracion.ARCHIVO_CONFIGURACION);
         actualizarEspaciosDisponibles();
 
@@ -81,6 +87,7 @@ public class CRegistro {
                 registro.getEstado()
             });
         });
+        columModel();
     }
 
     private void btnIngresarAction(ActionEvent e) {
@@ -95,10 +102,10 @@ public class CRegistro {
 
             bl.crearTicket(ticket);
             JOptionPane.showMessageDialog(vistaRegistro, "Vehiculo Agregado.", "Registro", 1);
-            
+
             //Pendiente Generar el ticket 
             JOptionPane.showMessageDialog(vistaRegistro, "Ticket en pantalla");
-            
+
             tickets = bl.getListaTickets();
             actualizarTablaTickets();
             actualizarEspaciosDisponibles();
@@ -148,5 +155,11 @@ public class CRegistro {
         actualizarTablaTickets();
         actualizarEspaciosDisponibles();
         vistaRegistro.btnRetirar.setEnabled(false);
+    }
+
+    private void columModel() {
+        dtcr.setHorizontalAlignment(SwingConstants.CENTER);
+        columnModel.getColumn(0).setCellRenderer(dtcr);
+        columnModel.getColumn(2).setCellRenderer(dtcr);
     }
 }

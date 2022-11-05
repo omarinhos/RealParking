@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import modelo.Comprobante;
 import modelo.Configuracion;
 import modelo.Incidente;
@@ -28,6 +31,10 @@ public class CCaja {
     private List<Comprobante> ventas = new ArrayList<>();
     private final Configuracion configuracion;
 
+    TableColumnModel columnModelT = vistaCaja.tblTicket.getColumnModel();
+    TableColumnModel columnModelV = vistaCaja.tblVentas.getColumnModel();
+    DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+
     private int idTicket, x;
 
     public CCaja(FrmPrincipal FrmP, Usuario usuario) {
@@ -36,6 +43,8 @@ public class CCaja {
         FrmP.contenedor.add(vistaCaja, BorderLayout.CENTER);
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
+
+        dtcr.setHorizontalAlignment(SwingConstants.CENTER);
 
         String cabecera[] = {"Id", "Placa", "Hora de Ingreso", "Estado"};
         modeloTicket.setColumnIdentifiers(cabecera);
@@ -83,6 +92,8 @@ public class CCaja {
                 registro.getEstado()
             });
         });
+        columnModelT.getColumn(0).setCellRenderer(dtcr);
+        columnModelT.getColumn(2).setCellRenderer(dtcr);
     }
 
     private void actualizarTablaVentas() {
@@ -96,6 +107,9 @@ public class CCaja {
                 venta.getImporte()
             });
         });
+        columnModelV.getColumn(0).setCellRenderer(dtcr);
+        columnModelV.getColumn(2).setCellRenderer(dtcr);
+        columnModelV.getColumn(3).setCellRenderer(dtcr);
     }
 
     private void btnMostrarAction(ActionEvent e) {

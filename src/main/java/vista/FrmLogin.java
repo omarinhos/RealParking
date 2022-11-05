@@ -42,9 +42,6 @@ public class FrmLogin extends javax.swing.JFrame {
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCerrar.setOpaque(true);
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCerrarMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCerrarMouseEntered(evt);
             }
@@ -60,9 +57,6 @@ public class FrmLogin extends javax.swing.JFrame {
         btnMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMin.setOpaque(true);
         btnMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMinMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMinMouseEntered(evt);
             }
@@ -158,10 +152,6 @@ public class FrmLogin extends javax.swing.JFrame {
         xy = evt.getY();
     }//GEN-LAST:event_headerMousePressed
 
-    private void btnMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseClicked
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_btnMinMouseClicked
-
     private void btnMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseEntered
         btnMin.setBackground(new Color(230, 230, 230));
     }//GEN-LAST:event_btnMinMouseEntered
@@ -169,10 +159,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseExited
         btnMin.setBackground(new Color(242, 242, 242));
     }//GEN-LAST:event_btnMinMouseExited
-
-    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btnCerrarMouseClicked
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
         btnCerrar.setBackground(new Color(139, 0, 0));

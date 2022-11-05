@@ -35,6 +35,7 @@ public class CPrincipal {
     private CRegistro cRegistro;
     private CCaja cCaja;
     private CReportes cReportes;
+    private final Usuario usuario;
     
     private boolean permisoRegistro;
     private boolean permisoCaja;
@@ -43,10 +44,12 @@ public class CPrincipal {
     private boolean permisoUsuarios;
     private boolean permisoRoles;
     
-    public CPrincipal(Usuario usuario) {
+    public CPrincipal(Usuario user) {
+        this.usuario = user;
         tipoRolPanel(usuario.getRol());
         frmPrincipal.txtUserActual.setText(usuario.getNombreCompleto());
         frmPrincipal.txtRolActual.setText(usuario.getRol().getDescripcion());
+        
         frmPrincipal.btnRegistro.setEnabled(permisoRegistro);
         frmPrincipal.btnCaja.setEnabled(permisoCaja);
         frmPrincipal.btnReportes.setEnabled(permisoReportes);
@@ -148,27 +151,19 @@ public class CPrincipal {
         });
     }
     
-    private void cargarPanel(JPanel panel) {
-        panel.setSize(740, 630);
-        frmPrincipal.contenedor.removeAll();
-        frmPrincipal.contenedor.add(panel, BorderLayout.CENTER);
-        frmPrincipal.contenedor.revalidate();
-        frmPrincipal.contenedor.repaint();
-    }
-    
     private void tipoRolPanel(Rol rol) {
         switch (rol.getDescripcion()) {
             case "Administrador":
                 new CUsuarios(frmPrincipal).vistaUsuarios.setVisible(true);
-                permisoRegistro = true;
-                permisoCaja = true;
+                permisoRegistro = false;
+                permisoCaja = false;
                 permisoReportes = true;
                 permisoConfiguracion = true;
                 permisoUsuarios = true;
                 permisoRoles = true;
                 break;
             case "Cajero":
-                cargarPanel(new VistaCaja());
+                new CCaja(frmPrincipal, usuario).vistaCaja.setVisible(true);
                 permisoRegistro = false;
                 permisoCaja = true;
                 permisoReportes = false;
@@ -177,13 +172,22 @@ public class CPrincipal {
                 permisoRoles = false;
                 break;
             case "Digitador":
-                cargarPanel(new VistaRegistro());
+                new CRegistro(frmPrincipal).vistaRegistro.setVisible(true);
                 permisoRegistro = true;
                 permisoCaja = false;
                 permisoReportes = false;
                 permisoConfiguracion = false;
                 permisoUsuarios = false;
                 permisoRoles = false;
+                break;
+            case "Testing":
+                new CRegistro(frmPrincipal).vistaRegistro.setVisible(true);
+                permisoRegistro = true;
+                permisoCaja = true;
+                permisoReportes = true;
+                permisoConfiguracion = true;
+                permisoUsuarios = true;
+                permisoRoles = true;
                 break;
             default:
                 new CRegistro(frmPrincipal).vistaRegistro.setVisible(true);
@@ -228,7 +232,7 @@ public class CPrincipal {
             user.setId(2);
             user.setUsuario("alo");
             user.setNombreCompleto("Nombre");
-            user.setRol(new Rol(1, "Administrador", "Activo"));
+            user.setRol(new Rol(1, "Testing", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });
     }

@@ -19,7 +19,7 @@ public class ComprobanteDAO extends DAO<Comprobante> {
     private final String SELECT = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n"
             + "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario\n"
             + "WHERE c.fecha LIKE '";
-    private String FILTER = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n" +
+    private final String FILTER = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n" +
 "            FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario ";
     
     private Connection getConnection() throws SQLException {
