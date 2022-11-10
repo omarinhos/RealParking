@@ -43,7 +43,6 @@ public class CCaja {
         FrmP.contenedor.add(vistaCaja, BorderLayout.CENTER);
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
-
         dtcr.setHorizontalAlignment(SwingConstants.CENTER);
 
         String cabecera[] = {"Id", "Placa", "Hora de Ingreso", "Estado"};

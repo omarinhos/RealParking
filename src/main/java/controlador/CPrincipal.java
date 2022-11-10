@@ -21,8 +21,6 @@ import java.sql.SQLException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import vista.VistaCaja;
-import vista.VistaRegistro;
 import modelo.Usuario;
 import modelo.Rol;
 
@@ -64,7 +62,6 @@ public class CPrincipal {
         frmPrincipal.btnRegistro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //falta implementar
                 if (permisoRegistro) {
                     cRegistro = new CRegistro(frmPrincipal);
                     cRegistro.vistaRegistro.setVisible(true);
