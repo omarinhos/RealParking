@@ -17,6 +17,7 @@ public class TicketDAO extends DAO<Ticket> {
     private final String INSERT = "INSERT INTO ticket (placa, estado, hora_ingreso) VALUES (?, ?, now())";
     private final String UPDATE = "UPDATE ticket SET estado = ?, hora_salida = now() WHERE id_ticket = ? ";
     private final String FILTER = "SELECT * FROM ticket WHERE estado != 'retirado' AND placa like '%";
+    private final String FINDBY = "SELECT * FROM ticket order by id_ticket desc limit 1";
 
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -57,7 +58,17 @@ public class TicketDAO extends DAO<Ticket> {
 
     @Override
     public Ticket findBy(String id) {
-        return null;
+        Ticket ticket = null;
+        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY);  
+                ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                ticket = new Ticket();
+                ticket = crearTicket(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return ticket;
     }
 
     @Override

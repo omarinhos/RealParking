@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,7 @@ public class CRoles {
     public final VistaRoles vistaRoles = new VistaRoles();
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloRoles = new DefaultTableModel();
-    private List<Rol> roles = new ArrayList<>();
+    private List<Rol> roles;
     private int idRol;
 
     public CRoles(FrmPrincipal FrmP) {
@@ -28,20 +27,16 @@ public class CRoles {
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
 
-        String cabecera[] = {"Id", "Rol", "Estado"};
+        String[] cabecera = {"Id", "Rol", "Estado"};
         modeloRoles.setColumnIdentifiers(cabecera);
         vistaRoles.tblRoles.setModel(modeloRoles);
         
         roles = bl.getListaRol();
         actualizarTablaRoles();
 
-        vistaRoles.btnGuardar.addActionListener(e -> {
-            btnGuardarAction(e);
-        });
+        vistaRoles.btnGuardar.addActionListener(this::btnGuardarAction);
 
-        vistaRoles.btnModificar.addActionListener(e -> {
-            btnModificarAction(e);
-        });
+        vistaRoles.btnModificar.addActionListener(this::btnModificarAction);
 
         vistaRoles.tblRoles.addMouseListener(new MouseAdapter() {
             @Override
@@ -50,25 +45,19 @@ public class CRoles {
             }
         });
 
-        vistaRoles.btnNuevo.addActionListener(e -> {
-            btnNuevoAction(e);
-        });
+        vistaRoles.btnNuevo.addActionListener(this::btnNuevoAction);
         
-        vistaRoles.btnFiltrar.addActionListener(e -> {
-            btnFiltrarAction(e);
-        });
+        vistaRoles.btnFiltrar.addActionListener(this::btnFiltrarAction);
     }
 
     private void actualizarTablaRoles() {
         modeloRoles.setRowCount(0);
 
-        roles.forEach(rol -> {
-            modeloRoles.addRow(new Object[]{
-                rol.getId(),
-                rol.getDescripcion(),
-                rol.getEstado()
-            });
-        });
+        roles.forEach(rol -> modeloRoles.addRow(new Object[]{
+            rol.getId(),
+            rol.getDescripcion(),
+            rol.getEstado()
+        }));
     }
 
     private void btnGuardarAction(ActionEvent e) {
@@ -120,12 +109,7 @@ public class CRoles {
             vistaRoles.cmbEstado.setSelectedItem(roles.get(x).getEstado());
 
             vistaRoles.btnGuardar.setEnabled(false);
-
-            if (idRol > 3) {
-                vistaRoles.btnModificar.setEnabled(true);
-            } else {
-                vistaRoles.btnModificar.setEnabled(false);
-            }
+            vistaRoles.btnModificar.setEnabled(idRol > 3);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaRoles, "Dar solo click izquiero.", "Advertencia", 2);

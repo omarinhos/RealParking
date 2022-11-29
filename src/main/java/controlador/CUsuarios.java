@@ -33,8 +33,7 @@ public class CUsuarios {
     public final VistaUsuarios vistaUsuarios = new VistaUsuarios();
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloUsuarios = new DefaultTableModel();
-    private List<Usuario> usuarios = new ArrayList<>();
-    private List<Rol> roles = new ArrayList<>();
+    private List<Usuario> usuarios;
     
     private int idUsuario;
     private String rutaImagen = null;
@@ -47,7 +46,7 @@ public class CUsuarios {
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
 
-        String cabecera[] = {"Id", "DNI", "Nombre", "Cargo", "Estado"};
+        String[] cabecera = {"Id", "DNI", "Nombre", "Cargo", "Estado"};
         modeloUsuarios.setColumnIdentifiers(cabecera);
         vistaUsuarios.tblUsuarios.setModel(modeloUsuarios);
 
@@ -76,25 +75,23 @@ public class CUsuarios {
 
     private void actualizarComboRoles() {
         vistaUsuarios.cmbCargo.removeAllItems();
-        roles = bl.getListaRol();
+        List<Rol> roles = bl.getListaRol();
         roles.forEach(rol -> vistaUsuarios.cmbCargo.addItem(rol.getDescripcion()));
     }
 
     private void actualizarTablaUsuarios() {
         modeloUsuarios.setRowCount(0);
 
-        usuarios.forEach(usuario -> {
-            modeloUsuarios.addRow(new Object[]{
-                usuario.getId(),
-                usuario.getUsuario(),
-                usuario.getNombreCompleto(),
-                usuario.getRol().getDescripcion(),
-                usuario.getEstado()
-            });
-        });
+        usuarios.forEach(usuario -> modeloUsuarios.addRow(new Object[]{
+            usuario.getId(),
+            usuario.getUsuario(),
+            usuario.getNombreCompleto(),
+            usuario.getRol().getDescripcion(),
+            usuario.getEstado()
+        }));
     }
 
-    private boolean btnGuardarAction(ActionEvent e) {
+    private void btnGuardarAction(ActionEvent e) {
         String DNI = vistaUsuarios.txtDni.getText();
         String nombre = vistaUsuarios.txtNombre.getText();
         String pass = String.valueOf(vistaUsuarios.txtPass.getPassword());
@@ -102,12 +99,12 @@ public class CUsuarios {
 
         if (DNI.isEmpty() || nombre.isEmpty() || pass.isEmpty() || passre.isEmpty()) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Llenar todos los campos.", "Usuario", 2);
-            return false;
+            return;
         }
 
         if (!pass.equals(passre)) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Las contraseñas no coinciden.", "Usuario", 2);
-            return false;
+            return;
         }
 
         Usuario user = new Usuario();
@@ -125,10 +122,9 @@ public class CUsuarios {
         actualizarTablaUsuarios();
         rutaImagen = null;
 
-        return true;
     }
 
-    private boolean btnModificarAction(ActionEvent e) {
+    private void btnModificarAction(ActionEvent e) {
         String DNI = vistaUsuarios.txtDni.getText();
         String nombre = vistaUsuarios.txtNombre.getText();
         String pass = String.valueOf(vistaUsuarios.txtPass.getPassword());
@@ -136,12 +132,12 @@ public class CUsuarios {
 
         if (DNI.isEmpty() || nombre.isEmpty() || pass.isEmpty() || passre.isEmpty()) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Llenar todos los campos.", "Usuario", 2);
-            return false;
+            return;
         }
 
         if (!pass.equals(passre)) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Las contraseñas no coinciden.", "Usuario", 2);
-            return false;
+            return;
         }
 
         Usuario user = new Usuario();
@@ -158,8 +154,6 @@ public class CUsuarios {
         JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Mdificado", "Usuario", 1);
         usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
-
-        return true;
     }
 
     private void tblUsuariosMouseClicked(MouseEvent evt) {

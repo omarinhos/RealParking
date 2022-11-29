@@ -1,4 +1,4 @@
-package controlador;
+ package controlador;
 
 import dao.BusinessLogic;
 import java.awt.BorderLayout;
@@ -23,13 +23,9 @@ public class CConfiguracion {
 
         actualizarParametrosConfiguracion();
 
-        vistaConfig.btnGuardar.addActionListener(e -> {
-            btnGuardarAction(e);
-        });
+        vistaConfig.btnGuardar.addActionListener(this::btnGuardarAction);
 
-        vistaConfig.btnModificar.addActionListener(e -> {
-            btnModificarAction(e);
-        });
+        vistaConfig.btnModificar.addActionListener(this::btnModificarAction);
     }
     
     private void actualizarParametrosConfiguracion() {
@@ -41,7 +37,7 @@ public class CConfiguracion {
         vistaConfig.txtTarifa.setText("" + configuracion.getTarifa());
     }
 
-    private boolean btnGuardarAction(ActionEvent e) {
+    private void btnGuardarAction(ActionEvent e) {
         String RazonSoc = vistaConfig.txtRazonSocial.getText();
         String RUC = vistaConfig.txtRUC.getText();
         String nombreC = vistaConfig.txtNombreComercial.getText();
@@ -50,7 +46,7 @@ public class CConfiguracion {
 
         if (RazonSoc.isEmpty() || RUC.isEmpty() || nombreC.isEmpty() || espacio.isEmpty() || tarifa.isEmpty()) {
             JOptionPane.showMessageDialog(vistaConfig, "Llenar todos los campos.", "Configuración", 2);
-            return false;
+            return;
         }
 
         try {
@@ -76,7 +72,6 @@ public class CConfiguracion {
         vistaConfig.txtTarifa.setEnabled(false);
         vistaConfig.btnGuardar.setEnabled(false);
         vistaConfig.btnModificar.setEnabled(true);
-        return true;
     }
 
     private void btnModificarAction(ActionEvent e) {

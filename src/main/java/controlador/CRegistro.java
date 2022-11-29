@@ -22,7 +22,7 @@ public class CRegistro {
     public final VistaRegistro vistaRegistro = new VistaRegistro();
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloTicket = new DefaultTableModel();
-    private List<Ticket> tickets = new ArrayList<>();
+    private List<Ticket> tickets;
     private final Configuracion configuracion;
 
     TableColumnModel columnModel = vistaRegistro.tblTicket.getColumnModel();
@@ -38,7 +38,7 @@ public class CRegistro {
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
 
-        String cabecera[] = {"Id", "Placa", "Hora de Ingreso", "Estado"};
+        String[] cabecera = {"Id", "Placa", "Hora de Ingreso", "Estado"};
         modeloTicket.setColumnIdentifiers(cabecera);
         vistaRegistro.tblTicket.setModel(modeloTicket);
 
@@ -69,42 +69,37 @@ public class CRegistro {
     private void actualizarEspaciosDisponibles() {
         int espaciosDisponibles = configuracion.getEspacios() - tickets.size();
         vistaRegistro.lblEspacios.setText("" + espaciosDisponibles);
-        if (espaciosDisponibles < 1) {
-            vistaRegistro.btnIngresar.setEnabled(false);
-        } else {
-            vistaRegistro.btnIngresar.setEnabled(true);
-        }
+        vistaRegistro.btnIngresar.setEnabled(espaciosDisponibles >= 1);
     }
 
     private void actualizarTablaTickets() {
         modeloTicket.setRowCount(0);
 
-        tickets.forEach(registro -> {
-            modeloTicket.addRow(new Object[]{
-                registro.getId(),
-                registro.getPlaca(),
-                registro.getHoraIngreso(),
-                registro.getEstado()
-            });
-        });
+        tickets.forEach(registro -> modeloTicket.addRow(new Object[]{
+            registro.getId(),
+            registro.getPlaca(),
+            registro.getHoraIngreso(),
+            registro.getEstado()
+        }));
         columModel();
     }
 
     private void btnIngresarAction(ActionEvent e) {
-        String placa = vistaRegistro.txtPlaca.getText();
+        String placa = vistaRegistro.txtPlaca.getText().toUpperCase();
 
         if (!placa.isEmpty()) {
 
             Ticket ticket = new Ticket();
-
+            ticket.setId(idTicket);
             ticket.setPlaca(placa);
             ticket.setEstado("Tránsito");
 
             bl.crearTicket(ticket);
             JOptionPane.showMessageDialog(vistaRegistro, "Vehiculo Agregado.", "Registro", 1);
 
-            //Pendiente Generar el ticket 
-            JOptionPane.showMessageDialog(vistaRegistro, "Ticket en pantalla");
+            GeneradorTicket ticketPdf = new GeneradorTicket(configuracion);
+            ticketPdf.crearTicket();
+            ticketPdf.abrirDoc();
 
             tickets = bl.getListaTickets();
             actualizarTablaTickets();
@@ -116,7 +111,7 @@ public class CRegistro {
     }
 
     private void btnMostrarAction(ActionEvent e) {
-        String placa = vistaRegistro.txtBuscar.getText();
+        String placa = vistaRegistro.txtBuscar.getText().toUpperCase();
         tickets = bl.filtrarPorPlaca(placa);
         actualizarTablaTickets();
     }

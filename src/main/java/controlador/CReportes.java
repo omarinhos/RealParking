@@ -25,8 +25,7 @@ public class CReportes {
     public final VistaReportes vistaReportes = new VistaReportes();
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloVenta = new DefaultTableModel();
-    private List<Comprobante> ventas = new ArrayList<>();
-    private List<String> usuarios = new ArrayList<>();
+    private List<Comprobante> ventas;
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -37,7 +36,7 @@ public class CReportes {
         FrmP.contenedor.revalidate();
         FrmP.contenedor.repaint();
 
-        String cabecera[] = {"Id", "Usuario", "Placa", "Hora Ingreso", "Hora Salida", "Importe"};
+        String[] cabecera = {"Id", "Usuario", "Placa", "Hora Ingreso", "Hora Salida", "Importe"};
         modeloVenta.setColumnIdentifiers(cabecera);
         vistaReportes.tblVentas.setModel(modeloVenta);
 
@@ -50,16 +49,14 @@ public class CReportes {
 
     private void actualizarTablaVentas() {
         modeloVenta.setRowCount(0);
-        ventas.forEach(venta -> {
-            modeloVenta.addRow(new Object[]{
-                venta.getId(),
-                venta.getUsuario().getUsuario(),
-                venta.getTicket().getPlaca(),
-                venta.getTicket().getHoraIngreso(),
-                venta.getTicket().getHoraSalida(),
-                venta.getImporte()
-            });
-        });
+        ventas.forEach(venta -> modeloVenta.addRow(new Object[]{
+            venta.getId(),
+            venta.getUsuario().getUsuario(),
+            venta.getTicket().getPlaca(),
+            venta.getTicket().getHoraIngreso(),
+            venta.getTicket().getHoraSalida(),
+            venta.getImporte()
+        }));
         resizeColumnWidth(vistaReportes.tblVentas);
 
     }
@@ -67,7 +64,7 @@ public class CReportes {
     private void actualizarComboUsuarios() {
         vistaReportes.cmbUsuarios.removeAllItems();
         vistaReportes.cmbUsuarios.addItem("Todos los usuarios");
-        usuarios = bl.getListaUsuario()
+        List<String> usuarios = bl.getListaUsuario()
                 .stream()
                 .map(Usuario::getUsuario)
                 .collect(Collectors.toList());
@@ -87,7 +84,7 @@ public class CReportes {
 
             vistaReportes.lblVehiculos.setText("" + ventas.size());
             vistaReportes.lblIngresos.setText("" + ventas.stream()
-                    .mapToDouble(v -> v.getImporte())
+                    .mapToDouble(Comprobante::getImporte)
                     .sum());
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(vistaReportes, "Seleccionar las fechas", "Campos vacíos", 2);

@@ -1,13 +1,11 @@
 package controlador;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import vista.FrmPrincipal;
@@ -228,7 +226,7 @@ public class CPrincipal {
             Usuario user = new Usuario();
             user.setId(2);
             user.setUsuario("alo");
-            user.setNombreCompleto("Nombre");
+            user.setNombreCompleto("Omar Santos");
             user.setRol(new Rol(1, "Testing", "Activo"));
             new CPrincipal(user).frmPrincipal.setVisible(true);
         });

@@ -39,28 +39,26 @@ public class Clogin {
         });
     }
 
-    private boolean ingresar() {
+    private void ingresar() {
         if (!v.comprobarCampo(FrmLogin.txtUser.getText())) {
-            return false;
+            return;
         }
 
         if (!v.comprobarCampo(String.valueOf(FrmLogin.txtPass.getPassword()))) {
-            return false;
+            return;
         }
 
         usuario.setUsuario(FrmLogin.txtUser.getText());
         usuario.setPass(String.valueOf(FrmLogin.txtPass.getPassword()));
 
         if (!v.existeUsuario(usuario)) {
-            return false;
+            return;
         }
 
         Usuario newUser = v.tipoUsuario(usuario);
         cPrincipal = new CPrincipal(newUser);
         cPrincipal.frmPrincipal.setVisible(true);
         FrmLogin.dispose();
-
-        return true;
     }
 
     public static void main(String[] args) {

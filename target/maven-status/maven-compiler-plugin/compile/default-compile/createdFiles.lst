@@ -33,7 +33,6 @@ vista\VistaCaja$2.class
 vista\VistaUsuarios$1.class
 dao\Conexion.class
 vista\VistaRoles$2.class
-NewClass.class
 controlador\Clogin$1.class
 modelo\Usuario.class
 controlador\CCaja.class
@@ -46,7 +45,6 @@ dao\RolDAO.class
 controlador\CRegistro$1.class
 vista\VistaCaja$4.class
 vista\VistaReportes$1.class
-vista\VistaReportes$4.class
 controlador\CRoles.class
 vista\VistaRegistro$3.class
 dao\TicketDAO.class
@@ -82,7 +80,6 @@ controlador\CPrincipal$7.class
 vista\VistaRegistro$1.class
 dao\DAOFactory.class
 vista\VistaConfiguracion$1.class
-vista\VistaReportes$3.class
 controlador\CConfiguracion.class
 controlador\Validacion.class
 vista\FrmLogin$3.class

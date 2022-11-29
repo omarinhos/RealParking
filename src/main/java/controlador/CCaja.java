@@ -27,7 +27,7 @@ public class CCaja {
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloTicket = new DefaultTableModel();
     private final DefaultTableModel modeloVenta = new DefaultTableModel();
-    private List<Ticket> tickets = new ArrayList<>();
+    private List<Ticket> tickets;
     private List<Comprobante> ventas = new ArrayList<>();
     private final Configuracion configuracion;
 
@@ -45,11 +45,11 @@ public class CCaja {
         FrmP.contenedor.repaint();
         dtcr.setHorizontalAlignment(SwingConstants.CENTER);
 
-        String cabecera[] = {"Id", "Placa", "Hora de Ingreso", "Estado"};
+        String[] cabecera = {"Id", "Placa", "Hora de Ingreso", "Estado"};
         modeloTicket.setColumnIdentifiers(cabecera);
         vistaCaja.tblTicket.setModel(modeloTicket);
 
-        String cabeceraV[] = {"Id Ticket", "Placa", "Fecha", "Importe"};
+        String[] cabeceraV = {"Id Ticket", "Placa", "Fecha", "Importe"};
         modeloVenta.setColumnIdentifiers(cabeceraV);
         vistaCaja.tblVentas.setModel(modeloVenta);
 
@@ -83,14 +83,13 @@ public class CCaja {
                 .filter(f -> f.getEstado().equals("Tránsito"))
                 .collect(Collectors.toList());
 
-        tickets.forEach(registro -> {
-            modeloTicket.addRow(new Object[]{
-                registro.getId(),
-                registro.getPlaca(),
-                registro.getHoraIngreso(),
-                registro.getEstado()
-            });
-        });
+        tickets.forEach(registro -> modeloTicket.addRow(new Object[]{
+            registro.getId(),
+            registro.getPlaca(),
+            registro.getHoraIngreso(),
+            registro.getEstado()
+        }));
+        
         columnModelT.getColumn(0).setCellRenderer(dtcr);
         columnModelT.getColumn(2).setCellRenderer(dtcr);
     }
@@ -98,19 +97,25 @@ public class CCaja {
     private void actualizarTablaVentas() {
         ventas = bl.getListaComprobantes();
         modeloVenta.setRowCount(0);
-        ventas.forEach(venta -> {
-            modeloVenta.addRow(new Object[]{
-                venta.getId(),
-                venta.getTicket().getPlaca(),
-                venta.getFecha(),
-                venta.getImporte()
-            });
-        });
+        ventas.forEach(venta -> modeloVenta.addRow(new Object[]{
+            venta.getId(),
+            venta.getTicket().getPlaca(),
+            venta.getFecha(),
+            venta.getImporte()
+        }));
         columnModelV.getColumn(0).setCellRenderer(dtcr);
         columnModelV.getColumn(2).setCellRenderer(dtcr);
         columnModelV.getColumn(3).setCellRenderer(dtcr);
     }
 
+    private void tblRegistroMouseClicked(MouseEvent e) {
+        x = vistaCaja.tblTicket.getSelectedRow();
+
+        idTicket = tickets.get(x).getId();
+        vistaCaja.btnGenerarPago.setEnabled(true);
+        vistaCaja.btnRegistrarIncidente.setEnabled(true);
+    }
+    
     private void btnMostrarAction(ActionEvent e) {
         String placa = vistaCaja.txtPlaca.getText();
         tickets = bl.filtrarPorPlaca(placa);
@@ -123,7 +128,7 @@ public class CCaja {
         actualizarTablaVentas();
         vistaCaja.lblVehículos.setText("" + ventas.size());
         vistaCaja.lblIngresos.setText("" + ventas.stream()
-                .mapToDouble(v -> v.getImporte())
+                .mapToDouble(Comprobante::getImporte)
                 .sum());
         vistaCaja.dlgVentas.setVisible(true);
     }
@@ -137,6 +142,7 @@ public class CCaja {
         Ticket ticket = new Ticket();
         ticket.setId(idTicket);
         ticket.setEstado(tickets.get(x).getEstado());
+        ticket.setPlaca(tickets.get(x).getPlaca());
         bl.actualizarEstadoVehiculo(ticket);
         JOptionPane.showMessageDialog(vistaCaja, "Pago registrado.", "Pago", 1);
 
@@ -146,21 +152,14 @@ public class CCaja {
         comprobante.setImporte(configuracion.getTarifa());
         bl.crearComprobante(comprobante);
 
-        //Pendiente generar comprobante
-        JOptionPane.showMessageDialog(vistaCaja, "Comprobante en pantalla", "", 1);
-
+        GeneradorComprobante comprobantePdf = new GeneradorComprobante(configuracion);
+        comprobantePdf.crearComprobante();
+        comprobantePdf.abrirDoc();
+        
         tickets = bl.getListaTickets();
         actualizarTablaTickets();
         vistaCaja.btnGenerarPago.setEnabled(false);
         vistaCaja.btnRegistrarIncidente.setEnabled(false);
-    }
-
-    private void tblRegistroMouseClicked(MouseEvent e) {
-        x = vistaCaja.tblTicket.getSelectedRow();
-
-        idTicket = tickets.get(x).getId();
-        vistaCaja.btnGenerarPago.setEnabled(true);
-        vistaCaja.btnRegistrarIncidente.setEnabled(true);
     }
 
     private void btnGenerarPagoDlg(ActionEvent e, Usuario usuario) {
