@@ -93,7 +93,12 @@ public class CReportes {
     }
 
     private void btnExportarAction(ActionEvent e) {
-        JOptionPane.showMessageDialog(vistaReportes, "Falta implementar");
+        try {
+            GeneradorExcel excel = new GeneradorExcel();
+            excel.crearExcel(ventas);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(vistaReportes, "Primero debe mostrar la vista previa", "Ventas vacías", 2);
+        }
     }
 
     private void resizeColumnWidth(JTable table) {

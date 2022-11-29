@@ -19,13 +19,17 @@ D:\RealParking\src\main\java\controlador\CRegistro.java
 D:\RealParking\src\main\java\vista\VistaRegistro.java
 D:\RealParking\src\main\java\modelo\Comprobante.java
 D:\RealParking\src\main\java\vista\VistaCaja.java
+D:\RealParking\src\main\java\controlador\GenerarReporte.java
 D:\RealParking\src\main\java\controlador\CCaja.java
+D:\RealParking\src\main\java\controlador\GeneradorComprobante.java
 D:\RealParking\src\main\java\dao\DAOFactory.java
 D:\RealParking\src\main\java\dao\UsuarioDAO.java
 D:\RealParking\src\main\java\vista\VistaReportes.java
 D:\RealParking\src\main\java\modelo\Configuracion.java
+D:\RealParking\src\main\java\controlador\GeneradorTicket.java
 D:\RealParking\src\main\java\modelo\Usuario.java
 D:\RealParking\src\main\java\controlador\CRoles.java
+D:\RealParking\src\main\java\controlador\GeneradorExcel.java
 D:\RealParking\src\main\java\dao\RolDAO.java
 D:\RealParking\src\main\java\vista\VistaUsuarios.java
 D:\RealParking\src\main\java\modelo\Rol.java

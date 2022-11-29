@@ -7,7 +7,6 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import dao.ComprobanteDAO;
-import dao.TicketDAO;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,7 +25,6 @@ public class GeneradorComprobante extends GenerarReporte{
         ComprobanteDAO cdao = new ComprobanteDAO();
         Comprobante comprobante = cdao.findBy("");
         nombreArchivo = "comprobantes/comprobante-" + comprobante.getId() + ".pdf";
-        String fecha = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         try {
             FileOutputStream ficheroPdf = new FileOutputStream(nombreArchivo);
             PdfWriter.getInstance(doc, ficheroPdf);
@@ -43,7 +41,7 @@ public class GeneradorComprobante extends GenerarReporte{
             agregarLinea("---------------------------------------------------------------", 10);
             agregarLinea("Placa                   : " + comprobante.getTicket().getPlaca(), 10);
             agregarLinea("Descripción         : Parqueo vehícular", 10);
-            agregarLinea("Fecha emisión    : " + fecha, 10);
+            agregarLinea("Fecha emisión    : " + comprobante.getFecha(), 10);
             agregarLinea("Importe total       :                                     S/ " + comprobante.getImporte(), 10);
             agregarLinea("---------------------------------------------------------------", 10);
             agregarLineaCenter("Gracias por su visita, vuelva pronto.", 8);
