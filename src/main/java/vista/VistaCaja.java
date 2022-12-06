@@ -156,6 +156,12 @@ public class VistaCaja extends javax.swing.JPanel {
         lblTarifa.setForeground(new java.awt.Color(102, 102, 102));
         lblTarifa.setText("-");
         add(lblTarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 30, -1));
+
+        txtPlaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlacaActionPerformed(evt);
+            }
+        });
         add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 230, 30));
 
         btnMostrar.setBackground(new java.awt.Color(0, 51, 102));
@@ -303,6 +309,10 @@ public class VistaCaja extends javax.swing.JPanel {
     private void btnGenerarComprobanteDlgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarComprobanteDlgMouseExited
         btnVentasDia.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnGenerarComprobanteDlgMouseExited
+
+    private void txtPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlacaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

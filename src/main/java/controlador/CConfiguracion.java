@@ -3,6 +3,8 @@
 import dao.BusinessLogic;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.Configuracion;
 import vista.FrmPrincipal;
@@ -26,6 +28,10 @@ public class CConfiguracion {
         vistaConfig.btnGuardar.addActionListener(this::btnGuardarAction);
 
         vistaConfig.btnModificar.addActionListener(this::btnModificarAction);
+        
+        vistaConfig.btnContacto.addActionListener(this::btnContactoAction);
+        
+        vistaConfig.btnEnviar.addActionListener(this::btnEnviarAction);
     }
     
     private void actualizarParametrosConfiguracion() {
@@ -82,5 +88,34 @@ public class CConfiguracion {
         vistaConfig.txtTarifa.setEnabled(true);
         vistaConfig.btnGuardar.setEnabled(true);
         vistaConfig.btnModificar.setEnabled(false);
+    }
+    
+    private void btnContactoAction(ActionEvent e) {
+        vistaConfig.dlgContacto.setVisible(true);
+    }
+    
+    private void btnEnviarAction(ActionEvent e) {
+        String nombre = vistaConfig.txtNombre.getText();
+        String email = vistaConfig.txtEmail.getText();
+        String asunto = vistaConfig.txtAsunto.getText();
+        String mensaje = vistaConfig.txtMensaje.getText();
+
+        if (nombre.isEmpty() || email.isEmpty() || asunto.isEmpty() || mensaje.isEmpty()) {
+            JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Llenar todos los campos.", "Configuración", 2);
+            return;
+        }
+        
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher matcher = pattern.matcher(email);
+        
+        if (!matcher.find()) {
+            JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "E-mail no válido", "Configuración", 2);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Mensaje enviado", "Configuración", 1);
+        vistaConfig.dlgContacto.setVisible(false);
+        
     }
 }
