@@ -51,11 +51,4 @@ public class MailContacto {
 
     }
 
-    public static void main(String[] args) {
-        MailContacto m = new MailContacto("config/config.prop");
-
-        m.enviarEmail("Test", "Hola mundo", "omarmarinosaguilar@gmail.com");
-
-    }
-
 }

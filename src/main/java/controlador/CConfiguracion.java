@@ -114,6 +114,9 @@ public class CConfiguracion {
             return;
         }
         
+        MailContacto mail = new MailContacto("config/config.prop");
+        mail.enviarEmail(asunto, mensaje, email);
+        
         JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Mensaje enviado", "Configuración", 1);
         vistaConfig.dlgContacto.setVisible(false);
         
