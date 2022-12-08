@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import javax.activation.*;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -14,11 +13,11 @@ import javax.mail.internet.MimeMessage;
 
 public class MailContacto {
 
-    private Properties props;
-    private Session session;
+    private final Properties props;
+    private final Session session;
 
     public MailContacto(String ruta) {
-        props = new Properties();
+        this.props = new Properties();
         loadConfig(ruta);
         session = Session.getDefaultInstance(props);
 
@@ -40,7 +39,8 @@ public class MailContacto {
             contenedor.setFrom(new InternetAddress((String) props.get("mail.smtp.user")));
             contenedor.addRecipient(Message.RecipientType.TO, new InternetAddress((String) props.get("mail.smtp.user")));
             contenedor.setSubject(asunto);
-            contenedor.setText(correo + "\n" + mensaje);
+            contenedor.setText(correo + "\n\n" + mensaje);
+            
             Transport t = session.getTransport("smtp");
             t.connect("smtp.gmail.com", (String) props.get("mail.smtp.user"), (String) props.get("mail.smtp.password"));
             t.sendMessage(contenedor, contenedor.getAllRecipients());

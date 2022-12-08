@@ -224,7 +224,7 @@ public class CPrincipal {
         
         java.awt.EventQueue.invokeLater(() -> {
             Usuario user = new Usuario();
-            user.setId(2);
+            user.setId(1);
             user.setUsuario("alo");
             user.setNombreCompleto("Omar Santos");
             user.setRol(new Rol(1, "Testing", "Activo"));

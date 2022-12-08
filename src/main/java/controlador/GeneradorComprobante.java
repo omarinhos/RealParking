@@ -1,6 +1,5 @@
 package controlador;
 
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
@@ -10,8 +9,6 @@ import dao.ComprobanteDAO;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import modelo.Comprobante;
 import modelo.Configuracion;
 

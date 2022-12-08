@@ -10,6 +10,7 @@ public class VistaCaja extends javax.swing.JPanel {
         dlgIncidente.setLocationRelativeTo(null);
         btnGenerarPago.setEnabled(false);
         btnRegistrarIncidente.setEnabled(false);
+        
     }
 
     @SuppressWarnings("unchecked")
