@@ -53,10 +53,6 @@ public class CPrincipal {
         frmPrincipal.btnUsuarios.setEnabled(permisoUsuarios);
         frmPrincipal.btnRoles.setEnabled(permisoRoles);
         
-        if (usuario.getImagen() != null) {
-            cargarImagen(usuario.getImagen());
-        }
-        
         frmPrincipal.btnRegistro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -81,7 +77,6 @@ public class CPrincipal {
         frmPrincipal.btnReportes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //falta implementar
                 if (permisoReportes) {
                     cReportes = new CReportes(frmPrincipal);
                     cReportes.vistaReportes.setVisible(true);
@@ -195,25 +190,7 @@ public class CPrincipal {
             
         }
     }
-    
-    private void cargarImagen(Blob blob) {
-        
-        BufferedImage img = null;
-        try {
-            //pasar el binario a imagen
-            byte[] data = blob.getBytes(1, (int) blob.length());
-            //lee la imagen
-            img = ImageIO.read(new ByteArrayInputStream(data));
-        } catch (IOException e) {
-        } catch (SQLException ex) {
-            Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        ImageIcon icono = new ImageIcon(img);
-        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(frmPrincipal.userFoto.getWidth(), frmPrincipal.userFoto.getHeight(), Image.SCALE_DEFAULT));
-        frmPrincipal.userFoto.setIcon(imagen);
-    }
-    
+
     public static void main(String args[]) {
         
         try {

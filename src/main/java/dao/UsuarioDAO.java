@@ -31,10 +31,6 @@ public class UsuarioDAO extends DAO<Usuario> {
 
     @Override
     public void create(Usuario usuario) {
-        if (usuario.getRutaFoto()!= null) {
-            INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol, foto) VALUES (?, ?, ?, ?, ?, ?)";
-        }
-
         try (PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
 
             stmt.setString(1, usuario.getUsuario());
@@ -42,13 +38,6 @@ public class UsuarioDAO extends DAO<Usuario> {
             stmt.setString(3, usuario.getNombreCompleto());
             stmt.setString(4, usuario.getEstado());
             stmt.setInt(5, usuario.getRol().getId());
-
-            if (usuario.getRutaFoto()!= null) {
-                File imageFile = new File(usuario.getRutaFoto());
-                FileInputStream fis = new FileInputStream(imageFile);
-                stmt.setBinaryStream(6, fis, imageFile.length());
-            }
-
             stmt.executeUpdate();
 
         } catch (SQLIntegrityConstraintViolationException e) {
@@ -56,8 +45,6 @@ public class UsuarioDAO extends DAO<Usuario> {
             throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -145,7 +132,6 @@ public class UsuarioDAO extends DAO<Usuario> {
         rol.setDescripcion(rs.getString("descripcion"));
         rol.setEstado(rs.getString(8));
         usuario.setRol(rol);
-        usuario.setImagen(rs.getBlob("foto"));
         return usuario;
     }
 

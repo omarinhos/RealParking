@@ -32,8 +32,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
         cmbCargo = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
-        jlbfotoUsuario = new javax.swing.JLabel();
-        btnGuardarFotos = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         btnFiltrar = new javax.swing.JButton();
@@ -45,13 +43,13 @@ public class VistaUsuarios extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
         jLabel18.setText("Nombre Completo:");
         add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 160, 30));
+        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 230, 30));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setText("Estado:");
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, 30));
-        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 160, 30));
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 230, 30));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
@@ -59,7 +57,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
         add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, 30));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 160, 30));
+        add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 230, 30));
 
         btnGuardar.setBackground(new java.awt.Color(0, 51, 102));
         btnGuardar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -73,7 +71,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnGuardarMouseExited(evt);
             }
         });
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 130, 30));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 130, 30));
 
         jLabel11.setForeground(new java.awt.Color(204, 204, 204));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -90,13 +88,13 @@ public class VistaUsuarios extends javax.swing.JPanel {
         jLabel26.setForeground(new java.awt.Color(102, 102, 102));
         jLabel26.setText("Contraseña:");
         add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
-        add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 30));
+        add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 230, 30));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 102, 102));
         jLabel27.setText("Repetir contraseña:");
         add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
-        add(txtPassRe, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 160, 30));
+        add(txtPassRe, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 230, 30));
 
         btnModificar.setBackground(new java.awt.Color(0, 51, 102));
         btnModificar.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
@@ -111,7 +109,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnModificarMouseExited(evt);
             }
         });
-        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 130, 30));
+        add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 130, 30));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
@@ -130,7 +128,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 700, 230));
 
         cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Digitador", "Cajero", "Prueba", "Abogado" }));
-        add(cmbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 160, 30));
+        add(cmbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 230, 30));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
@@ -149,29 +147,7 @@ public class VistaUsuarios extends javax.swing.JPanel {
                 btnNuevoMouseExited(evt);
             }
         });
-        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 130, 30));
-
-        jlbfotoUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jlbfotoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlbfotoUsuarioMouseClicked(evt);
-            }
-        });
-        add(jlbfotoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 160, 160));
-
-        btnGuardarFotos.setBackground(new java.awt.Color(0, 51, 102));
-        btnGuardarFotos.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        btnGuardarFotos.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarFotos.setText("ELEGIR FOTO");
-        btnGuardarFotos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarFotosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarFotosMouseExited(evt);
-            }
-        });
-        add(btnGuardarFotos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 140, 30));
+        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 130, 30));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(102, 102, 102));
@@ -218,18 +194,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
         btnModificar.setBackground(new Color(3,24,77));
     }//GEN-LAST:event_btnNuevoMouseExited
 
-    private void jlbfotoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbfotoUsuarioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlbfotoUsuarioMouseClicked
-
-    private void btnGuardarFotosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarFotosMouseExited
-        btnModificar.setBackground(new Color(3,24,77));
-    }//GEN-LAST:event_btnGuardarFotosMouseExited
-
-    private void btnGuardarFotosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarFotosMouseEntered
-        btnModificar.setBackground(new Color(5,42,136));
-    }//GEN-LAST:event_btnGuardarFotosMouseEntered
-
     private void btnFiltrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseEntered
         btnModificar.setBackground(new Color(5,42,136));
     }//GEN-LAST:event_btnFiltrarMouseEntered
@@ -242,7 +206,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnFiltrar;
     public javax.swing.JButton btnGuardar;
-    public javax.swing.JButton btnGuardarFotos;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnNuevo;
     public javax.swing.JComboBox<String> cmbCargo;
@@ -258,7 +221,6 @@ public class VistaUsuarios extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLayeredPane jLayeredPane1;
     public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JLabel jlbfotoUsuario;
     public javax.swing.JTable tblUsuarios;
     public javax.swing.JTextField txtDni;
     public javax.swing.JTextField txtFiltro;

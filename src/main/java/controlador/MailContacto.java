@@ -3,6 +3,8 @@ package controlador;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -24,11 +26,10 @@ public class MailContacto {
     }
 
     private void loadConfig(String ruta) {
-        try {
-            InputStream is = new FileInputStream(ruta);
+        try (InputStream is = new FileInputStream(ruta)) {
             this.props.load(is);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }
@@ -46,9 +47,7 @@ public class MailContacto {
             t.sendMessage(contenedor, contenedor.getAllRecipients());
             System.out.println("enviado");
         } catch (MessagingException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
-
     }
-
 }

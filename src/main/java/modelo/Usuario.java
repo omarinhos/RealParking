@@ -10,21 +10,17 @@ public class Usuario {
     private String nombreCompleto;
     private String estado;
     private Rol rol;
-    private String rutaFoto;
-    private Blob imagen;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol, String rutaFoto, Blob imagen) {
+    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol) {
         this.id = id;
         this.usuario = usuario;
         this.pass = pass;
         this.nombreCompleto = nombreCompleto;
         this.estado = estado;
         this.rol = rol;
-        this.rutaFoto = rutaFoto;
-        this.imagen = imagen;
     }
 
     public int getId() {
@@ -75,20 +71,4 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getRutaFoto() {
-        return rutaFoto;
-    }
-
-    public void setRutaFoto(String rutaFoto) {
-        this.rutaFoto = rutaFoto;
-    }
-
-    public Blob getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(Blob imagen) {
-        this.imagen = imagen;
-    }
-    
 }

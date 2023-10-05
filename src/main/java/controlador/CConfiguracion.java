@@ -105,8 +105,7 @@ public class CConfiguracion {
             return;
         }
         
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Pattern pattern = Pattern.compile("^[\\w.-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,}$\n");
         Matcher matcher = pattern.matcher(email);
         
         if (!matcher.find()) {

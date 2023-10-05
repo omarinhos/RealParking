@@ -4,26 +4,11 @@ import dao.BusinessLogic;
 import modelo.Usuario;
 import modelo.Rol;
 import java.awt.BorderLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import vista.FrmPrincipal;
 import vista.VistaUsuarios;
@@ -36,7 +21,6 @@ public class CUsuarios {
     private List<Usuario> usuarios;
     
     private int idUsuario;
-    private String rutaImagen = null;
 
     public CUsuarios(FrmPrincipal FrmP) {
 
@@ -67,8 +51,6 @@ public class CUsuarios {
 
         vistaUsuarios.btnNuevo.addActionListener(this::btnNuevoAction);
 
-        vistaUsuarios.btnGuardarFotos.addActionListener(this::btnGuardarFotosAction);
-        
         vistaUsuarios.btnFiltrar.addActionListener(this::btnFiltrarAction);
 
     }
@@ -112,7 +94,6 @@ public class CUsuarios {
         user.setPass(pass);
         user.setNombreCompleto(nombre);
         user.setEstado((String) vistaUsuarios.cmbEstado.getSelectedItem());
-        user.setRutaFoto(rutaImagen);
         Rol rol = new Rol();
         rol.setId(vistaUsuarios.cmbCargo.getSelectedIndex() + 1);
         user.setRol(rol);
@@ -120,7 +101,6 @@ public class CUsuarios {
         JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Agregado.", "Usuario", 1);
         usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
-        rutaImagen = null;
 
     }
 
@@ -169,11 +149,6 @@ public class CUsuarios {
             vistaUsuarios.cmbEstado.setSelectedItem(usuarios.get(x).getEstado());
             vistaUsuarios.btnGuardar.setEnabled(false);
             vistaUsuarios.btnModificar.setEnabled(true);
-            if (usuarios.get(x).getImagen() != null) {
-                cargarImagen(usuarios.get(x).getImagen());
-            } else {
-                vistaUsuarios.jlbfotoUsuario.setIcon(new ImageIcon("src/main/java/images/user.png"));
-            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaUsuarios, "Dar solo click izquiero.", "Advertencia", 2);
@@ -188,7 +163,6 @@ public class CUsuarios {
         vistaUsuarios.txtNombre.setText("");
         vistaUsuarios.txtPass.setText("");
         vistaUsuarios.txtPassRe.setText("");
-        vistaUsuarios.jlbfotoUsuario.setIcon(null);
         vistaUsuarios.txtFiltro.setText("");
     }
     
@@ -196,50 +170,6 @@ public class CUsuarios {
         String filtro = vistaUsuarios.txtFiltro.getText();
         usuarios = bl.filtrarPorUsuario(filtro);
         actualizarTablaUsuarios();
-    }
-
-    private void btnGuardarFotosAction(ActionEvent e) {
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-                "Formatos de Archivos JPEG(*.JPG;*.JPEG)", "jpg", "jpeg", "png"
-        );
-        JFileChooser se = new JFileChooser();
-        se.addChoosableFileFilter(filtro);
-        se.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int estado = se.showOpenDialog(null);
-
-        if (estado == JFileChooser.APPROVE_OPTION) {
-            try {
-
-                rutaImagen = se.getSelectedFile().getAbsolutePath();
-                Image icono = ImageIO.read(se.getSelectedFile()).getScaledInstance(vistaUsuarios.jlbfotoUsuario.getWidth(), vistaUsuarios.jlbfotoUsuario.getHeight(), Image.SCALE_DEFAULT);
-                vistaUsuarios.jlbfotoUsuario.setIcon(new ImageIcon(icono));
-                vistaUsuarios.jlbfotoUsuario.updateUI();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(CUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-    }
-
-    private void cargarImagen(Blob blob) {
-
-        BufferedImage img = null;
-        try {
-            //pasar el binario a imagen
-            byte[] data = blob.getBytes(1, (int) blob.length());
-            //lee la imagen
-            img = ImageIO.read(new ByteArrayInputStream(data));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException ex) {
-            Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        ImageIcon icono = new ImageIcon(img);
-        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(vistaUsuarios.jlbfotoUsuario.getWidth(), vistaUsuarios.jlbfotoUsuario.getHeight(), Image.SCALE_DEFAULT));
-        vistaUsuarios.jlbfotoUsuario.setIcon(imagen);
     }
 
 }
