@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -27,7 +29,7 @@ public class MailContacto {
         try (InputStream is = new FileInputStream(ruta)) {
             this.props.load(is);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(MailContacto.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -45,7 +47,7 @@ public class MailContacto {
             t.sendMessage(contenedor, contenedor.getAllRecipients());
             System.out.println("enviado");
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(MailContacto.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import modelo.Comprobante;
@@ -52,7 +53,7 @@ public class GeneradorExcel {
                     .sum());
             crearFile(xSSFWorkbook);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(GeneradorExcel.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -64,7 +65,7 @@ public class GeneradorExcel {
             Desktop.getDesktop().open(file);
             System.out.println(nombreArchivo + " open");
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            Logger.getLogger(GeneradorExcel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
