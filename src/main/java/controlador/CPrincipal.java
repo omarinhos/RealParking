@@ -10,15 +10,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import vista.FrmPrincipal;
 import static java.awt.Frame.ICONIFIED;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import modelo.Usuario;
 import modelo.Rol;
 

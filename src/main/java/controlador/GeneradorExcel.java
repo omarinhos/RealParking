@@ -2,12 +2,12 @@ package controlador;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import modelo.Comprobante;
 import org.apache.poi.ss.usermodel.Row;
@@ -50,17 +50,21 @@ public class GeneradorExcel {
             rowSuma.createCell(5).setCellValue(ventas.stream()
                     .mapToDouble(Comprobante::getImporte)
                     .sum());
-            try {
-                File file = new File(nombreArchivo);
-                FileOutputStream out = new FileOutputStream(file);
-                xSSFWorkbook.write(out);
-                Desktop.getDesktop().open(file);
-                System.out.println(nombreArchivo + " open");
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+            crearFile(xSSFWorkbook);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void crearFile(XSSFWorkbook xSSFWorkbook) {
+        try {
+            File file = new File(nombreArchivo);
+            FileOutputStream out = new FileOutputStream(file);
+            xSSFWorkbook.write(out);
+            Desktop.getDesktop().open(file);
+            System.out.println(nombreArchivo + " open");
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 }

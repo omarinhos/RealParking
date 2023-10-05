@@ -1,7 +1,5 @@
 package modelo;
 
-import java.sql.Blob;
-
 public class Usuario {
 
     private int id;
