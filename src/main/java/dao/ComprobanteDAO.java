@@ -1,10 +1,6 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,9 +12,9 @@ import modelo.Usuario;
 public class ComprobanteDAO extends DAO<Comprobante> {
 
     private final String INSERT = "INSERT INTO comprobante (id_ticket, id_usuario, fecha, importe) VALUES (?,?,now(),?)";
-    private final String SELECT = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n"
-            + "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario\n"
-            + "WHERE c.fecha LIKE '";
+    private final String SELECT = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida " +
+            "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario " +
+            "WHERE c.fecha LIKE ?";
     private final String FINDBY = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida \n" +
             "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario \n" +
             "order by c.id_comprobante desc limit 1";
@@ -79,8 +75,15 @@ public class ComprobanteDAO extends DAO<Comprobante> {
             user = "";
         }
 
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(FILTER + "WHERE c.fecha >= cast('" + desde + " 00:00:00' AS DATETIME) and c.fecha <= cast('" + hasta + " 23:59:59' AS DATETIME) and u.usuario like '%" + user + "'")) {
+        String sql = FILTER + "WHERE c.fecha >= ? AND c.fecha <= ? AND u.usuario LIKE ?";
+
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+            stmt.setTimestamp(1, Timestamp.valueOf(desde + " 00:00:00"));
+            stmt.setTimestamp(2, Timestamp.valueOf(hasta + " 23:59:59"));
+            stmt.setString(3, "%" + user);
+
+            ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
                 Comprobante comprobante = crearComprobante(rs);
                 comprobantes.add(comprobante);
@@ -92,13 +95,17 @@ public class ComprobanteDAO extends DAO<Comprobante> {
         return comprobantes;
     }
 
+
     @Override
     public List<Comprobante> getList() {
         String fechaHoy = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         List<Comprobante> comprobantes = new ArrayList<>();
 
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(SELECT + fechaHoy + "%'")) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(SELECT)) {
+            stmt.setString(1, fechaHoy + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
                 Comprobante comprobante = crearComprobante(rs);
                 comprobantes.add(comprobante);

@@ -22,13 +22,13 @@ public class CUsuarios {
     
     private int idUsuario;
 
-    public CUsuarios(FrmPrincipal FrmP) {
+    public CUsuarios(FrmPrincipal frmPrincipal) {
 
         vistaUsuarios.setSize(740, 630);
-        FrmP.contenedor.removeAll();
-        FrmP.contenedor.add(vistaUsuarios, BorderLayout.CENTER);
-        FrmP.contenedor.revalidate();
-        FrmP.contenedor.repaint();
+        frmPrincipal.contenedor.removeAll();
+        frmPrincipal.contenedor.add(vistaUsuarios, BorderLayout.CENTER);
+        frmPrincipal.contenedor.revalidate();
+        frmPrincipal.contenedor.repaint();
 
         String[] cabecera = {"Id", "DNI", "Nombre", "Cargo", "Estado"};
         modeloUsuarios.setColumnIdentifiers(cabecera);
