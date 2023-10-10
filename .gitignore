@@ -7,6 +7,7 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 config/config.prop
+target/
 
 # Compiled class file
 *.class
