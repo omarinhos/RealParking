@@ -8,16 +8,14 @@ import modelo.Usuario;
 public class Validacion {
     
     public boolean comprobarCampo(String campo) {
-        if(campo.length() == 0) {
+        if(campo.isEmpty()) {
             this.mostrarError("Hay un campo vacío.");
-            return false;
+            return true;
         }
-        
-        return true;
+        return false;
     }
     
     public boolean comprobarPass(String pass) {
-        
         if(pass.length() <= 5) {
             this.mostrarError("La contraseña debe tener más de 5 caracteres.");
             return false;
@@ -51,17 +49,11 @@ public class Validacion {
     
     public Usuario tipoUsuario(Usuario usuario) {
         UsuarioDAO udao = new UsuarioDAO();
-        Usuario user = udao.findBy(usuario.getUsuario());
-        
-        if (user == null) {
-            return null;
-        }
-                
-        return user;
+        return udao.findBy(usuario.getUsuario());
     }
     
     public void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", 2);
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.WARNING_MESSAGE);
     }
     
 }

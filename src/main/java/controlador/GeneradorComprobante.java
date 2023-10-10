@@ -6,9 +6,11 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import dao.ComprobanteDAO;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import modelo.Comprobante;
 import modelo.Configuracion;
 
@@ -45,10 +47,8 @@ public class GeneradorComprobante extends GenerarReporte{
             agregarLinea("---------------------------------------------------------------", 10);
             doc.close();
             System.out.println(nombreArchivo + " creado");
-        } catch (DocumentException | FileNotFoundException e) {
-            System.out.println(e.toString());
-        } catch (IOException ex) {
-            System.out.println(ex.toString());
+        } catch (DocumentException | IOException e) {
+            Logger.getLogger(GeneradorComprobante.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }

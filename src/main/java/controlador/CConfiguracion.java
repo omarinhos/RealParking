@@ -16,12 +16,12 @@ public class CConfiguracion {
     private final BusinessLogic bl = new BusinessLogic();
     private Configuracion configuracion = new Configuracion();
 
-    public CConfiguracion(FrmPrincipal FrmP) {
+    public CConfiguracion(FrmPrincipal frmPrincipal) {
         vistaConfig.setSize(740, 630);
-        FrmP.contenedor.removeAll();
-        FrmP.contenedor.add(vistaConfig, BorderLayout.CENTER);
-        FrmP.contenedor.revalidate();
-        FrmP.contenedor.repaint();
+        frmPrincipal.contenedor.removeAll();
+        frmPrincipal.contenedor.add(vistaConfig, BorderLayout.CENTER);
+        frmPrincipal.contenedor.revalidate();
+        frmPrincipal.contenedor.repaint();
 
         actualizarParametrosConfiguracion();
 
@@ -51,7 +51,7 @@ public class CConfiguracion {
         String tarifa = vistaConfig.txtTarifa.getText();
 
         if (RazonSoc.isEmpty() || RUC.isEmpty() || nombreC.isEmpty() || espacio.isEmpty() || tarifa.isEmpty()) {
-            JOptionPane.showMessageDialog(vistaConfig, "Llenar todos los campos.", "Configuración", 2);
+            JOptionPane.showMessageDialog(vistaConfig, "Llenar todos los campos.", "Configuración", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -62,11 +62,11 @@ public class CConfiguracion {
             configuracion.setEspacios(Integer.parseInt(espacio));
             configuracion.setTarifa(Double.parseDouble(tarifa));
             
-            JOptionPane.showMessageDialog(vistaConfig, "Configuracion Guardada", "Configuración", 1);
+            JOptionPane.showMessageDialog(vistaConfig, "Configuracion Guardada", "Configuración", JOptionPane.INFORMATION_MESSAGE);
             bl.guardarConfiguracion(configuracion);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(vistaConfig, "NumberFormatException en Espacios y/o Tarifa" + ex,
-                    "Configuración", 0);
+                    "Configuración", JOptionPane.ERROR_MESSAGE);
             actualizarParametrosConfiguracion();
             
         }
@@ -101,7 +101,7 @@ public class CConfiguracion {
         String mensaje = vistaConfig.txtMensaje.getText();
 
         if (nombre.isEmpty() || email.isEmpty() || asunto.isEmpty() || mensaje.isEmpty()) {
-            JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Llenar todos los campos.", "Configuración", 2);
+            JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Llenar todos los campos.", "Configuración", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -109,14 +109,14 @@ public class CConfiguracion {
         Matcher matcher = pattern.matcher(email);
         
         if (!matcher.find()) {
-            JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "E-mail no válido", "Configuración", 2);
+            JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "E-mail no válido", "Configuración", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         MailContacto mail = new MailContacto("config/config.prop");
         mail.enviarEmail(asunto, mensaje, email);
         
-        JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Mensaje enviado", "Configuración", 1);
+        JOptionPane.showMessageDialog(vistaConfig.dlgContacto, "Mensaje enviado", "Configuración", JOptionPane.INFORMATION_MESSAGE);
         vistaConfig.dlgContacto.setVisible(false);
         
     }

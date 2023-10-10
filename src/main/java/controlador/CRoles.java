@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import modelo.Rol;
 import vista.FrmPrincipal;
@@ -20,12 +20,12 @@ public class CRoles {
     private List<Rol> roles;
     private int idRol;
 
-    public CRoles(FrmPrincipal FrmP) {
+    public CRoles(FrmPrincipal frmPrincipal) {
         vistaRoles.setSize(740, 630);
-        FrmP.contenedor.removeAll();
-        FrmP.contenedor.add(vistaRoles, BorderLayout.CENTER);
-        FrmP.contenedor.revalidate();
-        FrmP.contenedor.repaint();
+        frmPrincipal.contenedor.removeAll();
+        frmPrincipal.contenedor.add(vistaRoles, BorderLayout.CENTER);
+        frmPrincipal.contenedor.revalidate();
+        frmPrincipal.contenedor.repaint();
 
         String[] cabecera = {"Id", "Rol", "Estado"};
         modeloRoles.setColumnIdentifiers(cabecera);
@@ -72,11 +72,11 @@ public class CRoles {
             rol.setEstado((String) vistaRoles.cmbEstado.getSelectedItem());
 
             bl.crearRol(rol);
-            JOptionPane.showMessageDialog(vistaRoles, "Rol Agregado.", "Roles", 1);
+            JOptionPane.showMessageDialog(vistaRoles, "Rol Agregado.", "Roles", JOptionPane.INFORMATION_MESSAGE);
             roles = bl.getListaRol();
             actualizarTablaRoles();
         } else {
-            JOptionPane.showMessageDialog(vistaRoles, "Llenar todos los campos.", "Roles", 2);
+            JOptionPane.showMessageDialog(vistaRoles, "Llenar todos los campos.", "Roles", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -92,15 +92,15 @@ public class CRoles {
             rol.setId(idRol);
 
             bl.actualizarRol(rol);
-            JOptionPane.showMessageDialog(vistaRoles, "Rol Modificado.", "Roles", 1);
+            JOptionPane.showMessageDialog(vistaRoles, "Rol Modificado.", "Roles", JOptionPane.INFORMATION_MESSAGE);
             roles = bl.getListaRol();
             actualizarTablaRoles();
         } else {
-            JOptionPane.showMessageDialog(vistaRoles, "Llenar todos los campos.", "Roles", 2);
+            JOptionPane.showMessageDialog(vistaRoles, "Llenar todos los campos.", "Roles", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    private void tblRolesMouseClicked(MouseEvent evt) {
+    private void tblRolesMouseClicked(MouseEvent ignoredE) {
         try {
             int x = vistaRoles.tblRoles.getSelectedRow();
 
@@ -112,7 +112,7 @@ public class CRoles {
             vistaRoles.btnModificar.setEnabled(idRol > 3);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(vistaRoles, "Dar solo click izquiero.", "Advertencia", 2);
+            JOptionPane.showMessageDialog(vistaRoles, "Dar solo click izquiero.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -120,7 +120,7 @@ public class CRoles {
         vistaRoles.btnGuardar.setEnabled(true);
         vistaRoles.btnModificar.setEnabled(false);
         vistaRoles.txtRol.setText("");
-        vistaRoles.tblRoles.setSelectionMode(0);
+        vistaRoles.tblRoles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         vistaRoles.txtFiltro.setText("");
     }
     

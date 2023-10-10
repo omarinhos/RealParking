@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import vista.FrmPrincipal;
 import vista.VistaUsuarios;
@@ -80,7 +80,7 @@ public class CUsuarios {
         String passre = String.valueOf(vistaUsuarios.txtPassRe.getPassword());
 
         if (DNI.isEmpty() || nombre.isEmpty() || pass.isEmpty() || passre.isEmpty()) {
-            JOptionPane.showMessageDialog(vistaUsuarios, "Llenar todos los campos.", "Usuario", 2);
+            JOptionPane.showMessageDialog(vistaUsuarios, "Llenar todos los campos.", "Usuario", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -131,12 +131,12 @@ public class CUsuarios {
         user.setRol(rol);
 
         bl.actualizarUsuario(user);
-        JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Mdificado", "Usuario", 1);
+        JOptionPane.showMessageDialog(vistaUsuarios, "Usuario Mdificado", "Usuario", JOptionPane.INFORMATION_MESSAGE);
         usuarios = bl.getListaUsuario();
         actualizarTablaUsuarios();
     }
 
-    private void tblUsuariosMouseClicked(MouseEvent evt) {
+    private void tblUsuariosMouseClicked(MouseEvent ignoredE) {
         try {
             int x = vistaUsuarios.tblUsuarios.getSelectedRow();
 
@@ -151,14 +151,14 @@ public class CUsuarios {
             vistaUsuarios.btnModificar.setEnabled(true);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(vistaUsuarios, "Dar solo click izquiero.", "Advertencia", 2);
+            JOptionPane.showMessageDialog(vistaUsuarios, "Dar solo click izquiero.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }
 
     private void btnNuevoAction(ActionEvent e) {
         vistaUsuarios.btnGuardar.setEnabled(true);
         vistaUsuarios.btnModificar.setEnabled(false);
-        vistaUsuarios.tblUsuarios.setSelectionMode(0);
+        vistaUsuarios.tblUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         vistaUsuarios.txtDni.setText("");
         vistaUsuarios.txtNombre.setText("");
         vistaUsuarios.txtPass.setText("");

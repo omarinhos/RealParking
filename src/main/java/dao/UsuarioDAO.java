@@ -14,11 +14,11 @@ import modelo.Rol;
 
 public class UsuarioDAO extends DAO<Usuario> {
 
-    private final String SELECT = "SELECT u.*, r.descripcion, r.estado FROM usuarios AS u INNER JOIN rol AS r ON r.id_rol = u.id_rol ORDER BY u.id_usuario";
-    private String INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol) VALUES (?, ?, ?, ?, ?)";
-    private final String UPDATE = "UPDATE usuarios SET usuario = ?, pass = ?, nombre_completo = ?, estado = ?, id_rol = ? WHERE id_usuario = ?";
-    private final String FINDBY = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = '";
-    private final String FILTER = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like";
+    private static final String SELECT = "SELECT u.*, r.descripcion, r.estado FROM usuarios AS u INNER JOIN rol AS r ON r.id_rol = u.id_rol ORDER BY u.id_usuario";
+    private static final String INSERT = "INSERT INTO usuarios (usuario, pass, nombre_completo, estado, id_rol) VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE = "UPDATE usuarios SET usuario = ?, pass = ?, nombre_completo = ?, estado = ?, id_rol = ? WHERE id_usuario = ?";
+    private static final String FINDBY = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol WHERE usuario = ?";
+    private static final String FILTER = "SELECT u.*, r.descripcion, r.estado FROM rol AS r INNER JOIN usuarios AS u ON r.id_rol = u.id_rol where u.usuario like ?";
 
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -46,8 +46,9 @@ public class UsuarioDAO extends DAO<Usuario> {
     @Override
     public Usuario findBy(String user) {
         Usuario usuario = null;
-        try (PreparedStatement stmt = getConnection().prepareCall(FINDBY + user + "'");
-                ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = getConnection().prepareCall(FINDBY)) {
+            stmt.setString(1, user);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 usuario = new Usuario();
                 usuario = crearUsuario(rs);
@@ -83,8 +84,9 @@ public class UsuarioDAO extends DAO<Usuario> {
     public List<Usuario> filter(String buscar) {
         List<Usuario> usuarios = new ArrayList<>();
 
-        try (Statement stmt = getConnection().createStatement();
-                ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%' ORDER BY u.id_usuario");) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(FILTER)) {
+            stmt.setString(1, "%" + buscar + "%");
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Usuario usuario = crearUsuario(rs);

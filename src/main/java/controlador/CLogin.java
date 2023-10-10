@@ -11,18 +11,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import vista.FrmLogin;
 
-public class Clogin {
+public class CLogin {
 
     private final Usuario usuario = new Usuario();
     public FrmLogin FrmLogin = new FrmLogin();
     private final Validacion v = new Validacion();
-    private CPrincipal cPrincipal;
 
-    public Clogin() {
+    public CLogin() {
 
-        FrmLogin.btniniciar.addActionListener(e -> {
-            ingresar();
-        });
+        FrmLogin.btniniciar.addActionListener(e -> ingresar());
 
         FrmLogin.btnCerrar.addMouseListener(new MouseAdapter() {
             @Override
@@ -40,11 +37,11 @@ public class Clogin {
     }
 
     private void ingresar() {
-        if (!v.comprobarCampo(FrmLogin.txtUser.getText())) {
+        if (v.comprobarCampo(FrmLogin.txtUser.getText())) {
             return;
         }
 
-        if (!v.comprobarCampo(String.valueOf(FrmLogin.txtPass.getPassword()))) {
+        if (v.comprobarCampo(String.valueOf(FrmLogin.txtPass.getPassword()))) {
             return;
         }
 
@@ -56,7 +53,7 @@ public class Clogin {
         }
 
         Usuario newUser = v.tipoUsuario(usuario);
-        cPrincipal = new CPrincipal(newUser);
+        CPrincipal cPrincipal = new CPrincipal(newUser);
         cPrincipal.frmPrincipal.setVisible(true);
         FrmLogin.dispose();
     }
@@ -68,9 +65,7 @@ public class Clogin {
             Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(() -> {
-            new Clogin().FrmLogin.setVisible(true);
-        });
+        java.awt.EventQueue.invokeLater(() -> new CLogin().FrmLogin.setVisible(true));
     }
 
 }

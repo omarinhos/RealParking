@@ -11,14 +11,14 @@ import modelo.Usuario;
 
 public class ComprobanteDAO extends DAO<Comprobante> {
 
-    private final String INSERT = "INSERT INTO comprobante (id_ticket, id_usuario, fecha, importe) VALUES (?,?,now(),?)";
-    private final String SELECT = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida " +
+    private static final String INSERT = "INSERT INTO comprobante (id_ticket, id_usuario, fecha, importe) VALUES (?,?,now(),?)";
+    private static final String SELECT = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida " +
             "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario " +
             "WHERE c.fecha LIKE ?";
-    private final String FINDBY = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida \n" +
+    private static final String FINDBY = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida \n" +
             "FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario \n" +
             "order by c.id_comprobante desc limit 1";
-    private final String FILTER = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n"
+    private static final String FILTER = "SELECT c.id_comprobante, u.usuario, c.id_ticket, c.fecha, t.placa, c.importe, t.hora_ingreso, t.hora_salida\n"
             + "            FROM comprobante AS c JOIN ticket AS t ON c.id_ticket = t.id_ticket JOIN usuarios AS u ON u.id_usuario = c.id_usuario ";
 
     private Connection getConnection() throws SQLException {
@@ -43,7 +43,7 @@ public class ComprobanteDAO extends DAO<Comprobante> {
     @Override
     public Comprobante findBy(String id) {
         Comprobante comprobante = null;
-        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY);  
+        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY);
                 ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
                 comprobante = new Comprobante();
@@ -75,9 +75,9 @@ public class ComprobanteDAO extends DAO<Comprobante> {
             user = "";
         }
 
-        String sql = FILTER + "WHERE c.fecha >= ? AND c.fecha <= ? AND u.usuario LIKE ?";
+        String query = FILTER.concat("WHERE c.fecha >= ? AND c.fecha <= ? AND u.usuario LIKE ?");
 
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(query)) {
             stmt.setTimestamp(1, Timestamp.valueOf(desde + " 00:00:00"));
             stmt.setTimestamp(2, Timestamp.valueOf(hasta + " 23:59:59"));
             stmt.setString(3, "%" + user);

@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -28,15 +27,16 @@ public class CRegistro {
     TableColumnModel columnModel = vistaRegistro.tblTicket.getColumnModel();
     DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 
-    private int idTicket, x;
+    private int idTicket;
+    private int x;
 
-    public CRegistro(FrmPrincipal FrmP) {
+    public CRegistro(FrmPrincipal frmPrincipal) {
 
         vistaRegistro.setSize(740, 630);
-        FrmP.contenedor.removeAll();
-        FrmP.contenedor.add(vistaRegistro, BorderLayout.CENTER);
-        FrmP.contenedor.revalidate();
-        FrmP.contenedor.repaint();
+        frmPrincipal.contenedor.removeAll();
+        frmPrincipal.contenedor.add(vistaRegistro, BorderLayout.CENTER);
+        frmPrincipal.contenedor.revalidate();
+        frmPrincipal.contenedor.repaint();
 
         String[] cabecera = {"Id", "Placa", "Hora de Ingreso", "Estado"};
         modeloTicket.setColumnIdentifiers(cabecera);
@@ -95,7 +95,7 @@ public class CRegistro {
             ticket.setEstado("Tránsito");
 
             bl.crearTicket(ticket);
-            JOptionPane.showMessageDialog(vistaRegistro, "Vehiculo Agregado.", "Registro", 1);
+            JOptionPane.showMessageDialog(vistaRegistro, "Vehiculo Agregado.", "Registro", JOptionPane.INFORMATION_MESSAGE);
 
             GeneradorTicket ticketPdf = new GeneradorTicket(configuracion);
             ticketPdf.crearTicket();
@@ -106,7 +106,7 @@ public class CRegistro {
             actualizarEspaciosDisponibles();
             vistaRegistro.txtPlaca.setText("");
         } else {
-            JOptionPane.showMessageDialog(vistaRegistro, "Llenar todos los campos.", "Resgistro", 2);
+            JOptionPane.showMessageDialog(vistaRegistro, "Llenar todos los campos.", "Resgistro", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -116,7 +116,7 @@ public class CRegistro {
         actualizarTablaTickets();
     }
 
-    private void tblRegistroMouseClicked(MouseEvent e) {
+    private void tblRegistroMouseClicked(MouseEvent ignoredE) {
         x = vistaRegistro.tblTicket.getSelectedRow();
 
         idTicket = tickets.get(x).getId();

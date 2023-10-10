@@ -22,7 +22,7 @@ public class VistaCaja extends javax.swing.JPanel {
         lblIngresos = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        lblVehículos = new javax.swing.JLabel();
+        lblVehiculos = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -72,10 +72,10 @@ public class VistaCaja extends javax.swing.JPanel {
         jLabel21.setText("Total de Ingresos   : S/ ");
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 310, 30));
 
-        lblVehículos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblVehículos.setForeground(new java.awt.Color(51, 0, 153));
-        lblVehículos.setText("--");
-        jPanel1.add(lblVehículos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 230, 20));
+        lblVehiculos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblVehiculos.setForeground(new java.awt.Color(51, 0, 153));
+        lblVehiculos.setText("--");
+        jPanel1.add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 230, 20));
 
         jScrollPane7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
@@ -341,7 +341,7 @@ public class VistaCaja extends javax.swing.JPanel {
     public javax.swing.JScrollPane jScrollPane7;
     public javax.swing.JLabel lblIngresos;
     public javax.swing.JLabel lblTarifa;
-    public javax.swing.JLabel lblVehículos;
+    public javax.swing.JLabel lblVehiculos;
     public javax.swing.JTable tblTicket;
     public javax.swing.JTable tblVentas;
     public javax.swing.JTextField txtDNI;

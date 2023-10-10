@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,11 +12,11 @@ import modelo.Ticket;
 
 public class TicketDAO extends DAO<Ticket> {
 
-    private final String SELECT = "SELECT * FROM ticket WHERE estado != 'retirado' AND hora_ingreso LIKE ";
-    private final String INSERT = "INSERT INTO ticket (placa, estado, hora_ingreso) VALUES (?, ?, now())";
-    private final String UPDATE = "UPDATE ticket SET estado = ?, hora_salida = now() WHERE id_ticket = ? ";
-    private final String FILTER = "SELECT * FROM ticket WHERE estado != 'retirado' AND placa like '%";
-    private final String FINDBY = "SELECT * FROM ticket order by id_ticket desc limit 1";
+    private static final String SELECT = "SELECT * FROM ticket WHERE estado != 'retirado' AND hora_ingreso LIKE ? ORDER BY estado";
+    private static final String INSERT = "INSERT INTO ticket (placa, estado, hora_ingreso) VALUES (?, ?, now())";
+    private static final String UPDATE = "UPDATE ticket SET estado = ?, hora_salida = now() WHERE id_ticket = ? ";
+    private static final String FILTER = "SELECT * FROM ticket WHERE estado != 'retirado' AND placa like ? AND hora_ingreso like ? ORDER BY estado";
+    private static final String FINDBY = "SELECT * FROM ticket order by id_ticket desc limit 1";
 
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -87,8 +86,11 @@ public class TicketDAO extends DAO<Ticket> {
     public List<Ticket> filter(String placa) {
         String fechaHoy = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         List<Ticket> tickets = new ArrayList<>();
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(FILTER + placa + "%' AND hora_ingreso like '" + fechaHoy + "%' ORDER BY estado")) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(FILTER)) {
+            stmt.setString(1, "%" + placa + "%");
+            stmt.setString(2, fechaHoy + "%");
+
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Ticket ticket = crearTicket(rs);
                 tickets.add(ticket);
@@ -104,9 +106,9 @@ public class TicketDAO extends DAO<Ticket> {
     public List<Ticket> getList() {
         String fechaHoy = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         List<Ticket> tickets = new ArrayList<>();
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(SELECT + "'%" + fechaHoy + "%' ORDER BY estado")) {
-
+        try (PreparedStatement stmt = getConnection().prepareStatement(SELECT)) {
+            stmt.setString(1, "%" + fechaHoy + "%");
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Ticket ticket = crearTicket(rs);
                 tickets.add(ticket);

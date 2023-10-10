@@ -2,19 +2,12 @@ package controlador;
 
 import dao.BusinessLogic;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 import modelo.Comprobante;
 import modelo.Usuario;
 import vista.FrmPrincipal;
@@ -29,12 +22,12 @@ public class CReportes {
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    public CReportes(FrmPrincipal FrmP) {
+    public CReportes(FrmPrincipal frmPrincipal) {
         vistaReportes.setSize(740, 630);
-        FrmP.contenedor.removeAll();
-        FrmP.contenedor.add(vistaReportes, BorderLayout.CENTER);
-        FrmP.contenedor.revalidate();
-        FrmP.contenedor.repaint();
+        frmPrincipal.contenedor.removeAll();
+        frmPrincipal.contenedor.add(vistaReportes, BorderLayout.CENTER);
+        frmPrincipal.contenedor.revalidate();
+        frmPrincipal.contenedor.repaint();
 
         String[] cabecera = {"Id", "Usuario", "Placa", "Hora Ingreso", "Hora Salida", "Importe"};
         modeloVenta.setColumnIdentifiers(cabecera);
@@ -87,7 +80,7 @@ public class CReportes {
                     .mapToDouble(Comprobante::getImporte)
                     .sum());
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(vistaReportes, "Seleccionar las fechas", "Campos vacíos", 2);
+            JOptionPane.showMessageDialog(vistaReportes, "Seleccionar las fechas", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -97,7 +90,7 @@ public class CReportes {
             GeneradorExcel excel = new GeneradorExcel();
             excel.crearExcel(ventas);
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(vistaReportes, "Primero debe mostrar la vista previa", "Ventas vacías", 2);
+            JOptionPane.showMessageDialog(vistaReportes, "Primero debe mostrar la vista previa", "Ventas vacías", JOptionPane.WARNING_MESSAGE);
         }
     }
 

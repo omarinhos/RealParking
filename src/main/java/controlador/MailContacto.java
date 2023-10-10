@@ -3,6 +3,8 @@ package controlador;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +28,7 @@ public class MailContacto {
     }
 
     private void loadConfig(String ruta) {
-        try (InputStream is = new FileInputStream(ruta)) {
+        try (InputStream is = Files.newInputStream(Paths.get(ruta))) {
             this.props.load(is);
         } catch (IOException e) {
             Logger.getLogger(MailContacto.class.getName()).log(Level.SEVERE, null, e);

@@ -10,6 +10,9 @@ import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import modelo.Configuracion;
 
 abstract class GenerarReporte {
@@ -30,7 +33,7 @@ abstract class GenerarReporte {
             Desktop.getDesktop().open(file);
             System.out.println(nombreArchivo + " abierto");
         } catch (IOException e) {
-            System.out.println(e);
+            Logger.getLogger(GenerarReporte.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

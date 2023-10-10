@@ -109,9 +109,9 @@ public class CPrincipal {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int op = JOptionPane.showConfirmDialog(frmPrincipal, "¿Desea cerrar sesión?",
-                        "Salir", 0, 3);
+                        "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (op == 0) {
-                    new Clogin().FrmLogin.setVisible(true);
+                    new CLogin().FrmLogin.setVisible(true);
                     frmPrincipal.dispose();
                 }
             }
@@ -182,7 +182,7 @@ public class CPrincipal {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());

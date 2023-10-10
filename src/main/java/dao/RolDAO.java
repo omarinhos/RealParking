@@ -13,12 +13,12 @@ import modelo.Rol;
 
 public class RolDAO extends DAO<Rol> {
 
-    private final String SELECT = "SELECT * FROM rol";
-    private final String INSERT = "INSERT INTO rol (id_rol, descripcion, estado) VALUES (?, ?, ?)";
-    private final String UPDATEROL = "UPDATE rol SET descripcion = ?, estado = ? WHERE id_rol = ? ";
-    private final String UPDATEUSER = "UPDATE usuarios SET estado = ? WHERE id_rol = ?";
-    private final String FINDBY = "SELECT * FROM rol WHERE id_rol = ";
-    private final String FILTER = "SELECT * FROM rol where descripcion like";
+    private static final String SELECT = "SELECT * FROM rol";
+    private static final String INSERT = "INSERT INTO rol (id_rol, descripcion, estado) VALUES (?, ?, ?)";
+    private static final String UPDATEROL = "UPDATE rol SET descripcion = ?, estado = ? WHERE id_rol = ? ";
+    private static final String UPDATEUSER = "UPDATE usuarios SET estado = ? WHERE id_rol = ?";
+    private static final String FINDBY = "SELECT * FROM rol WHERE id_rol = ?";
+    private static final String FILTER = "SELECT * FROM rol WHERE descripcion LIKE ?";
 
     private Connection getConnection() throws SQLException {
         return Conexion.getInstance();
@@ -47,11 +47,11 @@ public class RolDAO extends DAO<Rol> {
     @Override
     public Rol findBy(String id) {
         Rol rolDTO = null;
-        try ( PreparedStatement stmt = getConnection().prepareCall(FINDBY + id);  
-                ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(FINDBY)) {
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                rolDTO = new Rol();
                 rolDTO = crearRol(rs);
             }
 
@@ -89,8 +89,9 @@ public class RolDAO extends DAO<Rol> {
     public List<Rol> filter(String buscar) {
         List<Rol> rolesDTO = new ArrayList<>();
 
-        try ( Statement stmt = getConnection().createStatement();  
-                ResultSet rs = stmt.executeQuery(FILTER + " '" + buscar + "%'");) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(FILTER)) {
+            stmt.setString(1, buscar + "%");
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Rol rol = crearRol(rs);

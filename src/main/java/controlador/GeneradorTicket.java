@@ -5,6 +5,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import dao.TicketDAO;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import modelo.Configuracion;
 import modelo.Ticket;
 
@@ -38,7 +41,7 @@ public class GeneradorTicket extends GenerarReporte{
             doc.close();
             System.out.println(nombreArchivo + " creado");
         } catch (DocumentException | FileNotFoundException e) {
-            System.out.println(e.toString());
+            Logger.getLogger(GeneradorTicket.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
