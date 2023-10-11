@@ -19,7 +19,7 @@ public class CUsuarios {
     private final BusinessLogic bl = new BusinessLogic();
     private final DefaultTableModel modeloUsuarios = new DefaultTableModel();
     private List<Usuario> usuarios;
-    
+
     private int idUsuario;
 
     public CUsuarios(FrmPrincipal frmPrincipal) {
@@ -91,7 +91,7 @@ public class CUsuarios {
 
         Usuario user = new Usuario();
         user.setUsuario(DNI);
-        user.setPass(pass);
+        user.setPass(PasswordEncryption.encriptar(pass));
         user.setNombreCompleto(nombre);
         user.setEstado((String) vistaUsuarios.cmbEstado.getSelectedItem());
         Rol rol = new Rol();
@@ -123,7 +123,7 @@ public class CUsuarios {
         Usuario user = new Usuario();
         user.setId(idUsuario);
         user.setUsuario(DNI);
-        user.setPass(pass);
+        user.setPass(PasswordEncryption.encriptar(pass));
         user.setNombreCompleto(nombre);
         user.setEstado((String) vistaUsuarios.cmbEstado.getSelectedItem());
         Rol rol = new Rol();
@@ -151,7 +151,7 @@ public class CUsuarios {
             vistaUsuarios.btnModificar.setEnabled(true);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(vistaUsuarios, "Dar solo click izquiero.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(vistaUsuarios, "Dar solo click izquierdo.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }
 

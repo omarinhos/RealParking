@@ -16,6 +16,7 @@ public class CLogin {
     private final Usuario usuario = new Usuario();
     public FrmLogin FrmLogin = new FrmLogin();
     private final Validacion v = new Validacion();
+    private final PasswordEncryption passwordEncryption = new PasswordEncryption();
 
     public CLogin() {
 

@@ -6,7 +6,9 @@ import javax.swing.JOptionPane;
 import modelo.Usuario;
 
 public class Validacion {
-    
+
+    private final PasswordEncryption passwordEncryption = new PasswordEncryption();
+
     public boolean comprobarCampo(String campo) {
         if(campo.isEmpty()) {
             this.mostrarError("Hay un campo vacío.");
@@ -33,17 +35,21 @@ public class Validacion {
             return false;
         }
         
-        if (!usuario.getPass().equals(user.getPass())) {
+        if (!usuario.getPass().equals(PasswordEncryption.desencriptar(user.getPass()))) {
             this.mostrarError("Usuario o contraseña incorrecta.");
             return false;
         }
         
-        if (!user.getEstado().equals("Activo")) {
+        if (user.getEstado().equals("Inactivo")) {
             this.mostrarError(user.getUsuario() + " no tiene acceso al sistema.");
             return false;
         }
-        
-        
+
+        if (user.getCambiarPassword()) {
+            this.mostrarError(user.getUsuario() + " necesita actualizar su contraseña.");
+            return false;
+        }
+
         return true;
     }
     

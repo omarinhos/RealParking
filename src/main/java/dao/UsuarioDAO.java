@@ -1,5 +1,6 @@
 package dao;
 
+import controlador.PasswordEncryption;
 import modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,18 +27,41 @@ public class UsuarioDAO extends DAO<Usuario> {
 
     @Override
     public void create(Usuario usuario) {
-        try (PreparedStatement stmt = getConnection().prepareStatement(INSERT)) {
+        try {
+            getConnection().setAutoCommit(false);
 
-            stmt.setString(1, usuario.getUsuario());
-            stmt.setString(2, usuario.getPass());
-            stmt.setString(3, usuario.getNombreCompleto());
-            stmt.setString(4, usuario.getEstado());
-            stmt.setInt(5, usuario.getRol().getId());
-            stmt.executeUpdate();
+            try (PreparedStatement stmt = getConnection().prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, usuario.getUsuario());
+                stmt.setString(2, usuario.getPass());
+                stmt.setString(3, usuario.getNombreCompleto());
+                stmt.setString(4, usuario.getEstado());
+                stmt.setInt(5, usuario.getRol().getId());
+                stmt.executeUpdate();
 
-        } catch (SQLIntegrityConstraintViolationException e) {
-            JOptionPane.showMessageDialog(null, "Usuario ya existe");
-            throw new RuntimeException(e);
+                ResultSet generatedKeys = stmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int usuarioId = generatedKeys.getInt(1);
+
+                    String insertHistorialQuery = "INSERT INTO historial_passwords (id_usuario, password) VALUES (?, ?)";
+                    try (PreparedStatement insertStmt = getConnection().prepareStatement(insertHistorialQuery)) {
+                        insertStmt.setInt(1, usuarioId);
+                        insertStmt.setString(2, usuario.getPass());
+                        insertStmt.executeUpdate();
+                    }
+                } else {
+                    throw new SQLException("No se pudo obtener el ID del usuario creado.");
+                }
+                getConnection().commit();
+            } catch (SQLIntegrityConstraintViolationException e) {
+                getConnection().rollback();
+                JOptionPane.showMessageDialog(null, "Usuario ya existe");
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                getConnection().rollback();
+                throw new RuntimeException(e);
+            } finally {
+                getConnection().setAutoCommit(true);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -61,24 +85,43 @@ public class UsuarioDAO extends DAO<Usuario> {
 
     @Override
     public void update(Usuario usuario) {
-        try (PreparedStatement stmt = getConnection().prepareStatement(UPDATE)) {
+        try {
+            getConnection().setAutoCommit(false);
 
-            stmt.setString(1, usuario.getUsuario());
-            stmt.setString(2, usuario.getPass());
-            stmt.setString(3, usuario.getNombreCompleto());
-            stmt.setString(4, usuario.getEstado());
-            stmt.setInt(5, usuario.getRol().getId());
-            stmt.setInt(6, usuario.getId());
+            try (PreparedStatement stmt = getConnection().prepareStatement(UPDATE)) {
+                stmt.setString(1, usuario.getUsuario());
+                stmt.setString(2, usuario.getPass());
+                stmt.setString(3, usuario.getNombreCompleto());
+                stmt.setString(4, usuario.getEstado());
+                stmt.setInt(5, usuario.getRol().getId());
+                stmt.setInt(6, usuario.getId());
 
-            stmt.executeUpdate();
+                stmt.executeUpdate();
 
-        } catch (SQLIntegrityConstraintViolationException e) {
-            JOptionPane.showMessageDialog(null, "Usuario ya existe");
-            throw new RuntimeException(e);
+                // Agregar la nueva contraseña al historial
+                String insertHistorialQuery = "INSERT INTO historial_passwords (id_usuario, password) VALUES (?, ?)";
+                try (PreparedStatement insertStmt = getConnection().prepareStatement(insertHistorialQuery)) {
+                    insertStmt.setInt(1, usuario.getId());
+                    insertStmt.setString(2, usuario.getPass());
+                    insertStmt.executeUpdate();
+                }
+
+                getConnection().commit();
+            } catch (SQLIntegrityConstraintViolationException e) {
+                getConnection().rollback();
+                JOptionPane.showMessageDialog(null, "Usuario ya existe");
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                getConnection().rollback();
+                throw new RuntimeException(e);
+            } finally {
+                getConnection().setAutoCommit(true);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public List<Usuario> filter(String buscar) {
@@ -121,9 +164,10 @@ public class UsuarioDAO extends DAO<Usuario> {
         Usuario usuario = new Usuario();
         usuario.setId(rs.getInt("id_usuario"));
         usuario.setUsuario(rs.getString("usuario"));
-        usuario.setPass(rs.getString("pass"));
+        usuario.setPass(PasswordEncryption.desencriptar(rs.getString("pass")));
         usuario.setNombreCompleto(rs.getString("nombre_completo"));
         usuario.setEstado(rs.getString(5));
+        usuario.setCambiarPassword(rs.getBoolean("cambiar_password"));
         Rol rol = new Rol();
         rol.setId(rs.getInt("id_rol"));
         rol.setDescripcion(rs.getString("descripcion"));
@@ -134,6 +178,15 @@ public class UsuarioDAO extends DAO<Usuario> {
 
     @Override
     public void delete(int id) {
+    }
+
+    public void cambiarPassword(String user, String newPassword) {
+        try {
+            Usuario usuario = findBy(user);
+            CambioPassword.cambiarPassword(getConnection(), usuario.getId(), newPassword);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

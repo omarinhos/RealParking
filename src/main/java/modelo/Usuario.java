@@ -8,17 +8,19 @@ public class Usuario {
     private String nombreCompleto;
     private String estado;
     private Rol rol;
+    private Boolean cambiarPassword;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol) {
+    public Usuario(int id, String usuario, String pass, String nombreCompleto, String estado, Rol rol, Boolean cambiarPassword) {
         this.id = id;
         this.usuario = usuario;
         this.pass = pass;
         this.nombreCompleto = nombreCompleto;
         this.estado = estado;
         this.rol = rol;
+        this.cambiarPassword = cambiarPassword;
     }
 
     public int getId() {
@@ -69,4 +71,11 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public Boolean getCambiarPassword() {
+        return cambiarPassword;
+    }
+
+    public void setCambiarPassword(Boolean cambiarPassword) {
+        this.cambiarPassword = cambiarPassword;
+    }
 }
